@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>index</title>
+
+    <link rel="stylesheet" href="./normalize.min.css" />
+    <link rel="stylesheet" href="./css/body.css" />
+    <link rel="stylesheet" href="./css/L1.css" />
+    <link rel="stylesheet" href="./css/L2.css" />
+    <link rel="stylesheet" href="./css/L3.css" />
+    <link rel="stylesheet" href="./css/R1.css" />
+    <link rel="stylesheet" href="./css/R2.css" />
+    <link rel="stylesheet" href="./css/font.css" />
+
+    <link rel="stylesheet" href="./css/music.css" />
+    <link rel="stylesheet" href="./music.js" />
+
+    <script src="./index.js"></script>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="common left">
+
+        <div class="L1">
+
+          <div class="L1-1">
+            <div class="L1-1-1">
+              <i class="font">hello world hello world hello world hello world hello world</i>
+            </div>
+          </div>
+
+        </div>
+        
+        <div class="L2">
+          <div class="L2-1">
+            <div class="L2-1-1"></div>
+            <div class="L2-1-1"></div>
+            <div class="L2-1-1"></div>
+            <div class="L2-1-1"></div>
+          </div>
+        </div>
+
+        <div class="L3">
+
+          <div class="L3-1">
+
+            <div class="L3-1-1"></div>
+
+            <div class="L3-1-2">
+
+              <div class="L3-1-2-1">
+                <div class="L3-1-2-1-1"></div>
+                <div class="L3-1-2-1-1"></div>
+                <div class="L3-1-2-1-1"></div>
+                <div class="L3-1-2-1-1"></div>
+              </div>
+              
+              <div class="L3-1-2-2"></div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+      <div class="common right">
+
+        <div class="R1">
+
+          <div class="R1-1"></div>
+
+        </div>
+        
+        <div class="R2">
+
+          <div class="R2-1">
+            <div class="R2-1-1"></div>
+            <div class="R2-1-2">
+
+              <div class="player">
+                <div id="playlist-toggle"><i class="fas fa-chevron-circle-up"></i></div>
+
+                <div id="playlist">
+                    <ul>
+                        <li data-src="song1.mp3">歌曲1</li>
+                        <li data-src="song2.mp3">歌曲2</li>
+                        <li data-src="song3.mp3">歌曲3</li>
+                        <!-- Add more songs here -->
+                    </ul>
+                </div>
+
+                <div class="player-controls">
+                    <button id="prev"><i class="fas fa-backward"></i></button>
+                    <button id="play"><i class="fas fa-play"></i></button>
+                    <button id="next"><i class="fas fa-forward"></i></button>
+                    <button id="mode"><i class="fas fa-sync-alt"></i></button>
+                </div>
+
+                <progress id="progress-bar" value="0" max="1"></progress>
+
+                <audio id="audio-player">
+                    <source src="" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
+
+</html>
