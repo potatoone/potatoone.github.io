@@ -1,0 +1,25 @@
+.right {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(33, 109, 116);
+    width: 20%;
+  }
+  
+  .R1 {
+    height: 30vh;
+    background-color: rgb(37, 106, 149);
+  }
+
+  .R1-1 {
+    display: flex;
+    float: right;
+    height: 60%;
+    width: 90%;
+    margin: 30px 30px 0px 0px; /* 上 右 下 左*/
+    box-sizing: border-box;
+    border: 3px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: rgb(68, 49, 126);
+    background-color: rgba(167, 171, 26, 0.789);
+  }
