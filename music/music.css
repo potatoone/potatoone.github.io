@@ -34,7 +34,7 @@
 }
 
 #playlist-toggle:hover {  /* 按钮悬停 */
-  background-color: #d52222;
+  background-color: #e1e1e1;
 }
 
 #playlist {  /* 播放列表容器 */
@@ -44,7 +44,7 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s;
-  background: white;
+  background: rgb(239, 254, 255);
   border-radius: 5px;
   z-index: 100;
   font-size: small;
@@ -53,7 +53,7 @@
 #playlist.expanded {  /* 展开状态 */
   max-height: 60vh;
   overflow-y: auto;
-  border: 1px solid #ff0000;
+  border: 1px solid #959595;
   scrollbar-width: none;
 }
 
@@ -99,7 +99,7 @@
 }
 
 .player-controls button {  /* 按钮 */
-  background: white;
+  background: rgb(224, 205, 205); /* 按钮背景色 */
   border: none;
   width: 36px;
   height: 36px;
@@ -111,7 +111,7 @@
 }
 
 .player-controls button i {  /* 图标 */
-  color: #a84caf;
+  color: #d28ad7;
 }
 
 #audio-player {  /* 音频元素 */
