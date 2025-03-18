@@ -1,0 +1,75 @@
+.L3 {
+    height: 30vh;
+    background-color: rgb(160, 98, 23);
+  }
+
+    .L3-1 {
+      display: grid;
+      grid-row: 1;
+      grid-template-columns: 25% 35%; /* 设置两列的宽度比 */
+      height: 75%;
+      width: 50%;
+      margin: 30px 0px 0px 30px; /* 上 右 下 左*/
+      background-color: rgba(77, 78, 63, 0.789);
+    }
+
+    .L3-1-1 {
+      display: grid;
+      height: 160px;
+      width: 160px;
+      margin: 0px 0px 0px 0px; /* 上 右 下 左*/
+      box-sizing: border-box;
+      border: 3px;
+      border-radius: 100%;
+      border-style: solid;
+      border-color: rgb(49, 126, 126);
+      background-color: rgba(77, 78, 63, 0.789);
+    }
+
+    .L3-1-2 {
+      display: grid;
+      height: 100%;
+      width: 100%;
+      margin: 0px 0px 0px 30px; /* 上 右 下 左*/
+      background-color: rgba(77, 78, 63, 0.789);
+    }
+
+      .L3-1-2-1 {
+        display: grid;
+        height: 35%;
+        width: 85%;
+        margin: 60px 0px 0px 0px; /* 上 右 下 左*/
+        box-sizing: border-box;
+        border: 3px;
+        border-radius: 10px;
+        border-style: solid;
+        border-color: rgb(67, 91, 91);
+        background-color: rgba(77, 78, 63, 0.789);
+      }
+
+        .L3-1-2-1-1 {
+          display: grid;
+          grid-row: 1;
+          grid-template-columns: 25% 25% 25% 25%; /* 设置四列的宽度比 */
+          height: 100%;
+          width: 85%;
+          box-sizing: border-box;
+          border: 3px;
+          border-radius: 10px;
+          border-style: solid;
+          border-color: rgb(49, 126, 126);
+          background-color: rgba(77, 78, 63, 0.789);
+        }
+
+      .L3-1-2-2 {
+        display: grid;
+        height: 100%;
+        width: 100%;
+        margin: 0px 0px 0px 0px; /* 上 右 下 左*/
+        box-sizing: border-box;
+        border: 3px;
+        border-radius: 10px;
+        border-style: solid;
+        border-color: rgb(49, 126, 126);
+        background-color: rgba(77, 78, 63, 0.789);
+      }

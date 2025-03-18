@@ -1,0 +1,26 @@
+.L2 {
+    height: 40vh;
+    background-color: rgb(137, 31, 31);
+  }
+
+    .L2-1 {
+      display: grid;
+      float: right;
+      height: 50%;
+      width: 70%;
+      margin: 50px 0px 0px 0px; /* 上 右 下 左*/
+      background-color: rgba(116, 118, 78, 0.789);
+    }
+
+      .L2-1-1 {
+        grid-row: 1;
+        height: 70%;
+        width: 80%;
+        margin: 10%;
+        box-sizing: border-box;
+        border: 3px;
+        border-radius: 15px;
+        border-style: solid;
+        border-color: rgb(49, 126, 126);
+        background-color: rgba(116, 118, 78, 0.789);
+      }

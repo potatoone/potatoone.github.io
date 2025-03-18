@@ -1,0 +1,127 @@
+/* 播放器核心样式 */
+
+.player {  /* 播放器容器 */
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  margin-top: auto;
+  background: rgba(255, 255, 255, 0.255);
+  border-radius: 8px;
+}
+
+.playlist-container {  /* 播放列表容器 */
+  position: relative;
+}
+
+.player-title {  /* 标题 */
+  text-align: center;
+  font-weight: bold;
+  color: #a84caf;
+}
+
+#playlist-toggle {  /* 折叠按钮 */
+  position: absolute; /* 左侧绝对定位 */
+  display: flex; /* 块级元素变为行内元素 */
+  align-items: center; /* 垂直居中 */
+  justify-content: center; /* 水平居中 */
+  left: -50px;
+  top: 100px;
+  z-index: 100;
+  width: 30px; height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.255);
+}
+
+#playlist-toggle:hover {  /* 按钮悬停 */
+  background-color: #d52222;
+}
+
+#playlist {  /* 播放列表容器 */
+  position: absolute;
+  bottom: calc(100% + 15px);
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s;
+  background: white;
+  border-radius: 5px;
+  z-index: 100;
+  font-size: small;
+}
+
+#playlist.expanded {  /* 展开状态 */
+  max-height: 60vh;
+  overflow-y: auto;
+  border: 1px solid #ff0000;
+  scrollbar-width: none;
+}
+
+#playlist.expanded::-webkit-scrollbar {  /* 隐藏滚动条 */
+  display: none;
+}
+
+#playlist ul {  /* 列表 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#playlist li {  /* 列表项 */
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.track-name {  /* 歌曲名 */
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#playlist li:hover {  /* 悬停效果 */
+  background-color: #f0f0f0;
+}
+
+#playlist li.playing {  /* 当前播放 */
+  background-color: #b9e9ff;
+  font-weight: bold;
+}
+
+.player-controls {  /* 控制区 */
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+.player-controls button {  /* 按钮 */
+  background: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.player-controls button i {  /* 图标 */
+  color: #a84caf;
+}
+
+#audio-player {  /* 音频元素 */
+  display: none;
+}
+
+#playlist li:not(.playing) .audio-wave {  /* 隐藏波形 */
+  display: none;
+}
+
+#playlist li.playing .audio-wave {  /* 显示波形 */
+  display: inline-flex;
+}

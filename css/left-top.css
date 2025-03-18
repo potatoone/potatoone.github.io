@@ -1,0 +1,26 @@
+
+    .L1-1 {
+      display: flex;
+      height: 50%;
+      width: 60%;
+      margin: 30px 0px 0px 30px; /* 上 右 下 左*/
+      background-color: rgba(167, 171, 26, 0.789);
+    }
+
+      .L1-1-1 {
+        display: flex;
+        height: 90%;
+        width: 80%;
+        margin: 5px 0px 0px 5px; /* 上 右 下 左*/
+        box-sizing: border-box;
+        border: 3px;
+        border-radius: 15px;
+        border-style: solid;
+        border-color: rgb(49, 126, 126);
+        background-color: rgba(26, 171, 57, 0.789);
+      }
+
+      .font{
+        color: aliceblue;
+        padding: 20px;
+      }
