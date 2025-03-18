@@ -27,7 +27,7 @@
   .right {    /* 右区域容器 */
     display: flex;
     flex-direction: column;
-    background-color: rgb(113, 113, 113);
+    background-color: rgba(113, 113, 113, 0);
     width: 20%;
   }
   
