@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/body.css" />
     <link rel="stylesheet" href="./css/left-top.css" />
     <link rel="stylesheet" href="./css/left-medium.css" />
-    <link rel="stylesheet" href="./css/left-bottom.css" />
+    <link rel="stylesheet" href="./personal/info.css" />
     <link rel="stylesheet" href="./css/right.css" />
 
     <link rel="stylesheet" href="./music/music.css" />
@@ -39,24 +39,49 @@
         
         <div class="medium">
           <div class="medium-container">
-            <div class="medium-tab">1</div>
-            <div class="medium-tab">1</div>
-            <div class="medium-tab">1</div>
-            <div class="medium-tab">1</div>
+            <div class="medium-tab"></div>
+            <div class="medium-tab"></div>
+            <div class="medium-tab"></div>
+            <div class="medium-tab"></div>
           </div>
         </div>
 
         <div class="bottom">
-          <div class="bottom-container">
-            <div class="avatar">L3-1-1</div>
-            <div class="bottom-content">
-              <div class="bottom-buttonc">
-                <div class="bottom-button">3</div>
-                <div class="bottom-button">3</div>
-                <div class="bottom-button">3</div>
-                <div class="bottom-button">3</div>
+          <div class="bottom-container collapsed" id="bottomContainer">
+            <!-- 头像和按钮并排的顶部区域 -->
+            <div class="top-section">
+              <!-- 左侧头像区域 -->
+              <div class="avatar-container">
+                <div class="avatar" id="avatar">
+                  <img src="./res/avatar.jpg" alt="avatar" />
+                </div>
               </div>
-              <div class="bottom-label">1</div>
+              
+              <!-- 按钮挨着排列 -->
+              <div class="bottom-buttonc">
+                <div class="bottom-button github">
+                  <i class="fab fa-github"></i>
+                </div>
+                <div class="bottom-button email">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="bottom-button qq">
+                  <i class="fab fa-qq"></i>
+                </div>
+                <div class="bottom-button other">
+                  <i class="fas fa-ellipsis-h"></i>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 单独的标签容器 -->
+            <div class="tags-container">
+              <div class="tag">Web开发</div>
+              <div class="tag">前端工程师</div>
+              <div class="tag">JavaScript</div>
+              <div class="tag">CSS</div>
+              <div class="tag">React</div>
+              <div class="tag">Vue</div>
             </div>
           </div>
         </div>
@@ -91,6 +116,9 @@
       </div>
 
 
+
+
+
     </div>
 
     <!-- 在body结束标签前引入JavaScript -->
@@ -106,6 +134,8 @@
 
     <script src="./res/sentence.js"></script>
     <script src="./res/weather.js"></script>
+
+    <script src="./personal/info.js"></script>
     
   </body>
 </html>

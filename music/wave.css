@@ -2,13 +2,14 @@
     display: inline-flex;
     align-items: flex-end;
     height: 13px;
-    margin-left: 10px;
+    margin-left: auto;
+    margin-right: 5px; /* 添加：右侧一点小边距，避免贴边 */
   }
   
   .audio-wave span {  /* 波动条 */
     width: 3px;
-    margin-right: 2px;
-    background: #ffffff;
+    margin-right: 3px;
+    background: #8e38ff61;
     transform-origin: bottom;
     animation: wave 1.2s infinite;
   }

@@ -14,7 +14,7 @@
     font-size: 20px;
     color: #ffffff52;
     background: rgba(255, 255, 255, 0.2); /* 降低不透明度 */
-    border: 1px solid rgba(192, 192, 192, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
   }
   
@@ -40,7 +40,7 @@
     max-height: 60vh;
     overflow-y: auto;
     scrollbar-width: none; /* 隐藏滚动条 */
-    border: 1px solid rgba(192, 192, 192, 0.5);
+    border: 1px solid rgba(192, 192, 192, 0.293);
   }
   
   #playlist ul {  /* 列表 */
@@ -54,7 +54,6 @@
     align-items: center;
     padding: 10px;
     cursor: pointer;
-    border-bottom: 1px solid rgba(0,0,0,0.07);
     transition: background-color 0.2s;
   }
   

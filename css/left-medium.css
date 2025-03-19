@@ -1,26 +1,83 @@
 .medium {
-    height: 50vh;
-    background-color: rgba(137, 31, 31, 0.337);
-  }
+  height: 50vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .medium-container {
   display: grid;
-  float: right;
-  height: 50%;
-  width: 70%;
-  margin: 50px 0px 0px 0px; /* 上 右 下 左*/
-  background-color: rgba(255, 255, 255, 0);
+  width: 100%;
+  max-width: 1000px; /* 限制最大宽度 */
+  margin: 0 auto; /* 居中 */
+  
+  /* 桌面端默认为1行4列 */
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  gap: 20px; /* 统一设置间距 */
 }
 
 .medium-tab {
-  grid-row: 1;
-  height: 70%;
-  width: 80%;
-  margin: 10%;
+  width: 100%;
+  height: 100px;
+  position: relative;
   box-sizing: border-box;
-  border: 3px;
-  border-radius: 15px;
-  border-style: solid;
-  border-color: rgb(169, 169, 169);
-  background-color: rgba(203, 203, 203, 0.277);
+  border: 3px solid rgba(169, 169, 169, 0.468);
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.145);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; /* 确保内容不溢出 */
+}
+
+.medium-tab:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 内容容器 */
+.medium-tab-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+
+/* 移动端：2行2列布局 */
+@media (max-width: 768px) {
+  .medium {
+    height: auto; /* 允许高度自适应内容 */
+    padding: 15px;
+  }
+  
+  .medium-container {
+    width: 95%;
+    grid-template-columns: repeat(2, 1fr); /* 2列 */
+    grid-template-rows: repeat(2, 1fr); /* 2行 */
+    gap: 15px; /* 移动端减小间距 */
+  }
+  
+  .medium-tab {
+    border-width: 2px; /* 移动端减小边框宽度 */
+  }
+}
+
+/* 超小屏幕 */
+@media (max-width: 480px) {
+  .medium-container {
+    grid-template-columns: repeat(2, 1fr); /* 2列 */
+    grid-template-rows: repeat(2, 1fr); /* 2行 */
+  }
+  
+  .medium-tab {
+    padding-bottom: 70%; /* 矮一点的矩形 */
+  }
 }
