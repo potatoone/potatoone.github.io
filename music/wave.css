@@ -8,27 +8,35 @@
   .audio-wave span {  /* 波动条 */
     width: 3px;
     margin-right: 2px;
-    background: #a84caf;
+    background: #ffffff;
     transform-origin: bottom;
     animation: wave 1.2s infinite;
   }
   
   .audio-wave span:nth-child(1) {  /* 第一条 */
-    height: 8px;
-    animation-delay: 0.5s;
+    height: 5px;
+    animation-delay: 0.1s;
   }
   
   .audio-wave span:nth-child(2) {  /* 第二条 */
-    height: 5px;
+    height: 6px;
     animation-delay: 0.2s;
   }
   
   .audio-wave span:nth-child(3) {  /* 第三条 */
-    height: 3px;
-    animation-delay: 0.1s;
+    height: 7px;
+    animation-delay: 0.3s;
   }
 
   @keyframes wave {  /* 波动动画 */
     0%, 100% { transform: scaleY(0.5); }
     50% { transform: scaleY(1); }
+  }
+
+  #playlist li:not(.playing) .audio-wave {  /* 隐藏波形 */
+    display: none;
+  }
+  
+  #playlist li.playing .audio-wave {  /* 显示波形 */
+    display: inline-flex;
   }

@@ -7,6 +7,7 @@ const MusicPlayer = (() => {
   let playButton;
   let nextButton;
   let prevButton;
+  let playerTitle;
   
   // 初始化函数
   function init() {
@@ -15,8 +16,9 @@ const MusicPlayer = (() => {
     playButton = document.getElementById('play');
     nextButton = document.getElementById('next');
     prevButton = document.getElementById('prev');
+    playerTitle = document.querySelector('.player-title');
     
-    if (!audioPlayer || !playButton || !nextButton || !prevButton) {
+    if (!audioPlayer || !playButton || !nextButton || !prevButton || !playerTitle) {
       console.error('初始化音乐播放器失败：缺少必要的DOM元素');
       return false;
     }
@@ -62,7 +64,11 @@ const MusicPlayer = (() => {
     
     // 获取音频文件路径
     const audioSrc = track.getAttribute('data-src');
+    const trackName = track.querySelector('.track-name').textContent;
     console.log('正在播放:', audioSrc); // 调试信息
+    
+    // 更新播放器标题
+    playerTitle.textContent = trackName;
     
     // 重置进度条（如果重置函数存在）
     if (window.resetProgress) {

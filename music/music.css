@@ -1,127 +1,136 @@
 /* 播放器核心样式 */
 
 .player {  /* 播放器容器 */
-  position: relative;
-  width: 100%;
+  position: fixed; /* 固定定位 */
+  bottom: 20px; /* 距离底部20px */
+  right: 20px; /* 距离右侧20px */
+  width: 240px; /* 固定宽度 */
   padding: 10px;
-  margin-top: auto;
-  background: rgba(255, 255, 255, 0.255);
-  border-radius: 8px;
-}
-
-.playlist-container {  /* 播放列表容器 */
-  position: relative;
+  background: rgba(255, 255, 255, 0.2); /* 降低不透明度 */
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18); /* 添加细边框 */
+  backdrop-filter: blur(10px); /* 更强的模糊效果 */
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000; /* 确保播放器在其他元素之上 */
+  transition: all 0.3s ease;
+  margin: 0; /* 移除margin，使用bottom和right控制定位 */
 }
 
 .player-title {  /* 标题 */
   text-align: center;
-  font-weight: bold;
-  color: #a84caf;
-}
-
-#playlist-toggle {  /* 折叠按钮 */
-  position: absolute; /* 左侧绝对定位 */
-  display: flex; /* 块级元素变为行内元素 */
-  align-items: center; /* 垂直居中 */
-  justify-content: center; /* 水平居中 */
-  left: -50px;
-  top: 100px;
-  z-index: 100;
-  width: 30px; height: 30px;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.255);
-}
-
-#playlist-toggle:hover {  /* 按钮悬停 */
-  background-color: #e1e1e1;
-}
-
-#playlist {  /* 播放列表容器 */
-  position: absolute;
-  bottom: calc(100% + 15px);
-  width: 100%;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s;
-  background: rgb(239, 254, 255);
-  border-radius: 5px;
-  z-index: 100;
-  font-size: small;
-}
-
-#playlist.expanded {  /* 展开状态 */
-  max-height: 60vh;
-  overflow-y: auto;
-  border: 1px solid #959595;
-  scrollbar-width: none;
-}
-
-#playlist.expanded::-webkit-scrollbar {  /* 隐藏滚动条 */
-  display: none;
-}
-
-#playlist ul {  /* 列表 */
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#playlist li {  /* 列表项 */
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-}
-
-.track-name {  /* 歌曲名 */
-  flex-grow: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-#playlist li:hover {  /* 悬停效果 */
-  background-color: #f0f0f0;
-}
-
-#playlist li.playing {  /* 当前播放 */
-  background-color: #b9e9ff;
-  font-weight: bold;
+  font-weight: 400;
+  font-size: 14px;
+  color: #ecececa0;
 }
 
 .player-controls {  /* 控制区 */
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin: 10px 0;
+  margin: 10px 0 -10px 0;    /* 上 右 下 左*/
 }
 
 .player-controls button {  /* 按钮 */
-  background: rgb(224, 205, 205); /* 按钮背景色 */
+  background: rgba(255, 255, 255, 0); /* 降低不透明度 */
   border: none;
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.player-controls button:hover { /* 悬停效果 */
+  transform: scale(1); /* 悬停时放大效果 */
+  background: rgba(255, 255, 255, 0.403);
+}
+
+.player-controls button:active {
+  transform: scale(0.3); /* 点击时缩小效果 */
 }
 
 .player-controls button i {  /* 图标 */
-  color: #d28ad7;
+  color: #dededed4;
 }
 
-#audio-player {  /* 音频元素 */
+
+
+.playing-animation {
+  animation: rotate 5s linear infinite;
+}
+
+/* 遮罩层 */
+.overlay {
   display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 998;
 }
 
-#playlist li:not(.playing) .audio-wave {  /* 隐藏波形 */
-  display: none;
+
+
+
+
+/* 修改响应式设计部分 */
+@media screen and (max-width: 768px) {
+  .player {
+    bottom: 20px;
+    right: -400px; /* 初始位置在屏幕外 */
+    width: 240px;
+    transition: all 0.3s ease;
+    max-width: 80vw; /* 限制最大宽度 */
+    pointer-events: none; /* 初始不响应点击 */
+    margin: 0; /* 确保没有额外的边距 */
+  }
+  
+  .player.active {
+    right: 20px; /* 滑动到离右侧20px的位置 */
+    opacity: 1; /* 完全不透明 */
+    pointer-events: auto; /* 可以点击 */
+  }
+  
+  .mobile-toggle {
+    display: flex; /* 移动端显示 */
+    bottom: 20px;
+    right: 20px;
+    margin: 0; /* 确保没有额外的边距 */
+  }
+  
+  .overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+    display: block;
+  }
 }
 
-#playlist li.playing .audio-wave {  /* 显示波形 */
-  display: inline-flex;
+/* 桌面模式下的样式 */
+@media screen and (min-width: 769px) {
+  .player {
+    transform: none;
+    bottom: 20px;
+    right: 20px;
+    opacity: 1;
+    pointer-events: auto;
+    margin: 0; /* 确保没有额外的边距 */
+  }
+  
+  .mobile-toggle {
+    display: none; /* 始终隐藏 */
+  }
+  
+  .overlay {
+    display: none; /* 始终隐藏 */
+  }
 }

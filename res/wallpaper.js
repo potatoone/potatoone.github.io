@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 缓存键
     const CACHE_KEY = 'bing_wallpaper_cache';
     const CACHE_TIME_KEY = 'bing_wallpaper_timestamp';
-    const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24小时缓存
+    const CACHE_DURATION = 1 * 60 * 60 * 1000; // 1小时缓存
     
     // 容器元素
     let container = document.body;
@@ -156,17 +156,17 @@ document.addEventListener('DOMContentLoaded', function() {
       // 设置按钮样式
       const buttonStyle = infoButton.style;
       buttonStyle.position = 'fixed';
-      buttonStyle.top = '15px';
-      buttonStyle.right = '15px';
-      buttonStyle.width = '24px';
-      buttonStyle.height = '24px';
+      buttonStyle.top = '10px';
+      buttonStyle.right = '10px';
+      buttonStyle.width = '15px';
+      buttonStyle.height = '15px';
       buttonStyle.borderRadius = '50%';
       buttonStyle.backgroundColor = 'rgba(0, 0, 0, 0.3)';
       buttonStyle.color = 'white';
       buttonStyle.display = 'flex';
       buttonStyle.alignItems = 'center';
       buttonStyle.justifyContent = 'center';
-      buttonStyle.fontSize = '14px';
+      buttonStyle.fontSize = '10px';
       buttonStyle.cursor = 'pointer';
       buttonStyle.zIndex = '1000';
       buttonStyle.opacity = '0.4';
@@ -183,8 +183,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // 设置信息面板样式
       const infoStyle = infoElement.style;
       infoStyle.position = 'fixed';
-      infoStyle.top = '50px';
-      infoStyle.right = '15px';
+      infoStyle.top = '30px';
+      infoStyle.right = '10px';
       infoStyle.background = 'rgba(0, 0, 0, 0.3)';  // 背景颜色
       infoStyle.color = 'white';
       infoStyle.padding = '8px 12px';
