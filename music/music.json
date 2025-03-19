@@ -1,52 +1,20 @@
 {
   "musicFiles": [
     {
-      "name": "碧海清游-海底场景音乐",
-      "src": "./music/file/碧海清游-海底场景音乐.mp3"
+      "name": "Endless Love Story",
+      "src": "./music/file/Endless Love Story.mp3"
     },
     {
-      "name": "南海BGM",
-      "src": "./music/file/南海BGM.mp3"
+      "name": "Romaritime Recollection",
+      "src": "./music/file/Romaritime Recollection.mp3"
     },
     {
-      "name": "碧海清游-海底场景音乐",
-      "src": "./music/file/碧海清游-海底场景音乐.mp3"
+      "name": "The Time Is Now",
+      "src": "./music/file/The Time Is Now.mp3"
     },
     {
-      "name": "南海BGM",
-      "src": "./music/file/南海BGM.mp3"
-    },
-    {
-      "name": "碧海清游-海底场景音乐",
-      "src": "./music/file/碧海清游-海底场景音乐.mp3"
-    },
-    {
-      "name": "南海BGM",
-      "src": "./music/file/南海BGM.mp3"
-    },
-    {
-      "name": "南海BGM",
-      "src": "./music/file/南海BGM.mp3"
-    },
-    {
-      "name": "碧海清游-海底场景音乐",
-      "src": "./music/file/碧海清游-海底场景音乐.mp3"
-    },
-    {
-      "name": "南海BGM",
-      "src": "./music/file/南海BGM.mp3"
-    },
-    {
-      "name": "碧海清游-海底场景音乐",
-      "src": "./music/file/碧海清游-海底场景音乐.mp3"
-    },
-    {
-      "name": "南海BGM",
-      "src": "./music/file/南海BGM.mp3"
-    },
-    {
-      "name": "南海BGM",
-      "src": "./music/file/南海BGM.mp3"
+      "name": "战斗-通往胜利",
+      "src": "./music/file/战斗-通往胜利.mp3"
     }
   ]
 }
