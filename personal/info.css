@@ -183,7 +183,7 @@
     position: fixed;
     left: 15px;
     bottom: 15px;
-    width: calc(100% - 30px);
+    width: calc(100% - 55px);
     max-width: 350px;
     z-index: 200;
     display: flex;
