@@ -10,10 +10,8 @@
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18); /* 添加细边框 */
   backdrop-filter: blur(10px); /* 更强的模糊效果 */
-  -webkit-backdrop-filter: blur(10px);
   z-index: 1000; /* 确保播放器在其他元素之上 */
   transition: all 0.3s ease;
-  margin: 0; /* 移除margin，使用bottom和right控制定位 */
 }
 
 .player-title {  /* 标题 */
@@ -56,59 +54,53 @@
   color: #dededed4;
 }
 
-.mobile-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 999;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
 
-.mobile-toggle i {
-  color: white;
-  font-size: 18px;
-}
 
-.mobile-toggle:hover {
-  transform: scale(1.05);
-  background: rgba(255, 255, 255, 0.3);
-}
 
-.playing-animation {
-  animation: rotate 5s linear infinite;
-}
 
-@keyframes rotate {
+
+
+/* 移动端样式 */
+@media screen and (max-width: 768px) {
+
+  .mobile-toggle {
+    position: fixed;
+    right: 20px;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    align-items: center; /* 垂直居中 */ 
+    justify-content: center;  /* 水平居中 */
+    cursor: pointer;
+    z-index: 999;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0; /* 移除margin，使用bottom和right控制定位 */
+  }
+
+  .mobile-toggle i {
+    font-size: 20px;
+  }
+
+  /* 播放时旋转动画 */
+  @keyframes rotate {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-}
+  }
 
-/* 修改响应式设计部分 */
-@media screen and (max-width: 768px) {
   .player {
-    bottom: 20px;
     right: -400px; /* 初始位置在屏幕外 */
     width: 240px;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     max-width: 80vw; /* 限制最大宽度 */
     pointer-events: none; /* 初始不响应点击 */
-    margin: 0; /* 确保没有额外的边距 */
   }
   
   .player.active {
@@ -117,26 +109,17 @@
     pointer-events: auto; /* 可以点击 */
   }
   
-  .mobile-toggle {
-    display: flex; /* 移动端显示 */
-    bottom: 20px;
-    right: 20px;
-    margin: 0; /* 确保没有额外的边距 */
+  .playing-animation {
+    animation: rotate 5s linear infinite;
   }
-}
 
-/* 桌面模式下的样式 */
-@media screen and (min-width: 769px) {
-  .player {
-    transform: none;
-    bottom: 20px;
-    right: 20px;
-    opacity: 1;
-    pointer-events: auto;
-    margin: 0; /* 确保没有额外的边距 */
+  .mobile-toggle {
+    bottom: 20px; /* 距离底部20px */
   }
   
-  .mobile-toggle {
-    display: none; /* 始终隐藏 */
+  .mobile-toggle:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.3);
   }
+
 }

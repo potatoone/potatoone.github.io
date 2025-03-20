@@ -1,19 +1,21 @@
-.body {
-    display: flex;
-    width: 100%;
-    height: 100vh;
+/* 修改body.css文件 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: auto; /* 改为auto，允许在需要时出现滚动条 */
+  scrollbar-width: none; /* 隐藏滚动条 */
 }
 
 .background {
   display: flex;
-  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-.container {   /* 左区域容器 */
+.container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   background-color: rgba(0, 0, 0, 0.403);
 }
-

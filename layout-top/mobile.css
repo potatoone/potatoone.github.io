@@ -1,59 +1,38 @@
 /* 添加媒体查询，针对不同屏幕大小调整组件尺寸 */
 @media screen and (max-width: 768px) {
-.top {
-    margin: 10px; /* 上 右 下 左*/
-    height: auto;
-    flex-direction: column;
-    position: relative; /* 确保定位上下文 */
-}
-
 .sentence {
     width: 75%; /* 占满宽度 */
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0);
-    backdrop-filter: none;
-    border: none;
-    font-size: 12px;
+    font-size: 10px;
+    top: 20px;
+    left: 20px;
 }
 
 .weather {
-    position: absolute;
-    width: 20%; /* 移动端下略微调整大小 */
-    top: 10px; /* 调整顶部距离 */
-    right: 20px; /* 调整右侧距离 */
-    padding: 8px; /* 稍微减小内边距 */
-    font-size: clamp(10px, 1.2vw, 14px); /* 稍微调小字体大小 */
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    background: none;
+    padding: 15px;
+    top: 20px;
+    right: 20px;
 }
 
 .weather-icon {
-    font-size: clamp(0.9rem, 1.8vw, 1rem); /* 调整图标大小 */
+    font-size: 20px;
+  }
+  
+  .weather-temp {
+    font-size: 10px;
+  }
+
+  .weather-humidity {
+    font-size: 10px;
+  }
+  
+  .weather-city {
+    font-size: 10px;
+  }
+
 }
 
-.weather-temp {
-    font-size: clamp(0.8rem, 1.6vw, 0.9rem);
-}
-
-.weather-humidity {
-    font-size: clamp(0.6rem, 1.3vw, 0.7rem);
-}
-
-.weather-city {
-    font-size: clamp(0.7rem, 1.4vw, 0.8rem);
-}
-}
-
-@media screen and (min-width: 769px) and (max-width: 768px) {
-.weather {
-    width: 120px; /* 调整中等屏幕上的宽度 */
-    top: 0px; /* 调整顶部距离 */
-    right: 0px; /* 调整右侧距离 */
-}
-}
-
-@media screen and (min-width: 768px) {
-.weather {
-    width: 150px; /* 确保大屏幕上有合适的大小 */
-    top: 30px;
-    right: 30px;
-}
-}

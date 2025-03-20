@@ -1,0 +1,45 @@
+
+/* 一言组件 - 左上角 */
+.sentence {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    width: 400px; /* 固定宽度 */
+    max-width: 40vw; /* 响应式限制 */
+    padding: 15px;
+    border-radius: 15px;
+    background-color: rgba(146, 146, 146, 0.129);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    backdrop-filter: blur(5px);
+    box-sizing: border-box;
+    border: 1px solid rgba(236, 236, 236, 0.332);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translateZ(0); /* 硬件加速 */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: auto; /* 允许点击 */
+  }
+  
+  .sentence:hover {
+    transform: translateY(3px) translateZ(0);
+    background-color: rgba(146, 146, 146, 0.2);
+  }
+  
+  /* 一言文本样式 */
+  .sentence-text {
+    font-size: clamp(0.8rem, 1.6vw, 1rem);
+    line-height: 1.5;
+    margin-bottom: 8px;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  
+  .sentence-author {
+    font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+    align-self: flex-end;
+    font-style: italic;
+    opacity: 0.7;
+  }

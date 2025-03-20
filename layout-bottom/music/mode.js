@@ -143,12 +143,13 @@ const PlayModeManager = (() => {
       // 设置样式
       const style = toast.style;
       style.position = 'fixed';
-      style.bottom = '30px';
+      style.top = '120px';
       style.right = '30px';
-      style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+      style.fontSize = '12px';
+      style.backgroundColor = 'rgba(0, 0, 0, 0.24)';
       style.color = 'white';
-      style.padding = '10px 20px';
-      style.borderRadius = '4px';
+      style.padding = '10px 10px';
+      style.borderRadius = '6px';
       style.zIndex = '1000';
       style.transition = 'opacity 0.5s';
       

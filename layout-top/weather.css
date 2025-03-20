@@ -1,0 +1,52 @@
+
+/* 天气组件 - 右上角 */
+.weather {
+    position: fixed;
+    display: flex;
+    top: 30px; right: 30px; padding: 15px;
+    border-radius: 15px;
+    color: #ffffff;
+    align-items: center;
+    background-color: rgba(146, 146, 146, 0.129);
+    backdrop-filter: blur(5px);
+    box-sizing: border-box;
+    border: 1px solid rgba(236, 236, 236, 0.332);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 10;
+  }
+
+  .weather-icon {
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    color: #ffffff;
+    margin-right: 10px;
+  }
+  
+  .weather-info {
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .weather-data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .weather-temp {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  
+  .weather-humidity {
+    font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+    opacity: 0.8;
+  }
+  
+  .weather-city {
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+    opacity: 0.9;
+  }
+  

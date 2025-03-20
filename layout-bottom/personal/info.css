@@ -1,89 +1,89 @@
-
-/* 个人信息容器 */
+/* 个人信息容器 - 整体固定定位 */
 .info-container {
-  position: fixed; /* 固定定位 */
-  bottom: 20px; /* 距离底部20px */
-  left: 20px; /* 距离右侧20px */
-  width: 260px; /* 固定宽度 */
-  border-radius: 20px;
-  padding: 15px;
-  box-shadow: 0 4px 15px rgba(66, 66, 66, 0.408);
-  max-width: 300px; /* 减小最大宽度 */
-  background-color: rgba(255, 255, 255, 0.096);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-/* 顶部区域：头像和按钮并排 */
-.top-section {
+  position: fixed; 
+  bottom: 20px; 
+  left: 20px; 
   display: flex;
-  align-items: center;
-  margin-bottom: 15px;
+  gap: 20px; /* 固定组件间距为20px */
+  z-index: 100;
+  transform-origin: bottom left;
+  transition: all 0.3s ease; /* 使用all简化过渡 */
 }
 
-/* 左侧头像区域 */
+/* 当容器被悬停时整体放大 */
+.info-container:hover {
+  transform: scale(1.02);
+}
+
+/* 头像区域 */
 .avatar-container {
-  display: flex;
-  align-items: center;
-  margin-right: 15px; /* 与按钮的间距 */
-  width: 70px; /* 增加容器宽度 */
-  height: 70px; /* 增加容器高度 */
+  width: 170px;
+  height: 170px;
+  flex-shrink: 0; /* 防止被压缩 */
+  z-index: 102;
 }
 
 /* 圆形头像 */
 .avatar {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.5);
   background-color: rgba(197, 197, 197, 0.2);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  display: flex;
+  backdrop-filter: blur(5px);
+  display: flex; /* 确保居中显示 */
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* 确保图片不溢出圆形边界 */
+  overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  z-index: 101;
 }
 
 /* 头像图片 */
 .avatar img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 保持宽高比并填充整个区域 */
-  display: block;
+  object-fit: cover; /* 保持宽高比并填充 */
 }
 
-.avatar:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+/* 内容包装器 */
+.content-wrapper {
+  position: relative; /* 设置为相对定位 */
+  height: 170px; /* 与头像高度匹配 */
+  width: 240px; /* 固定宽度 */
+  flex-shrink: 0; /* 防止内容被压缩 */
 }
 
-/* 按钮区域 - 现在与头像在同一行 */
+/* 按钮容器 - 绝对定位到底部上方 */
 .bottom-buttonc {
-  display: flex; /* 改为flex布局，按钮水平排列 */
-  gap: 8px; /* 减小按钮间距 */
+  position: absolute;
+  bottom: 95px;
+  left: 0;
+  display: flex;
+  gap: 8px;
+  z-index: 101;
 }
 
 /* 单个按钮 */
 .bottom-button {
-  height: 32px;
-  width: 32px; /* 稍微减小按钮尺寸 */
+  height: 36px;
+  width: 36px;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.126);
   backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* 简化过渡 */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* 按钮图标 */
 .bottom-button i {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.874);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 /* 按钮悬停效果 */
@@ -112,29 +112,36 @@
   background-color: #7289DA;
 }
 
-/* 标签容器 - 单独的容器 */
+/* 标签容器 - 绝对定位到底部 */
 .tags-container {
+  position: absolute;
+  bottom: 0px; /* 保持在底部 */
+  left: 0;
+  width: 240px;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  width: 100%;
-  padding-top: 5px; /* 与上方内容的间距 */
-  border-top: 1px solid rgba(255, 255, 255, 0.1); /* 添加分隔线 */
+  gap: 7px;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.096);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(66, 66, 66, 0.2);
 }
 
 /* 个性化标签 */
 .tag {
-  padding: 4px 10px;
+  padding: 5px 10px;
   border-radius: 15px;
   backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
   background-color: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.066);
   color: white;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 5px; /* 确保底部有间距 */
+  transition: all 0.3s ease; /* 简化过渡 */
+  margin-bottom: 0; /* 确保底部无间距 */
+  white-space: nowrap;
 }
 
 .tag:hover {
@@ -142,91 +149,3 @@
   transform: translateY(-2px);
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .bottom {
-    left: 15px;
-    bottom: 15px;
-  }
-  
-  .info-container.collapsed {
-    background-color: transparent;
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    padding: 0;
-  }
-  
-  .info-container.collapsed .top-section {
-    margin-bottom: 0;
-  }
-  
-  .info-container.collapsed .avatar-container {
-    margin-right: 0; /* 移除右侧间距 */
-    width: 60px; /* 移动端保持合适大小 */
-    height: 60px;
-  }
-  
-  .info-container.collapsed .bottom-buttonc,
-  .info-container.collapsed .tags-container {
-    display: none; /* 隐藏按钮和标签 */
-  }
-  
-  .info-container.expanded {
-    position: fixed;
-    left: 15px;
-    bottom: 15px;
-    width: calc(100% - 55px);
-    max-width: 350px;
-    z-index: 200;
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-  
-  .info-container.expanded .top-section {
-    margin-bottom: 15px;
-  }
-  
-  .info-container.expanded .avatar-container {
-    margin-right: 15px;
-  }
-  
-  .info-container.expanded .bottom-buttonc {
-    display: flex;
-  }
-  
-  .info-container.expanded .tags-container {
-    display: flex;
-    padding-top: 10px;
-  }
-  
-  /* 添加遮罩层 */
-  .overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99; /* 确保在底部容器下面，但在其他内容上面 */
-  }
-  
-  .overlay.active {
-    display: block;
-  }
-}
-
-/* 超小屏幕 */
-@media (max-width: 480px) {
-  .info-container.expanded {
-    padding: 12px;
-  }
-  
-  .tag {
-    padding: 3px 8px;
-    font-size: 0.7rem;
-  }
-}
