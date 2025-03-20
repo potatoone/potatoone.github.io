@@ -183,14 +183,16 @@ document.addEventListener('DOMContentLoaded', function() {
       // 设置信息面板样式
       const infoStyle = infoElement.style;
       infoStyle.position = 'fixed';
-      infoStyle.top = '30px';
-      infoStyle.right = '10px';
+      infoStyle.top = '10px';
+      infoStyle.right = '30px';
       infoStyle.background = 'rgba(0, 0, 0, 0.3)';  // 背景颜色
       infoStyle.color = 'white';
       infoStyle.padding = '8px 12px';
       infoStyle.borderRadius = '4px';
-      infoStyle.fontSize = '12px';
-      infoStyle.maxWidth = '300px';
+      infoStyle.boxSizing = 'border-box';
+      infoStyle.overflowY = 'auto';
+      infoStyle.fontSize = '10px';
+      infoStyle.maxWidth = '450px';
       infoStyle.zIndex = '999';
       infoStyle.display = 'none'; // 默认隐藏
       infoStyle.opacity = '0';
@@ -250,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // 初始化壁纸
   BingWallpaper.init({
-    container: '.container', // 为特定容器设置背景
+    container: '.background', // 为特定容器设置背景
     useCache: true          // 是否使用缓存
   });
   

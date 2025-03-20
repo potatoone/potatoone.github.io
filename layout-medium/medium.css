@@ -1,5 +1,5 @@
 .medium {
-  height: 50vh;
+  height: 85vh;
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -9,6 +9,7 @@
 .medium-container {
   display: grid;
   width: 100%;
+
   max-width: 1000px; /* 限制最大宽度 */
   margin: 0 auto; /* 居中 */
   
@@ -18,19 +19,20 @@
   gap: 20px; /* 统一设置间距 */
 }
 
-.medium-tab {
+.medium-tab1,.medium-tab2,.medium-tab3,.medium-tab4 {
   width: 100%;
   height: 100px;
+  top: 20px;
   position: relative;
   box-sizing: border-box;
   border: 3px solid rgba(169, 169, 169, 0.468);
-  border-radius: 30px;
+  border-radius: 20px 20px 20px 20px;
   background-color: rgba(255, 255, 255, 0.145);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden; /* 确保内容不溢出 */
 }
 
-.medium-tab:hover {
+.medium-tab1:hover,.medium-tab2:hover,.medium-tab3:hover,.medium-tab4:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
@@ -51,33 +53,3 @@
 }
 
 
-/* 移动端：2行2列布局 */
-@media (max-width: 768px) {
-  .medium {
-    height: auto; /* 允许高度自适应内容 */
-    padding: 15px;
-  }
-  
-  .medium-container {
-    width: 95%;
-    grid-template-columns: repeat(2, 1fr); /* 2列 */
-    grid-template-rows: repeat(2, 1fr); /* 2行 */
-    gap: 15px; /* 移动端减小间距 */
-  }
-  
-  .medium-tab {
-    border-width: 2px; /* 移动端减小边框宽度 */
-  }
-}
-
-/* 超小屏幕 */
-@media (max-width: 480px) {
-  .medium-container {
-    grid-template-columns: repeat(2, 1fr); /* 2列 */
-    grid-template-rows: repeat(2, 1fr); /* 2行 */
-  }
-  
-  .medium-tab {
-    padding-bottom: 70%; /* 矮一点的矩形 */
-  }
-}

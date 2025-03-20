@@ -8,18 +8,21 @@
     <title>One Potato</title>
 
     <link rel="stylesheet" href="./normalize.min.css" />
-    <link rel="stylesheet" href="./css/body.css" />
-    <link rel="stylesheet" href="./css/left-top.css" />
-    <link rel="stylesheet" href="./css/left-medium.css" />
-    <link rel="stylesheet" href="./personal/info.css" />
-    <link rel="stylesheet" href="./css/right.css" />
-
-    <link rel="stylesheet" href="./music/music.css" />
-    <link rel="stylesheet" href="./music/wave.css" />
-    <link rel="stylesheet" href="./music/progress.css" />
-    <link rel="stylesheet" href="./music/playlist.css" />
-
+    <link rel="stylesheet" href="./body.css" />
     <link rel="stylesheet" href="./click/loader.css" />
+
+    <link rel="stylesheet" href="./layout-top/top.css" />
+    <link rel="stylesheet" href="./layout-top/mobile.css" />
+
+    <link rel="stylesheet" href="./layout-medium/medium.css" />
+    <link rel="stylesheet" href="./layout-medium/mobile.css" />
+
+    <link rel="stylesheet" href="./layout-bottom/bottom.css" />
+    <link rel="stylesheet" href="./layout-bottom/personal/info.css" />
+    <link rel="stylesheet" href="./layout-bottom/music/music.css" />
+    <link rel="stylesheet" href="./layout-bottom/music/wave.css" />
+    <link rel="stylesheet" href="./layout-bottom/music/progress.css" />
+    <link rel="stylesheet" href="./layout-bottom/music/playlist.css" />
 
     <!-- 引入Font Awesome图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -28,9 +31,9 @@
 
   <body>
 
-    <div class="container">
+    <div class="background">
 
-      <div class="left">
+      <div class="container">
 
         <div class="top">
           <div class="sentence"></div>
@@ -39,101 +42,97 @@
         
         <div class="medium">
           <div class="medium-container">
-            <div class="medium-tab"></div>
-            <div class="medium-tab"></div>
-            <div class="medium-tab"></div>
-            <div class="medium-tab"></div>
+            <div class="medium-tab1"></div>
+            <div class="medium-tab2"></div>
+            <div class="medium-tab3"></div>
+            <div class="medium-tab4"></div>
           </div>
         </div>
 
-        <div class="bottom">
-          <div class="bottom-container collapsed" id="bottomContainer">
-            <!-- 头像和按钮并排的顶部区域 -->
-            <div class="top-section">
-              <!-- 左侧头像区域 -->
-              <div class="avatar-container">
-                <div class="avatar" id="avatar">
-                  <img src="./res/avatar.jpg" alt="avatar" />
-                </div>
-              </div>
-              
-              <!-- 按钮挨着排列 -->
-              <div class="bottom-buttonc">
-                <div class="bottom-button github">
-                  <i class="fab fa-github"></i>
-                </div>
-                <div class="bottom-button email">
-                  <i class="fas fa-envelope"></i>
-                </div>
-                <div class="bottom-button qq">
-                  <i class="fab fa-qq"></i>
-                </div>
-                <div class="bottom-button other">
-                  <i class="fas fa-ellipsis-h"></i>
-                </div>
+
+
+        <div class="info-container collapsed" id="infoContainer">
+          <!-- 头像和按钮并排的顶部区域 -->
+          <div class="top-section">
+            <!-- 左侧头像区域 -->
+            <div class="avatar-container">
+              <div class="avatar" id="avatar">
+                <img src="./res/avatar.jpg" alt="avatar" />
               </div>
             </div>
             
-            <!-- 单独的标签容器 -->
-            <div class="tags-container">
-              <div class="tag">Linux</div>
-              <div class="tag">Docker</div>
-              <div class="tag">Nginx</div>
-              <div class="tag">NE</div>
+            <!-- 按钮挨着排列 -->
+            <div class="bottom-buttonc">
+              <div class="bottom-button github">
+                <i class="fab fa-github"></i>
+              </div>
+              <div class="bottom-button email">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="bottom-button qq">
+                <i class="fab fa-qq"></i>
+              </div>
+              <div class="bottom-button other">
+                <i class="fas fa-ellipsis-h"></i>
+              </div>
             </div>
           </div>
+          
+          <!-- 单独的标签容器 -->
+          <div class="tags-container">
+            <div class="tag">Linux</div>
+            <div class="tag">Docker</div>
+            <div class="tag">Nginx</div>
+            <div class="tag">NE</div>
+          </div>
+        </div>
+        <div class="player">    <!-- 播放器区域，现在是浮动的 -->
+          <div class="playlist-container">
+            <div id="playlist-toggle"><i class="fas fa-chevron-circle-down"></i></div>
+            <div class="player-title">音乐播放器</div>
+            <div id="playlist">  <!-- 播放列表由JavaScript动态生成 --><ul></ul></div>
+          </div>
+          <div class="player-controls">
+            <button id="prev"><i class="fas fa-backward"></i></button>
+            <button id="play"><i class="fas fa-play"></i></button>
+            <button id="next"><i class="fas fa-forward"></i></button>
+            <button id="mode"><i class="fas fa-sync-alt"></i></button>
+          </div>          
+          <div class="time-info">   <!-- 时间 -->
+            <span class="current-time">0:00</span>
+            <span class="total-time">0:00</span>
+          </div>
+          <div class="progress-container">
+            <div class="progress-bar"></div>
+            <div class="progress-handle"></div>
+          </div>
+          <audio id="audio-player">
+            <source src="" type="audio/mpeg">
+          </audio>
         </div>
 
-      </div>
 
-
-
-      <div class="player">    <!-- 播放器区域，现在是浮动的 -->
-        <div class="playlist-container">
-          <div id="playlist-toggle"><i class="fas fa-chevron-circle-down"></i></div>
-          <div class="player-title">音乐播放器</div>
-          <div id="playlist">  <!-- 播放列表由JavaScript动态生成 --><ul></ul></div>
-        </div>
-        <div class="player-controls">
-          <button id="prev"><i class="fas fa-backward"></i></button>
-          <button id="play"><i class="fas fa-play"></i></button>
-          <button id="next"><i class="fas fa-forward"></i></button>
-          <button id="mode"><i class="fas fa-sync-alt"></i></button>
-        </div>          
-        <div class="time-info">   <!-- 时间 -->
-          <span class="current-time">0:00</span>
-          <span class="total-time">0:00</span>
-        </div>
-        <div class="progress-container">
-          <div class="progress-bar"></div>
-          <div class="progress-handle"></div>
-        </div>
-        <audio id="audio-player">
-          <source src="" type="audio/mpeg">
-        </audio>
-      </div>
-
+      
+    </div>
 
 
 
 
     </div>
 
-    <!-- 在body结束标签前引入JavaScript -->
-    <script src="./music/music.js"></script>
-    <script src="./music/playlist.js"></script>
-    <script src="./music/progress.js"></script>
-    <script src="./music/mode.js"></script>
-    <script src="./music/mobile.js"></script>   <!-- 移动端适配 -->
+    <!-- 在body结束标签前引入JavaScript -->\
 
-    <script src="./res/wallpaper.js"></script>
+    <script src="./layout-bottom/personal/info.js"></script>  <!-- 个人信息区域 -->
+    <script src="./layout-bottom/music/music.js"></script>  <!-- 音乐播放器区域 -->
+    <script src="./layout-bottom/music/playlist.js"></script> <!-- 播放列表 -->
+    <script src="./layout-bottom/music/progress.js"></script> <!-- 进度条 -->
+    <script src="./layout-bottom/music/mode.js"></script> <!-- 播放模式 -->
+    <script src="./layout-bottom/music/mobile.js"></script> <!-- 移动端适配 -->
 
-    <script src="./click/loader.js"></script>
-
-    <script src="./res/sentence.js"></script>
-    <script src="./res/weather.js"></script>
-
-    <script src="./personal/info.js"></script>
+    <script src="./res/wallpaper.js"></script>  <!-- Bing壁纸 -->
+    <script src="./click/loader.js"></script> <!-- 点击效果 -->
+    <script src="./res/sentence.js"></script> <!-- 一言 -->
+    <script src="./res/weather.js"></script>  <!-- 天气 -->
     
   </body>
 </html>

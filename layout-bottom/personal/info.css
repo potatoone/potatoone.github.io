@@ -1,21 +1,15 @@
-/* 底部主容器 */
-.bottom {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  z-index: 100;
-  transition: all 0.3s ease;
-}
 
-/* 底部内容容器 */
-.bottom-container {
-  display: flex;
-  flex-direction: column; /* 改为垂直排列 */
+/* 个人信息容器 */
+.info-container {
+  position: fixed; /* 固定定位 */
+  bottom: 20px; /* 距离底部20px */
+  left: 20px; /* 距离右侧20px */
+  width: 260px; /* 固定宽度 */
   border-radius: 20px;
   padding: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(66, 66, 66, 0.408);
   max-width: 300px; /* 减小最大宽度 */
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.096);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -75,7 +69,7 @@
   height: 32px;
   width: 32px; /* 稍微减小按钮尺寸 */
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.126);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -89,12 +83,11 @@
 /* 按钮图标 */
 .bottom-button i {
   font-size: 14px;
-  color: white;
+  color: rgba(255, 255, 255, 0.874);
 }
 
 /* 按钮悬停效果 */
 .bottom-button:hover {
-  background-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -133,12 +126,12 @@
 .tag {
   padding: 4px 10px;
   border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.066);
   color: white;
+  font-size: 0.75rem;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-bottom: 5px; /* 确保底部有间距 */
@@ -156,7 +149,7 @@
     bottom: 15px;
   }
   
-  .bottom-container.collapsed {
+  .info-container.collapsed {
     background-color: transparent;
     box-shadow: none;
     backdrop-filter: none;
@@ -164,22 +157,22 @@
     padding: 0;
   }
   
-  .bottom-container.collapsed .top-section {
+  .info-container.collapsed .top-section {
     margin-bottom: 0;
   }
   
-  .bottom-container.collapsed .avatar-container {
+  .info-container.collapsed .avatar-container {
     margin-right: 0; /* 移除右侧间距 */
     width: 60px; /* 移动端保持合适大小 */
     height: 60px;
   }
   
-  .bottom-container.collapsed .bottom-buttonc,
-  .bottom-container.collapsed .tags-container {
+  .info-container.collapsed .bottom-buttonc,
+  .info-container.collapsed .tags-container {
     display: none; /* 隐藏按钮和标签 */
   }
   
-  .bottom-container.expanded {
+  .info-container.expanded {
     position: fixed;
     left: 15px;
     bottom: 15px;
@@ -189,24 +182,23 @@
     display: flex;
     flex-direction: column;
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
   
-  .bottom-container.expanded .top-section {
+  .info-container.expanded .top-section {
     margin-bottom: 15px;
   }
   
-  .bottom-container.expanded .avatar-container {
+  .info-container.expanded .avatar-container {
     margin-right: 15px;
   }
   
-  .bottom-container.expanded .bottom-buttonc {
+  .info-container.expanded .bottom-buttonc {
     display: flex;
   }
   
-  .bottom-container.expanded .tags-container {
+  .info-container.expanded .tags-container {
     display: flex;
     padding-top: 10px;
   }
@@ -219,7 +211,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
     z-index: 99; /* 确保在底部容器下面，但在其他内容上面 */
   }
   
@@ -230,7 +221,7 @@
 
 /* 超小屏幕 */
 @media (max-width: 480px) {
-  .bottom-container.expanded {
+  .info-container.expanded {
     padding: 12px;
   }
   

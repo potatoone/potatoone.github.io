@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
   const avatar = document.getElementById('avatar');
-  const bottomContainer = document.getElementById('bottomContainer');
+  const infoContainer = document.getElementById('infoContainer');
   const overlay = document.getElementById('overlay');
   
   // 检查是否为移动设备
@@ -13,15 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // 点击头像切换展开/折叠状态
   avatar.addEventListener('click', function() {
     if (isMobile()) {
-      if (bottomContainer.classList.contains('collapsed')) {
+      if (infoContainer.classList.contains('collapsed')) {
         // 展开
-        bottomContainer.classList.remove('collapsed');
-        bottomContainer.classList.add('expanded');
+        infoContainer.classList.remove('collapsed');
+        infoContainer.classList.add('expanded');
         overlay.classList.add('active');
       } else {
         // 折叠
-        bottomContainer.classList.remove('expanded');
-        bottomContainer.classList.add('collapsed');
+        infoContainer.classList.remove('expanded');
+        infoContainer.classList.add('collapsed');
         overlay.classList.remove('active');
       }
     }
@@ -29,25 +29,25 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // 点击遮罩层关闭展开的内容
   overlay.addEventListener('click', function() {
-    bottomContainer.classList.remove('expanded');
-    bottomContainer.classList.add('collapsed');
+    infoContainer.classList.remove('expanded');
+    infoContainer.classList.add('collapsed');
     overlay.classList.remove('active');
   });
   
   // 窗口大小改变时检查
   window.addEventListener('resize', function() {
     if (!isMobile()) {
-      bottomContainer.classList.remove('collapsed', 'expanded');
+      infoContainer.classList.remove('collapsed', 'expanded');
       overlay.classList.remove('active');
     } else {
-      if (!bottomContainer.classList.contains('expanded')) {
-        bottomContainer.classList.add('collapsed');
+      if (!infoContainer.classList.contains('expanded')) {
+        infoContainer.classList.add('collapsed');
       }
     }
   });
   
   // 初始化
   if (isMobile()) {
-    bottomContainer.classList.add('collapsed');
+    infoContainer.classList.add('collapsed');
   }
 });

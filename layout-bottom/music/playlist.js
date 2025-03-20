@@ -5,26 +5,35 @@ const PlaylistManager = (() => {
   let MP3_FILES = [];
   let currentTrack = 0;
   
+  // 网易云音乐源
+  const NETEASE_SONGS = [
+    { id: 2676045527, name: "未知歌曲1" },
+    { id: 2667995042, name: "未知歌曲2" },
+    { id: 2667995012, name: "未知歌曲3" },
+    { id: 2646148624, name: "未知歌曲4" },
+    { id: 2667994989, name: "未知歌曲5" },
+    { id: 2664858270, name: "未知歌曲6" }
+  ];
+  
   // DOM元素引用
-  let playlist, playlistToggle, audioPlayer;
+  let playlist, playlistToggle;
   
   // 初始化函数
   function init() {
     // 获取DOM元素
     playlist = document.getElementById('playlist');
     playlistToggle = document.getElementById('playlist-toggle');
-    audioPlayer = document.getElementById('audio-player');
     
-    if (!playlist || !playlistToggle || !audioPlayer) {
-      console.error('初始化播放列表管理器失败：缺少必要的DOM元素');
+    if (!playlist || !playlistToggle) {
+      console.error('初始化播放列表管理器失败');
       return false;
     }
     
     // 设置事件监听器
     setupEventListeners();
     
-    // 加载音乐文件列表
-    loadMusicFiles();
+    // 使用网易云音乐数据
+    useNeteaseMusic();
     
     // 初始化播放列表状态
     playlist.classList.remove('expanded');
@@ -39,6 +48,27 @@ const PlaylistManager = (() => {
     return true;
   }
   
+  // 使用网易云音乐数据
+  function useNeteaseMusic() {
+    // 将网易云音乐数据转换为播放器所需格式
+    MP3_FILES = NETEASE_SONGS.map(song => {
+      return {
+        name: song.name,
+        src: `https://music.163.com/song/media/outer/url?id=${song.id}`,
+        id: song.id
+      };
+    });
+    
+    // 生成播放列表
+    generatePlaylist();
+    
+    // 初始化第一首歌
+    const tracks = playlist.querySelectorAll('li');
+    if (tracks.length > 0 && window.MusicPlayer) {
+      window.MusicPlayer.playTrack(tracks[0], 0);
+    }
+  }
+  
   // 设置事件监听器
   function setupEventListeners() {
     // 播放列表折叠/展开按钮点击事件
@@ -51,6 +81,7 @@ const PlaylistManager = (() => {
       // 如果点击的是音频波形或其中的span元素，需要向上查找到li元素
       while (target !== this && target.tagName !== 'LI') {
         target = target.parentNode;
+        if (!target) return; // 保护性检查
       }
       
       if (target !== this && target.tagName === 'LI') {
@@ -65,37 +96,6 @@ const PlaylistManager = (() => {
     });
   }
   
-  // 加载音乐文件列表
-  function loadMusicFiles() {
-    fetch('./music/music.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('无法加载音乐文件列表');
-        }
-        return response.json();
-      })
-      .then(data => {
-        MP3_FILES = data.musicFiles;
-        // 加载完成后生成播放列表
-        generatePlaylist();
-        
-        // 初始化第一首歌
-        const tracks = playlist.querySelectorAll('li');
-        if (tracks.length > 0 && window.MusicPlayer) {
-          window.MusicPlayer.playTrack(tracks[0], 0);
-        }
-      })
-      .catch(error => {
-        console.error('加载音乐文件列表失败:', error);
-        // 提供一些默认的MP3文件列表
-        MP3_FILES = [
-          { name: "默认音乐1", src: "./music/file/default1.mp3" },
-          { name: "默认音乐2", src: "./music/file/default2.mp3" }
-        ];
-        generatePlaylist();
-      });
-  }
-  
   // 生成播放列表
   function generatePlaylist() {
     const playlistUl = playlist.querySelector('ul');
@@ -106,14 +106,15 @@ const PlaylistManager = (() => {
     
     playlistUl.innerHTML = ''; // 清空现有列表
     
-    MP3_FILES.forEach((track, index) => {
+    MP3_FILES.forEach((track) => {
       const li = document.createElement('li');
       li.setAttribute('data-src', track.src);
+      li.setAttribute('data-id', track.id || '');
       
       // 创建一个包含名称的span和波形的结构
       const nameSpan = document.createElement('span');
       nameSpan.className = 'track-name';
-      nameSpan.textContent = track.name || getFileNameFromPath(track.src);
+      nameSpan.textContent = track.name;
       
       const waveDiv = document.createElement('div');
       waveDiv.className = 'audio-wave';
@@ -130,17 +131,6 @@ const PlaylistManager = (() => {
       // 添加到播放列表
       playlistUl.appendChild(li);
     });
-  }
-  
-  // 从文件路径中提取文件名
-  function getFileNameFromPath(path) {
-    if (!path) return "未知歌曲";
-    
-    // 去除路径，只保留文件名
-    const filename = path.split('/').pop().split('\\').pop();
-    
-    // 去除扩展名
-    return filename.replace(/\.[^/.]+$/, "");
   }
   
   // 切换播放列表展开/折叠
@@ -178,15 +168,6 @@ const PlaylistManager = (() => {
     return currentTrack;
   }
   
-  // 设置当前曲目索引
-  function setCurrentTrackIndex(index) {
-    if (index >= 0 && playlist.querySelectorAll('li').length > index) {
-      currentTrack = index;
-      return true;
-    }
-    return false;
-  }
-  
   // 获取曲目总数
   function getTotalTracks() {
     return playlist.querySelectorAll('li').length;
@@ -203,7 +184,6 @@ const PlaylistManager = (() => {
     init,
     updatePlayingStatus,
     getCurrentTrackIndex,
-    setCurrentTrackIndex,
     getTotalTracks,
     getTrackElement,
     togglePlaylist
@@ -215,9 +195,5 @@ window.PlaylistManager = PlaylistManager;
 
 // 在DOM加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
-  // 初始化播放列表管理器
-  const initialized = PlaylistManager.init();
-  if (initialized) {
-    console.log('播放列表管理器初始化成功');
-  }
+  PlaylistManager.init();
 });
