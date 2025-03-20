@@ -7,12 +7,12 @@ const PlaylistManager = (() => {
   
   // 网易云音乐源
   const NETEASE_SONGS = [
-    { id: 2676045527, name: "未知歌曲1" },
-    { id: 2667995042, name: "未知歌曲2" },
-    { id: 2667995012, name: "未知歌曲3" },
-    { id: 2646148624, name: "未知歌曲4" },
-    { id: 2667994989, name: "未知歌曲5" },
-    { id: 2664858270, name: "未知歌曲6" }
+    { id: 2646148624, name: "Together Till Infinity" },
+    { id: 2676045527, name: "花焰照亮的旅途" },
+    { id: 2667995012, name: "Find MY Way" },
+    { id: 2664858270, name: "流星季 Night" },
+    { id: 2667994989, name: "天鹅的祝歌" },
+    { id: 2667995042, name: "微风中的绿野" }
   ];
   
   // DOM元素引用

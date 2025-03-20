@@ -19,32 +19,32 @@
   }
   
   #playlist-toggle:hover {  /* 按钮悬停 */
-    background-color: rgba(166, 146, 211, 0.4);
+    background-color: rgba(113, 70, 213, 0.4);
   }
   
+
+
+
   #playlist {  /* 播放列表容器 */
     position: absolute;
     bottom: calc(100% + 20px);
     width: 100%;
-    max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s, box-shadow 0.3s;
     color: #ffffffd9;
-    background: rgba(255, 255, 255, 0.211); /* 半透明背景 */
     border-radius: 5px;
-    z-index: 1002; /* 确保在播放器之上 */
-    font-size: small;
+    font-size: 12px;
+    z-index: 0; /* 确保在播放器之上 */
+    background-color: rgba(162, 162, 162, 0.282);
   }
   
   #playlist.expanded {  /* 展开状态 */
-    max-height: 60vh;
     overflow-y: auto;
     scrollbar-width: none; /* 隐藏滚动条 */
     border: 1px solid rgba(192, 192, 192, 0.293);
   }
   
   #playlist ul {  /* 列表 */
-    list-style: none;
     padding: 0;
     margin: 0;
   }
@@ -58,11 +58,12 @@
   }
   
   #playlist li:hover {  /* 悬停效果 */
-    background-color: rgba(240, 240, 240, 0.477);
+    background-color: rgba(209, 74, 139, 0.321);
   }
   
   #playlist li.playing {  /* 当前播放 */
-    background-color: rgba(158, 67, 255, 0.236);
+    background-color: rgba(187, 22, 63, 0.436);
     font-weight: bold;
+    color: rgb(255, 255, 255);
   }
 

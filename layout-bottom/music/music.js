@@ -6,6 +6,7 @@ const MusicPlayer = (() => {
   let playButton;
   let nextButton;
   let prevButton;
+  let modeButton;
   let playerTitle;
   
   // 初始化函数
@@ -15,9 +16,10 @@ const MusicPlayer = (() => {
     playButton = document.getElementById('play');
     nextButton = document.getElementById('next');
     prevButton = document.getElementById('prev');
+    modeButton = document.getElementById('mode');
     playerTitle = document.querySelector('.player-title');
     
-    if (!audioPlayer || !playButton || !nextButton || !prevButton || !playerTitle) {
+    if (!audioPlayer || !playButton || !nextButton || !prevButton || !modeButton || !playerTitle) {
       console.error('初始化音乐播放器失败：缺少必要的DOM元素');
       return false;
     }
@@ -41,6 +43,11 @@ const MusicPlayer = (() => {
     // 上一首按钮点击事件
     prevButton.addEventListener('click', function() {
       advanceTrack(false);
+    });
+    
+    // 模式切换按钮点击事件
+    modeButton.addEventListener('click', function() {
+      PlayModeManager.toggleMode();
     });
     
     // 音频播放结束事件
@@ -134,11 +141,11 @@ const MusicPlayer = (() => {
     const currentTrack = window.PlaylistManager.getCurrentTrackIndex();
     let nextTrackIndex;
     
-    // 简化的播放模式，只使用顺序播放
+    // 使用播放模式管理器获取下一首/上一首索引
     if (forward) {
-      nextTrackIndex = (currentTrack + 1) % totalTracks;
+      nextTrackIndex = PlayModeManager.getNextTrackIndex(currentTrack, totalTracks);
     } else {
-      nextTrackIndex = (currentTrack - 1 + totalTracks) % totalTracks;
+      nextTrackIndex = PlayModeManager.getPrevTrackIndex(currentTrack, totalTracks);
     }
     
     // 获取并播放下一首歌

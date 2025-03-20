@@ -1,43 +1,42 @@
 .audio-wave {  /* 波形动画容器 */
-    display: inline-flex;
-    align-items: flex-end;
-    height: 13px;
-    margin-left: auto;
-    margin-right: 5px; /* 添加：右侧一点小边距，避免贴边 */
-  }
-  
-  .audio-wave span {  /* 波动条 */
-    width: 3px;
-    margin-right: 3px;
-    background: #8e38ff61;
-    transform-origin: bottom;
-    animation: wave 1.2s infinite;
-  }
-  
-  .audio-wave span:nth-child(1) {  /* 第一条 */
-    height: 5px;
-    animation-delay: 0.1s;
-  }
-  
-  .audio-wave span:nth-child(2) {  /* 第二条 */
-    height: 6px;
-    animation-delay: 0.2s;
-  }
-  
-  .audio-wave span:nth-child(3) {  /* 第三条 */
-    height: 7px;
-    animation-delay: 0.3s;
-  }
+  align-items: flex-end;
+  height: 15px;
+  margin-left: auto;
+  margin-right: 5px; /* 添加：右侧一点小边距，避免贴边 */
+}
 
-  @keyframes wave {  /* 波动动画 */
-    0%, 100% { transform: scaleY(0.5); }
-    50% { transform: scaleY(1); }
-  }
+.audio-wave span {  /* 波动条 */
+  width: 4px;
+  margin-right: 3px;
+  background: #ffffffd4;
+  transform-origin: bottom;
+  animation: wave 1.2s infinite;
+}
 
-  #playlist li:not(.playing) .audio-wave {  /* 隐藏波形 */
-    display: none;
-  }
-  
-  #playlist li.playing .audio-wave {  /* 显示波形 */
-    display: inline-flex;
-  }
+.audio-wave span:nth-child(1) {  /* 第一条 */
+  height: 7px;
+  animation-delay: 0.5s;
+}
+
+.audio-wave span:nth-child(2) {  /* 第二条 */
+  height: 9px;
+  animation-delay: 0.2s;
+}
+
+.audio-wave span:nth-child(3) {  /* 第三条 */
+  height: 12px;
+  animation-delay: 0.3s;
+}
+
+@keyframes wave {  /* 波动动画 */
+  0%, 100% { transform: scaleY(0.5); }
+  50% { transform: scaleY(1); }
+}
+
+#playlist li:not(.playing) .audio-wave {  /* 隐藏波形 */
+  display: none;
+}
+
+#playlist li.playing .audio-wave {  /* 显示波形 */
+  display: inline-flex;
+}
