@@ -3,7 +3,7 @@
 .weather {
     position: fixed;
     display: flex;
-    top: 30px; right: 30px; padding: 15px;
+    top: 30px; right: 30px; padding: 12px;
     border-radius: 15px;
     color: #ffffff;
     align-items: center;
@@ -34,18 +34,18 @@
   }
   
   .weather-temp {
-    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    font-size: 16px;
     font-weight: bold;
     margin-right: 8px;
   }
   
   .weather-humidity {
-    font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+    font-size: 12px;
     opacity: 0.8;
   }
   
   .weather-city {
-    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+    font-size: 14px;
     opacity: 0.9;
   }
   

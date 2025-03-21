@@ -2,11 +2,8 @@
 /* 一言组件 - 左上角 */
 .sentence {
     position: fixed;
-    top: 30px;
-    left: 30px;
-    width: 400px; /* 固定宽度 */
-    max-width: 40vw; /* 响应式限制 */
-    padding: 15px;
+    top: 30px; left: 30px; padding: 20px; 
+    width: auto; max-width: 60vw; /* 自动宽度，最大宽度限制 */
     border-radius: 15px;
     background-color: rgba(146, 146, 146, 0.129);
     display: flex;
@@ -21,6 +18,7 @@
     transform: translateZ(0); /* 硬件加速 */
     transition: transform 0.3s ease, opacity 0.3s ease;
     pointer-events: auto; /* 允许点击 */
+    font-size: 20px;
   }
   
   .sentence:hover {
@@ -28,18 +26,3 @@
     background-color: rgba(146, 146, 146, 0.2);
   }
   
-  /* 一言文本样式 */
-  .sentence-text {
-    font-size: clamp(0.8rem, 1.6vw, 1rem);
-    line-height: 1.5;
-    margin-bottom: 8px;
-    font-weight: 400;
-    opacity: 0.9;
-  }
-  
-  .sentence-author {
-    font-size: clamp(0.7rem, 1.4vw, 0.9rem);
-    align-self: flex-end;
-    font-style: italic;
-    opacity: 0.7;
-  }

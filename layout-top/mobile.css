@@ -1,9 +1,8 @@
 /* 添加媒体查询，针对不同屏幕大小调整组件尺寸 */
 @media screen and (max-width: 768px) {
 .sentence {
-    width: 75%; /* 占满宽度 */
     padding: 15px;
-    font-size: 10px;
+    font-size: 12px;
     top: 20px;
     left: 20px;
     backdrop-filter: none;
@@ -11,6 +10,13 @@
     box-shadow: none;
     background: none;
 }
+
+/* 覆盖 hover 效果 */
+.sentence:hover {
+  transform: none;
+  background-color: transparent;
+}
+
 
 .weather {
     backdrop-filter: none;
