@@ -8,7 +8,7 @@
     <title>One Potato</title>
 
     <!-- 网站图标 -->
-    <link rel="icon" href="./res/home.png" type="image/png">
+    <link rel="icon" href="./res/home.svg" type="image/svg">
 
     <link rel="stylesheet" href="./normalize.min.css" />
     <link rel="stylesheet" href="./body.css" />
@@ -24,6 +24,7 @@
 
     <link rel="stylesheet" href="./layout-bottom/personal/info.css" />
     <link rel="stylesheet" href="./layout-bottom/personal/mobile.css" />
+    <link rel="stylesheet" href="./layout-bottom/personal/card.css" /> <!-- 模态窗口 -->
 
     <link rel="stylesheet" href="./layout-bottom/music/player.css" />
     <link rel="stylesheet" href="./layout-bottom/music/playlist/playlist.css" />
@@ -77,19 +78,27 @@
             <!-- 按钮区域 -->
             <div class="bottom-buttonc">
               <div class="bottom-button github">
-                <i class="fab fa-github"></i>
+                <a href="https://github.com/potatoone" target="_blank">
+                  <i class="fab fa-github"></i>
+                </a>
               </div>
               <div class="bottom-button email">
-                <i class="fas fa-envelope"></i>
+                <a href="#">
+                    <i class="fas fa-envelope"></i>
+                </a>
               </div>
               <div class="bottom-button qq">
-                <i class="fab fa-qq"></i>
+                  <a href="#">
+                      <i class="fab fa-qq"></i>
+                  </a>
               </div>
               <div class="bottom-button other">
-                <i class="fas fa-ellipsis-h"></i>
+                <a href="http://www.coolapk.com/u/709076" target="_blank">
+                  <i class="fas fa-ellipsis-h"></i>
+                </a>
               </div>
             </div>
-            
+
             <!-- 标签容器 -->
             <div class="tags-container">
               <div class="tag">Linux</div>
@@ -102,7 +111,6 @@
           </div>
 
         </div>
-
 
         <div class="player">
 
@@ -137,7 +145,16 @@
 
       </div>
 
-
+    <!-- 个人信息弹窗 -->
+    <div class="modal-overlay" id="contact-modal">
+      <div class="box">
+        <div class="front"></div>
+        <div class="back">
+          <div class="card-title">联系方式</div>
+          <div class="card-value" id="contact-value">内容</div>
+        </div>
+      </div>
+    </div>
       
     </div>
 
@@ -147,6 +164,7 @@
     <script src="./layout-top/weather.js"></script>  <!-- 天气 -->
 
     <script src="./layout-bottom/personal/info.js"></script>  <!-- 个人信息区域 -->
+    <script src="./layout-bottom/personal/card.js"></script>  <!-- 模态窗口 -->
 
     <script src="./layout-bottom/music/player.js"></script>  <!-- 音乐播放器区域 -->
     <script src="./layout-bottom/music/playlist/playlist.js"></script> <!-- 播放列表 -->

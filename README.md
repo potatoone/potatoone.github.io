@@ -8,7 +8,8 @@ Personal homepage
 mkdocs WIKI 配置
 
 终端激活python myenv 虚拟环境
- .\myenv\Scripts\Activate
+ .\wiki\myenv\Scripts\Activate
+
 cd wiki
 
 构建静态页面

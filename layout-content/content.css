@@ -4,20 +4,25 @@
   height: auto; /* 允许高度自适应 */
   padding: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  box-sizing: border-box; /* 确保padding不影响总宽度 */
 }
 
 .content-container {
   display: grid;
   width: 100%;
   max-width: 1000px; /* 限制最大宽度 */
-  margin: 0 auto; /* 居中 */
   
   /* 桌面端默认为1行4列 */
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr;
   gap: 20px; /* 统一设置间距 */
+  
+  /* 确保居中 */
+  place-items: center; /* 网格项目居中 */
+  align-self: center; /* 在flex容器中垂直居中 */
+  justify-self: center; /* 在flex容器中水平居中 */
 }
 
 .content-tab1,.content-tab2,.content-tab3,.content-tab4 {

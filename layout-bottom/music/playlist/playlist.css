@@ -46,29 +46,25 @@
   position: absolute; /* 改为固定定位，与control一致 */
   width: 250px; /* 固定宽度 */ 
   bottom: 110px;
-
-  /* 外观样式 */
-  overflow: hidden;
+  max-height: 0; /* 初始状态下收起 */
+  overflow: hidden; /* 隐藏溢出内容 */
   border-radius: 10px;
 
   /* 颜色和效果 */
   color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  
-  /* 动画 */
   transition: max-height 0.3s, box-shadow 0.3s, padding 0.3s;
 }
 
 #playlist.expanded {
-  overflow-y: auto;
+  max-height: 500px; /* 展开时的最大高度 */
   scrollbar-width: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 #playlist ul {
   padding: 0;
   margin: 0;
-  list-style: none;
   width: 100%;
 }
 
@@ -84,7 +80,6 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-
 }
 
 #playlist li:hover {

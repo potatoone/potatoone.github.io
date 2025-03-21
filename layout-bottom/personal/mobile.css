@@ -74,8 +74,15 @@
       margin-right: 5px; /* 按钮之间的间距 */
       border-radius: 20px;
       transition: all 0.3s ease; /* 添加过渡效果 */
+      font-size: 5px;
     }
     
+    /* 按钮图标 */
+    .bottom-button a {
+      line-height: 30px;    /* 按钮高度 */
+      font-size: 16px;
+    }
+
     /* 微调标签样式 */
     .tag {
       padding: 3px 7px;

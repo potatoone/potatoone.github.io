@@ -1,0 +1,73 @@
+.modal-overlay {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(37, 37, 37, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  .modal-overlay.active {
+    display: flex; /* 激活时显示 */
+  }
+  
+  .box {
+    width: 600px;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform-origin: bottom; /* 设置旋转中心为底部 */
+  }
+  
+  .box div {
+    top: 0;
+    left: 0;
+    backface-visibility: hidden; /* 隐藏背面 */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .front, .back {
+    padding: 20px;
+    text-align: center;
+    background-color: rgb(216, 34, 77);
+  }
+  
+  .back {
+    transform: rotateX(-180deg);
+  }
+  
+  .flipped .front {
+    opacity: 0;
+    background-color: rgb(216, 34, 77);
+  }
+  
+  .flipped .back {
+    opacity: 1;
+  }
+  
+  .card-title {
+    font-size: 24px;
+    margin-top: -20px;    /* 增加上边距 */
+    width: 100%;
+    text-align: center;
+    color: aliceblue;
+    font-weight: bold;
+  }
+  
+  .card-value {
+    font-size: 18px;
+    margin-top: 20px;    /* 增加上边距 */
+    width: 100%;
+    text-align: center;
+    color: aliceblue;
+  }

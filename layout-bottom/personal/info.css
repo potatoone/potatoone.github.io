@@ -6,13 +6,7 @@
   display: flex;
   gap: 20px; /* 固定组件间距为20px */
   z-index: 100;
-  transform-origin: bottom left;
   transition: all 0.3s ease; /* 使用all简化过渡 */
-}
-
-/* 当容器被悬停时整体放大 */
-.info-container:hover {
-  transform: scale(1.02);
 }
 
 /* 头像区域 */
@@ -81,9 +75,15 @@
 }
 
 /* 按钮图标 */
-.bottom-button i {
-  font-size: 16px;
+.bottom-button a {
+  display: block;       /* 让链接变为块级元素 */
+  width: 100%;          /* 填满父元素的宽度 */
+  height: 100%;         /* 填满父元素的高度 */
+  text-align: center;
+  line-height: 36px;    /* 按钮高度 */
+  font-size: 20px;
   color: rgba(255, 255, 255, 0.87);
+  text-decoration: none;
 }
 
 /* 按钮悬停效果 */
