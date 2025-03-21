@@ -1,0 +1,190 @@
+/* 播放列表样式
+ * 组织结构:
+ * 1. 播放列表切换按钮
+ * 2. 播放列表主体
+ * 3. 播放列表项
+ * 4. 音频波形动画
+ * 5. 兼容性处理
+ * 6. 响应式设计
+ */
+
+/* ===== 1. 播放列表切换按钮 ===== */
+#playlist-toggle {
+  /* 位置和尺寸 */
+  position: absolute;
+  right: 260px;
+  width: 40px; 
+  height: 40px;
+  bottom: 0px;  /* 与player底部对齐 */
+
+  /* 外观样式 */
+  display: flex; 
+  align-items: center; 
+  justify-content: center;  /* 居中 */
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  
+  /* 颜色和效果 */
+  color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  
+  /* 动画 */
+  transition: all 0.3s ease;
+}
+
+#playlist-toggle:hover {
+  background-color: rgba(113, 70, 213, 0.4);
+  color: white;
+}
+
+/* ===== 2. 播放列表主体 ===== */
+.playlist { /* 播放列表主体 */
+  /* 位置和尺寸 */
+  position: absolute; /* 改为固定定位，与control一致 */
+  width: 250px; /* 固定宽度 */ 
+  bottom: 110px;
+
+  /* 外观样式 */
+  overflow: hidden;
+  border-radius: 10px;
+
+  /* 颜色和效果 */
+  color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  
+  /* 动画 */
+  transition: max-height 0.3s, box-shadow 0.3s, padding 0.3s;
+}
+
+#playlist.expanded {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+#playlist ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
+}
+
+/* ===== 3. 播放列表项 ===== */
+#playlist li { /* 播放列表项 */
+  /* 布局 */
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  font-size: 10px;
+  
+  /* 外观 */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+}
+
+#playlist li:hover {
+  background-color: rgba(209, 74, 139, 0.321);
+  transition: 0.1s;
+}
+
+#playlist li.playing {
+  background-color: rgba(187, 22, 63, 0.436);
+  font-weight: bold;
+  font-size: 12px;
+  padding: 10px;
+  color: rgb(255, 255, 255);
+  background-image: linear-gradient(
+    90deg,
+    rgba(189, 114, 255, 0.5) 0%,
+    rgba(179, 106, 235, 0.5) 10%,
+    rgba(200, 84, 228, 0.5) 20%,
+    rgba(205, 67, 190, 0.5) 30%,
+    rgba(210, 50, 152, 0.5) 40%,
+    rgba(216, 37, 103, 0.5) 50%,
+    rgba(210, 50, 152, 0.5) 60%,
+    rgba(205, 67, 190, 0.5) 70%,
+    rgba(200, 84, 228, 0.5) 80%,
+    rgba(179, 106, 235, 0.5) 90%,
+    rgba(189, 114, 255, 0.5) 100%
+  );
+  background-size: 200% 100%;
+  animation: bg-slide-loop 5s linear infinite;
+}
+
+/* 背景滑动动画 */
+@keyframes bg-slide-loop {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: -200% 50%;
+  }
+}
+
+
+
+
+/* ===== 4. 音频波形动画 ===== */
+.audio-wave { 
+  display: none;
+  align-items: flex-end;
+  height: 14px;
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+/* 默认隐藏波形 */
+#playlist li .audio-wave {
+  display: none;
+}
+
+/* 仅在播放项上且 active 时显示波形 */
+#playlist li.playing .audio-wave.active {
+  display: inline-flex;
+}
+
+/* 波形动画 */
+.audio-wave span {
+  display: block;
+  width: 3px;
+  margin-right: 3px;
+  background: rgba(255, 255, 255, 0.9);
+  
+  /* 只有在 active 时才有动画效果 */
+  animation: none;
+  transform-origin: bottom;
+}
+
+.audio-wave.active span {
+  animation: wave 1.2s infinite ease-in-out;
+}
+
+.audio-wave span:nth-child(1) {
+  height: 8px;
+  animation-delay: 0.2s;
+}
+
+.audio-wave span:nth-child(2) {
+  height: 10px;
+  animation-delay: 0.4s;
+}
+
+.audio-wave span:nth-child(3) {
+  height: 12px;
+  animation-delay: 0.6s;
+}
+
+/* 波形动画 */
+@keyframes wave {
+  0%, 100% {
+    transform: scaleY(0.6);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}

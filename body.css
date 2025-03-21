@@ -1,10 +1,27 @@
 /* 修改body.css文件 */
+
+/* 首先定义字体 */
+@font-face {
+  font-family: 'DY Font';
+  src: url('./res/almmfyt.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* 优化字体加载策略 */
+}
+
+/* 全局样式设置 */
 html, body {
   margin: 0;
   padding: 0;
   height: 100vh;
   overflow: auto; /* 改为auto，允许在需要时出现滚动条 */
   scrollbar-width: none; /* 隐藏滚动条 */
+  font-family: 'DY Font'; /* 设置默认字体 */
+}
+
+/* 为Chrome等浏览器隐藏滚动条 */
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;
 }
 
 .background {
@@ -18,4 +35,9 @@ html, body {
   flex-direction: column;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.403);
+}
+
+/* 确保所有元素都继承字体设置 */
+* {
+  font-family: inherit;
 }
