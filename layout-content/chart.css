@@ -60,6 +60,7 @@
     display: none; /* 移动端隐藏左侧tab */
   }
   .tab2 {
+    display: none;  /* 移动端隐藏右侧tab */
     border-radius: 15px;
     width: 100%; /* 移动端两个tab都占满宽度 */
     height: 80px; /* 移动端稍微减小高度 */
