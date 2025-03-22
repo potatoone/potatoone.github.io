@@ -1,0 +1,66 @@
+.chart {
+  display: flex; /* 改为flex布局 */
+  flex-direction: row; /* 水平排列 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  width: 100%;
+  max-width: 1000px; /* 限制最大宽度 */
+  gap: 20px; /* 元素之间的间距 */
+  padding: 20px;
+}
+
+.tab1 {
+  width: 20%; /* 左侧tab宽度15% */
+  height: 150px;
+  box-sizing: border-box;
+  border: 3px solid rgba(169, 169, 169, 0.468);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.145);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; /* 确保内容不溢出 */
+  display: flex; /* 添加flex布局使图标居中 */
+  justify-content: center;
+  align-items: center;
+}
+
+.tab1 i {
+  font-size: 40px;
+  color: #f0f0f0;
+}
+
+.tab2 {
+  width: 80%; /* 右侧tab宽度85% */
+  height: 150px;
+  box-sizing: border-box;
+  border: 3px solid rgba(169, 169, 169, 0.468);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.145);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; /* 确保内容不溢出 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab1:hover,.tab2:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+  .chart {
+    flex-direction: column; /* 移动端改为垂直排列 */
+    gap: 15px; /* 移动端减小间距 */
+  }
+  .tab1 {
+    display: none; /* 移动端隐藏左侧tab */
+  }
+  .tab2 {
+    width: 100%; /* 移动端两个tab都占满宽度 */
+    height: 120px; /* 移动端稍微减小高度 */
+    border-radius: 0;
+  }
+}

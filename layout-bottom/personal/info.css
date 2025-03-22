@@ -1,89 +1,64 @@
-/* 个人信息容器 - 整体固定定位 */
+/* 个人信息容器 */
 .info-container {
-  position: fixed; 
-  bottom: 20px; 
-  left: 20px; 
-  display: flex;
-  gap: 20px; /* 固定组件间距为20px */
-  z-index: 100;
-  transition: all 0.3s ease; /* 使用all简化过渡 */
+  display: flex; position: fixed; z-index: 100;
+  bottom: 20px; left: 20px; gap: 20px;
+  transition: all 0.3s ease;
 }
 
 /* 头像区域 */
 .avatar-container {
-  width: 170px;
-  height: 170px;
-  flex-shrink: 0; /* 防止被压缩 */
-  z-index: 102;
+  flex-shrink: 0; z-index: 102;
+  width: 170px; height: 170px;
 }
 
 /* 圆形头像 */
 .avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: flex; justify-content: center; align-items: center;
+  overflow: hidden; cursor: pointer;
+  width: 100%; height: 100%; 
+  border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.5);
   background-color: rgba(197, 197, 197, 0.2);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(5px);
-  display: flex; /* 确保居中显示 */
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  cursor: pointer;
+  backdrop-filter: blur(5px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* 头像图片 */
 .avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* 保持宽高比并填充 */
+  object-fit: cover;
+  width: 100%; height: 100%;
 }
 
 /* 内容包装器 */
 .content-wrapper {
-  position: relative; /* 设置为相对定位 */
-  height: 170px; /* 与头像高度匹配 */
-  width: 240px; /* 固定宽度 */
-  flex-shrink: 0; /* 防止内容被压缩 */
+  position: relative; flex-shrink: 0;
+  width: 240px; height: 170px;
 }
 
-/* 按钮容器 - 绝对定位到底部上方 */
-.bottom-buttonc {
-  position: absolute;
-  bottom: 95px;
-  left: 0;
-  display: flex;
-  gap: 8px;
-  z-index: 101;
+/* 按钮容器 */
+.bottom-btnc {
+  display: flex; justify-content: center; align-items: center; 
+  position: absolute; z-index: 101;
+  bottom: 95px; left: 0; gap: 8px;
 }
 
 /* 单个按钮 */
 .bottom-button {
-  height: 36px;
-  width: 36px;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.126);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex; justify-content: center; align-items: center; 
   cursor: pointer;
-  transition: all 0.3s ease; /* 简化过渡 */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 36px; height: 36px; 
+  border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.126);
+  backdrop-filter: blur(5px); 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  transition: all 0.3s ease;
 }
 
 /* 按钮图标 */
 .bottom-button a {
-  display: block;       /* 让链接变为块级元素 */
-  width: 100%;          /* 填满父元素的宽度 */
-  height: 100%;         /* 填满父元素的高度 */
-  text-align: center;
-  line-height: 36px;    /* 按钮高度 */
-  font-size: 20px;
+  display: block; 
+  text-align: center; text-decoration: none;
+  width: 100%; height: 100%;  
+  line-height: 36px; font-size: 20px;
   color: rgba(255, 255, 255, 0.87);
-  text-decoration: none;
 }
 
 /* 按钮悬停效果 */
@@ -112,40 +87,29 @@
   background-color: #7289DA;
 }
 
-/* 标签容器 - 绝对定位到底部 */
+/* 标签容器 */
 .tags-container {
-  position: absolute;
-  bottom: 0px; /* 保持在底部 */
-  left: 0;
-  width: 240px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  z-index: 100;
-  background-color: rgba(255, 255, 255, 0.096);
-  backdrop-filter: blur(10px);
+  position: absolute; display: flex; flex-wrap: wrap;
+  width: 240px; bottom: 0px; left: 0; /* 定位于左下角 */
+  padding: 10px; 
   border-radius: 15px;
-  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.096); 
+  backdrop-filter: blur(10px);
   box-shadow: 0 4px 15px rgba(66, 66, 66, 0.2);
+  gap: 7px;
 }
 
 /* 个性化标签 */
 .tag {
-  padding: 5px 10px;
-  border-radius: 15px;
-  backdrop-filter: blur(5px);
-  background-color: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.066);
-  color: white;
+  padding: 5px 10px; 
+  background-color: rgba(255, 255, 255, 0.06); color: white; 
   font-size: 0.65rem;
-  cursor: pointer;
-  transition: all 0.3s ease; /* 简化过渡 */
-  margin-bottom: 0; /* 确保底部无间距 */
-  white-space: nowrap;
+  border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.066);
+  cursor: pointer; transition: all 0.3s ease; white-space: nowrap;
 }
 
+/* 标签悬停效果 */
 .tag:hover {
   background-color: rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
 }
-

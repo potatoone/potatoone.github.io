@@ -3,7 +3,7 @@
 .weather {
     position: fixed;
     display: flex;
-    top: 30px; right: 30px; padding: 12px;
+    top: 20px; right: 20px; padding: 12px;
     border-radius: 15px;
     color: #ffffff;
     align-items: center;

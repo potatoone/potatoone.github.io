@@ -2,7 +2,7 @@
 /* 一言组件 - 左上角 */
 .sentence {
     position: fixed;
-    top: 30px; left: 30px; padding: 20px; 
+    top: 20px; left: 20px; padding: 20px; 
     width: auto; max-width: 60vw; /* 自动宽度，最大宽度限制 */
     border-radius: 15px;
     background-color: rgba(146, 146, 146, 0.129);

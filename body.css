@@ -1,6 +1,20 @@
 /* 修改body.css文件 */
 
-@import url("https://static.zeoseven.com/zsft/88/main/result.css");
+@import url("https://static.zeoseven.com/zsft/41/main/result.css");
+
+body {
+    font-family: "DaBaoTaoTaoTi"; /* 大宝桃桃体 */
+    font-weight: normal;
+}
+
+/* 全局性能优化 */
+body {
+  transform: translateZ(0); /* 全局启用GPU加速 */
+  backface-visibility: hidden; /* 防止3D翻转闪烁 */
+  will-change: auto; /* 自动判断需要优化的属性 */
+  -webkit-font-smoothing: antialiased; /* 字体渲染优化 */
+  -moz-osx-font-smoothing: grayscale;
+}
 
 /* 全局样式设置 */
 html, body {
@@ -9,8 +23,6 @@ html, body {
   height: 100vh;
   overflow: auto; /* 改为auto，允许在需要时出现滚动条 */
   scrollbar-width: none; /* 隐藏滚动条 */
-  font-family: "MaokenZhuyuanTi"; /* 猫啃珠圆体 */
-  font-weight: normal;
 }
 
 /* 为Chrome等浏览器隐藏滚动条 */
@@ -34,4 +46,16 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
 /* 确保所有元素都继承字体设置 */
 * {
   font-family: inherit;
+}
+
+/* 确保淡入动画支持GPU加速 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateZ(0);
+  }
 }

@@ -4,9 +4,6 @@
       position: absolute;
       left: 20px; /* 左侧间距20px */
       bottom: 20px; /* 底部间距20px */
-      transition: transform 0.3s ease, opacity 0.3s ease, left 0.3s ease, bottom 0.3s ease; /* 增加位置过渡 */
-      opacity: 1;
-      transform: translateZ(0);
     }
     
     /* 内容包装器 */
@@ -17,7 +14,6 @@
       position: absolute;
       left: 70px; /* 在头像右侧显示 */
       bottom: -7px; /* 与放大后的头像底部对齐 */
-      transition: all 0.3s ease; /* 添加过渡效果 */
     }
   
     /* 头像状态：折叠(默认) */
@@ -32,7 +28,6 @@
     .info-container.expanded .avatar-container {
       transform: scale(1.2); /* 微微放大，但不是原始大小 */
       opacity: 1;
-      transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
     }
     
     /* 展开状态的内容包装器 */
@@ -42,16 +37,14 @@
     }
     
     /* 展开状态的按钮容器 */
-    .info-container.expanded .bottom-buttonc {
-      position: relative; /* 改为相对定位，保持在右侧 */
+    .info-container.expanded .bottom-btnc {
+      display: flex; position: relative; /* 改为相对定位，保持在右侧 */
       opacity: 1;
       visibility: visible;
       bottom: auto; /* 清除桌面端底部定位 */
       margin-bottom: 10px; /* 与下方标签保持间距 */
-      display: flex;
       flex-direction: row; /* 水平排列 */
       justify-content: flex-start;
-      transition: opacity 0.3s ease, margin 0.3s ease; /* 添加过渡效果 */
     }
     
     /* 展开状态的标签容器 */
@@ -64,7 +57,6 @@
       bottom: auto; /* 清除之前的底部定位 */
       transform: none; /* 清除之前的变换 */
       width: 100%; /* 撑满包装器宽度 */
-      transition: opacity 0.3s ease, transform 0.3s ease, width 0.3s ease; /* 添加过渡效果 */
     }
     
     /* 移动端按钮样式调整 */
@@ -73,7 +65,6 @@
       width: 30px;
       margin-right: 5px; /* 按钮之间的间距 */
       border-radius: 20px;
-      transition: all 0.3s ease; /* 添加过渡效果 */
       font-size: 5px;
     }
     
@@ -87,7 +78,6 @@
     .tag {
       padding: 3px 7px;
       font-size: 0.5rem;
-      transition: all 0.3s ease; /* 添加过渡效果 */
     }
     
     /* 淡入动画 */

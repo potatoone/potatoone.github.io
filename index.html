@@ -21,10 +21,12 @@
     <link rel="stylesheet" href="./layout-content/content.css" />
     <link rel="stylesheet" href="./layout-content/mobile.css" />
 
+    <link rel="stylesheet" href="./layout-content/chart.css" />
+    <link rel="stylesheet" href="./layout-content/github-chart/chart.css" />
 
     <link rel="stylesheet" href="./layout-bottom/personal/info.css" />
     <link rel="stylesheet" href="./layout-bottom/personal/mobile.css" />
-    <link rel="stylesheet" href="./layout-bottom/personal/card.css" /> <!-- 模态窗口 -->
+    <link rel="stylesheet" href="./layout-bottom/personal/card/card.css" /> <!-- 模态窗口 -->
 
     <link rel="stylesheet" href="./layout-bottom/music/player.css" />
     <link rel="stylesheet" href="./layout-bottom/music/playlist/playlist.css" />
@@ -49,17 +51,46 @@
         
 
         <div class="content">
+          
           <div class="content-container">
             <div class="content-tab1">
-              <a href="https://potatoone.github.io/wiki/site" class="wiki-link" title="访问我的Wiki">
+              <a href="https://potatoone.github.io/wiki/site" class="tab-link" title="访问我的Wiki">
                 <i class="fas fa-book-open"></i>
-                <span>My Wiki</span>
+                <span>Wiki</span>
               </a>
             </div>
-            <div class="content-tab2"></div>
-            <div class="content-tab3"></div>
-            <div class="content-tab4"></div>
+            <div class="content-tab2">
+              <a href="#" class="tab-link" title="网址导航">
+                <i class="fas fa-compass"></i>
+                <span>网址导航</span>
+              </a>
+            </div>
+            <div class="content-tab3">
+              <a href="#" class="tab-link" title="音乐集">
+                <i class="fas fa-music"></i>
+                <span>音乐集</span>
+              </a>
+            </div>
+            <div class="content-tab4">
+              <a href="#" class="tab-link" title="图册">
+                <i class="fas fa-images"></i>
+                <span>图册</span>
+              </a>
+            </div>
           </div>
+
+          <div class="chart">
+            <div class="tab1">
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+            <div class="tab2">
+              <div class="github-contributions">
+                <!-- JavaScript将在这里生成贡献格子 -->
+              </div>
+            </div>
+          </div>
+
         </div>
 
 
@@ -75,8 +106,9 @@
           
           <!-- 内容包装器 -->
           <div class="content-wrapper">
+
             <!-- 按钮区域 -->
-            <div class="bottom-buttonc">
+            <div class="bottom-btnc">
               <div class="bottom-button github">
                 <a href="https://github.com/potatoone" target="_blank">
                   <i class="fab fa-github"></i>
@@ -108,6 +140,7 @@
               <div class="tag">Net</div>
               <div class="tag">UI/UX</div>
             </div>
+
           </div>
 
         </div>
@@ -145,17 +178,18 @@
 
       </div>
 
-    <!-- 个人信息弹窗 -->
-    <div class="modal-overlay" id="contact-modal">
-      <div class="box">
-        <div class="front"></div>
-        <div class="back">
-          <div class="card-title">联系方式</div>
-          <div class="card-value" id="contact-value">内容</div>
+      <!-- 个人信息弹窗 -->
+      <div class="modal-overlay" id="contact-modal">
+        <div class="box">
+          <div class="front"></div>
+          <div class="back">
+            <div class="card-title">联系方式</div>
+            <div class="card-value" id="contact-value">内容</div>
+          </div>
         </div>
       </div>
-    </div>
-      
+
+
     </div>
 
     <!-- 在body结束标签前引入JavaScript -->
@@ -163,8 +197,11 @@
     <script src="./layout-top/sentence.js"></script> <!-- 一言 -->
     <script src="./layout-top/weather.js"></script>  <!-- 天气 -->
 
+    <script src="./layout-content/github-chart/chart.js"></script> <!-- Github图表 -->
+    <script src="./layout-content/github-chart/setcolor.js"></script> <!-- Github图表颜色 -->
+
     <script src="./layout-bottom/personal/info.js"></script>  <!-- 个人信息区域 -->
-    <script src="./layout-bottom/personal/card.js"></script>  <!-- 模态窗口 -->
+    <script src="./layout-bottom/personal/card/card.js"></script>  <!-- 模态窗口 -->
 
     <script src="./layout-bottom/music/player.js"></script>  <!-- 音乐播放器区域 -->
     <script src="./layout-bottom/music/playlist/playlist.js"></script> <!-- 播放列表 -->
