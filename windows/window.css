@@ -1,0 +1,456 @@
+/* Windows风格窗口管理器 */
+
+:root {
+    --window-border-color: rgba(255, 0, 0, 0);
+    --window-header-bg: rgba(245, 245, 245, 0);
+    --window-body-bg: rgba(255, 255, 255, 0);
+    --window-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --window-button-close: #ff4757;
+    --window-button-minimize: #ffa502;
+    --window-button-maximize: #2ed573;
+    --window-border-radius: 8px;
+    --window-backdrop-filter: blur(15px);
+  }
+  
+  /* 窗口容器 */
+  .window-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9000;
+  }
+  
+  /* 窗口 */
+  .window {
+    position: absolute;
+    min-width: 300px;
+    min-height: 200px;
+    border-radius: var(--window-border-radius);
+    box-shadow: var(--window-shadow);
+    border: 1px solid var(--window-border-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    transform: scale(0.98);
+    opacity: 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    background-color: var(--window-body-bg);
+    backdrop-filter: var(--window-backdrop-filter);
+  }
+  
+  .window.active {
+    border-color: rgba(255, 255, 255, 0.157);
+    border: 2px solid #d1d1d127;
+  }
+  
+  .window.visible {
+    transform: scale(1);
+    opacity: 1;
+  }
+  
+  .window.maximized {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0;
+  }
+  
+  .window.minimized {
+    transform: scale(0.6);
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* 窗口标题栏 */
+  .window-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--window-header-bg);
+    backdrop-filter: var(--window-backdrop-filter);
+    padding: 8px 10px;
+    cursor: move;
+    user-select: none;
+    height: 25px;
+    flex-shrink: 0;
+  }
+  
+  .window-title {
+    color: #ffffff;
+    font-size: 14px;
+    margin-right: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .window-title img {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* 修改窗口标题中的图标样式 */
+  .window-title i {
+    font-size: 16px;
+    margin-right: 8px;
+    color: #ffffff;
+  }
+  
+  /* 窗口控制按钮 - Windows 10样式 */
+  .window-controls {
+    display: flex;
+    margin-left: auto;
+  }
+  
+  .window-button {
+    width: 46px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+  }
+  
+  /* 按钮图标 */
+  .window-button span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    position: relative;
+  }
+  
+  /* 最小化按钮 - 横线 */
+  .window-button.minimize span::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background-color: rgb(255, 255, 255);
+    top: 50%;
+    left: 0;
+  }
+  
+  /* 最大化按钮 - 方框 */
+  .window-button.maximize span::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 2px solid rgb(255, 255, 255);
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+  }
+  
+  /* 关闭按钮 - X形 */
+  .window-button.close span::before,
+  .window-button.close span::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 2px;
+    background-color: rgb(255, 255, 255);
+    top: 50%;
+    left: 50%;
+  }
+  
+  .window-button.close span::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .window-button.close span::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  
+  /* 按钮悬停效果 */
+  .window-button.minimize:hover {
+    background-color: rgba(135, 135, 135, 0.414);
+  }
+  
+  .window-button.maximize:hover {
+    background-color: rgba(95, 95, 95, 0.1);
+  }
+  
+  .window-button.close:hover {
+    background-color: #e81123; /* Windows红色关闭按钮 */
+  }
+  
+  /* 最大化窗口时的最大化按钮变为"恢复"图标 */
+  .window.maximized .window-button.maximize span::before {
+    width: 6px;
+    height: 6px;
+    border: 1px solid white;
+    top: 1px;
+    left: 1px;
+  }
+  
+  .window.maximized .window-button.maximize span::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border: 1px solid white;
+    top: 3px;
+    left: 3px;
+    z-index: -1;
+  }
+  
+  /* 窗口内容区域 */
+  .window-body {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--window-body-bg);
+  }
+  
+  .window-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  /* 窗口大小调整手柄 */
+  .resize-handle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+  }
+  
+  .resize-handle.top-left {
+    top: 0;
+    left: 0;
+    cursor: nwse-resize;
+  }
+  
+  .resize-handle.top-right {
+    top: 0;
+    right: 0;
+    cursor: nesw-resize;
+  }
+  
+  .resize-handle.bottom-left {
+    bottom: 0;
+    left: 0;
+    cursor: nesw-resize;
+  }
+  
+  .resize-handle.bottom-right {
+    bottom: 0;
+    right: 0;
+    cursor: nwse-resize;
+  }
+  
+  .resize-handle.top {
+    top: 0;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    cursor: ns-resize;
+  }
+  
+  .resize-handle.right {
+    top: 10px;
+    bottom: 10px;
+    right: 0;
+    height: auto;
+    cursor: ew-resize;
+  }
+  
+  .resize-handle.bottom {
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    cursor: ns-resize;
+  }
+  
+  .resize-handle.left {
+    top: 10px;
+    bottom: 10px;
+    left: 0;
+    height: auto;
+    cursor: ew-resize;
+  }
+  
+  /* 任务栏 - 放在左上角句子的右边 */
+  .taskbar {
+    position: fixed;
+    top: 20px;
+    left: calc(var(--sentence-width, 30vw) + 40px); /* 放在sentence的右边 */
+    padding: 10px 15px;
+    border-radius: 15px;
+    background-color: rgba(146, 146, 146, 0.129);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    z-index: 9999;
+    border: 1px solid rgba(236, 236, 236, 0.332);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translateZ(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    max-width: 200px;
+  }
+  
+  .taskbar:hover {
+    transform: translateY(3px) translateZ(0);
+    background-color: rgba(146, 146, 146, 0.2);
+  }
+  
+  .taskbar-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .taskbar-item {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgb(51, 51, 51);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  
+  .taskbar-item img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+  
+  /* 任务栏项目图标 */
+  .taskbar-item i {
+    font-size: 16px;
+    color: white;
+  }
+  
+  .taskbar-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+  
+  .taskbar-item.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  
+  /* 悬停提示 */
+  .taskbar-item::after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+  }
+  
+  .taskbar-item:hover::after {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* 加载指示器 */
+  .loading-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--window-button-maximize), transparent);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+  
+  @keyframes loading {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+  
+  /* 窗口内容加载中状态 */
+  .window-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--window-body-bg);
+    color: white;
+  }
+  
+  .window-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+  }
+  
+  @keyframes spin {
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    .window {
+      min-width: 250px;
+    }
+    
+    .window-header {
+      height: 35px;
+      padding: 6px 8px;
+    }
+    
+    .window-button {
+      width: 10px;
+      height: 10px;
+    }
+    
+    .taskbar {
+      top: 15px;
+      left: calc(var(--sentence-width, 70vw) + 20px);
+      padding: 5px 10px;
+    }
+    
+    .taskbar-item {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .taskbar-item img {
+      width: 16px;
+      height: 16px;
+    }
+  }
