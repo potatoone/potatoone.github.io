@@ -12,8 +12,8 @@
 .github-contributions {
   display: grid;
   /* 修改网格模板，确保一致性 */
-  grid-template-rows: 20px repeat(7, minmax(10px, 1fr)); /* 第一行给月份标签 */
-  grid-template-columns: 30px repeat(53, minmax(10px, 1fr)); /* 第一列给星期标签 */
+  grid-template-rows: 15px repeat(7, minmax(10px, 1fr)); /* 第一行给月份标签 */
+  grid-template-columns: 25px repeat(53, minmax(10px, 1fr)); /* 第一列给星期标签 */
   grid-gap: 3px; /* 统一的间隙 */
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.05);
@@ -78,7 +78,7 @@
 /* 周标签 - 修改为固定在第一列 */
 .day-label {
   grid-column: 1; /* 固定在第一列 */
-  font-size: 10px;
+  font-size: 7px;
   color: var(--contrib-text);
   align-self: center;
   justify-self: end;
@@ -88,9 +88,8 @@
 /* 月份标签 - 修改为固定在第一行 */
 .month-label {
   grid-row: 1; /* 固定在第一行 */
-  /* 移除可能导致宽度变化的样式 */
   width: auto;
-  font-size: 10px;
+  font-size: 9px;
   color: var(--contrib-text);
   align-self: center;
   justify-self: center;
@@ -106,8 +105,8 @@
 @media screen and (max-width: 768px) {
   .github-contributions {
     padding: 8px; grid-gap: 1px; /* 统一的间隙 */
-    grid-template-rows: 15px repeat(7, minmax(6px, 1fr));
-    grid-template-columns: 20px repeat(53, minmax(6px, 1fr));
+    grid-template-rows: 12px repeat(7, minmax(6px, 1fr));
+    grid-template-columns: 17px repeat(53, minmax(6px, 1fr));
   }
   
   .contribution-cell {
@@ -118,6 +117,6 @@
   }
   
   .day-label, .month-label {
-    font-size: 8px;
+    font-size: 5px;
   }
 }

@@ -62,6 +62,6 @@
   .tab2 {
     border-radius: 15px;
     width: 100%; /* 移动端两个tab都占满宽度 */
-    height: 100px; /* 移动端稍微减小高度 */
+    height: 80px; /* 移动端稍微减小高度 */
   }
 }
