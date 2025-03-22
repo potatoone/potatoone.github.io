@@ -14,7 +14,7 @@
   /* 修改网格模板，确保一致性 */
   grid-template-rows: 20px repeat(7, minmax(10px, 1fr)); /* 第一行给月份标签 */
   grid-template-columns: 30px repeat(53, minmax(10px, 1fr)); /* 第一列给星期标签 */
-  grid-gap: 2px; /* 统一的间隙 */
+  grid-gap: 3px; /* 统一的间隙 */
   padding: 10px;
   background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(5px);
@@ -24,9 +24,9 @@
 
 /* 贡献格子基础样式 - 固定大小 */
 .contribution-cell {
-  width: 12px; /* 固定宽度 */
-  height: 12px; /* 固定高度 */
-  border-radius: 2px;
+  width: 10px; /* 固定宽度 */
+  height: 10px; /* 固定高度 */
+  border-radius: 1px;
   transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.3s ease;
   cursor: pointer;
   position: relative;
@@ -105,14 +105,14 @@
 /* 响应式布局 */
 @media screen and (max-width: 768px) {
   .github-contributions {
-    padding: 8px;
+    padding: 8px; grid-gap: 1px; /* 统一的间隙 */
     grid-template-rows: 15px repeat(7, minmax(6px, 1fr));
     grid-template-columns: 20px repeat(53, minmax(6px, 1fr));
   }
   
   .contribution-cell {
-    width: 7px; /* 移动端更小格子 */
-    height: 7px;
+    width: 5px; /* 移动端更小格子 */
+    height: 5px;
     grid-gap: 1px; /* 移动端更小间隙 */
     border-radius: 1px;
   }
