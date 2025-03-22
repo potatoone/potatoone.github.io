@@ -1,13 +1,6 @@
 /* 修改body.css文件 */
 
-/* 首先定义字体 */
-@font-face {
-  font-family: 'DY Font';
-  src: url('./res/almmfyt.ttf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap; /* 优化字体加载策略 */
-}
+@import url("https://static.zeoseven.com/zsft/88/main/result.css");
 
 /* 全局样式设置 */
 html, body {
@@ -16,7 +9,8 @@ html, body {
   height: 100vh;
   overflow: auto; /* 改为auto，允许在需要时出现滚动条 */
   scrollbar-width: none; /* 隐藏滚动条 */
-  font-family: 'DY Font'; /* 设置默认字体 */
+  font-family: "MaokenZhuyuanTi"; /* 猫啃珠圆体 */
+  font-weight: normal;
 }
 
 /* 为Chrome等浏览器隐藏滚动条 */
