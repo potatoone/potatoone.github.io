@@ -1,0 +1,58 @@
+/* 
+ * Windows风格窗口管理器 - 内容区域
+ * 包含窗口主体和iframe样式
+ */
+
+/* 窗口内容区域 */
+.window-body {
+  flex: 1; /* 占用剩余空间 */
+  overflow: hidden;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0); /* 透明背景 */
+}
+
+/* 窗口内的iframe */
+.window-body iframe {
+  width: 100%;
+  height: 100%;
+  border: none; /* 移除iframe边框 */
+}
+
+/* 窗口内容加载中状态 */
+.window-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0); /* 透明背景 */
+  color: white;
+}
+
+/* 加载中旋转动画 */
+.window-loading .spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1); /* 暗淡的圆环 */
+  border-top-color: white; /* 顶部为白色，形成对比 */
+  border-radius: 50%;
+  animation: spin 1s linear infinite; /* 旋转动画 */
+  margin-bottom: 15px;
+}
+
+/* 加载指示器进度条 */
+.loading-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  /* 使用绿色作为加载指示器颜色 */
+  background: linear-gradient(to right, transparent, #db1e63, transparent);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite; /* 无限循环动画 */
+}

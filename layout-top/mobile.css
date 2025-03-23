@@ -1,14 +1,12 @@
 /* 添加媒体查询，针对不同屏幕大小调整组件尺寸 */
 @media screen and (max-width: 768px) {
 .sentence {
-    padding: 15px;
-    font-size: 12px;
-    top: 20px;
-    left: 20px;
-    backdrop-filter: none;
-    border: none;
-    box-shadow: none;
-    background: none;
+  left: 20px; top: 20px; padding: 5px;
+  backdrop-filter: none;
+  border: none;
+  font-size: 12px;
+  box-shadow: none;
+  background: none;
 }
 
 /* 覆盖 hover 效果 */
@@ -18,31 +16,30 @@
 }
 
 
+
 .weather {
-    backdrop-filter: none;
-    border: none;
-    box-shadow: none;
-    background: none;
-    padding: 15px;
-    top: 20px;
-    right: 20px;
+  right: 20px; top: 20px; padding: 5px;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  background: none;
 }
 
 .weather-icon {
-    font-size: 20px;
-  }
+  font-size: 20px;
+}
   
-  .weather-temp {
-    font-size: 10px;
-  }
+.weather-temp {
+  font-size: 10px;
+}
 
-  .weather-humidity {
-    font-size: 10px;
-  }
-  
-  .weather-city {
-    font-size: 10px;
-  }
+.weather-humidity {
+  font-size: 10px;
+}
+
+.weather-city {
+  font-size: 10px;
+}
 
 }
 

@@ -156,10 +156,10 @@ document.addEventListener('DOMContentLoaded', function() {
       // 设置按钮样式
       const buttonStyle = infoButton.style;
       buttonStyle.position = 'fixed';
-      buttonStyle.top = '10px';
-      buttonStyle.right = '10px';
-      buttonStyle.width = '15px';
-      buttonStyle.height = '15px';
+      buttonStyle.top = '5px';
+      buttonStyle.right = '5px';
+      buttonStyle.width = '17px';
+      buttonStyle.height = '17px';
       buttonStyle.borderRadius = '50%';
       buttonStyle.backgroundColor = 'rgba(0, 0, 0, 0.3)';
       buttonStyle.color = 'white';
@@ -183,16 +183,17 @@ document.addEventListener('DOMContentLoaded', function() {
       // 设置信息面板样式
       const infoStyle = infoElement.style;
       infoStyle.position = 'fixed';
-      infoStyle.top = '10px';
-      infoStyle.right = '30px';
-      infoStyle.background = 'rgba(0, 0, 0, 0.3)';  // 背景颜色
+      infoStyle.top = '22px';
+      infoStyle.right = '22px';
+      infoStyle.background = 'rgba(0, 0, 0, 0.37)';  // 背景颜色
+      infoStyle.backdropFilter = 'blur(5px)';  // 模糊效果
       infoStyle.color = 'white';
       infoStyle.padding = '8px 12px';
       infoStyle.borderRadius = '4px';
       infoStyle.boxSizing = 'border-box';
       infoStyle.overflowY = 'auto';
       infoStyle.fontSize = '10px';
-      infoStyle.maxWidth = '450px';
+      infoStyle.maxWidth = '300px';
       infoStyle.zIndex = '999';
       infoStyle.display = 'none'; // 默认隐藏
       infoStyle.opacity = '0';

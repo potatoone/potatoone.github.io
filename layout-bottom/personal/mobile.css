@@ -22,8 +22,12 @@
       transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease, height 0.3s ease; /* 添加尺寸过渡 */
       width: 50px; /* 更小的头像容器 */
       height: 50px;
+
     }
-    
+    .avatar {
+      border: 2px solid rgba(255, 255, 255, 0.192);
+    }
+
     /* 头像状态：展开 */
     .info-container.expanded .avatar-container {
       transform: scale(1.2); /* 微微放大，但不是原始大小 */

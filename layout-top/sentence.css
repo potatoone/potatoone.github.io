@@ -1,28 +1,28 @@
 
 /* 一言组件 - 左上角 */
 .sentence {
-    position: fixed;
-    top: 20px; left: 20px; padding: 20px; 
-    width: auto; max-width: 60vw; /* 自动宽度，最大宽度限制 */
-    border-radius: 15px;
-    background-color: rgba(146, 146, 146, 0.129);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    backdrop-filter: blur(5px);
-    box-sizing: border-box;
-    border: 1px solid rgba(236, 236, 236, 0.332);
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transform: translateZ(0); /* 硬件加速 */
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    pointer-events: auto; /* 允许点击 */
-    font-size: 20px;
-  }
-  
-  .sentence:hover {
-    transform: translateY(3px) translateZ(0);
-    background-color: rgba(146, 146, 146, 0.2);
-  }
+  position: fixed;
+  top: 20px; left: 20px; padding: 20px; 
+  width: auto; max-width: 60vw; /* 自动宽度，最大宽度限制 */
+  border-radius: 15px;
+  background-color: rgba(146, 146, 146, 0.129);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  backdrop-filter: blur(5px);
+  box-sizing: border-box;
+  border: 1px solid rgba(236, 236, 236, 0.332);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transform: translateZ(0); /* 硬件加速 */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: auto; /* 允许点击 */
+  font-size: 20px;
+}
+
+.sentence:hover {
+  transform: translateY(3px) translateZ(0);
+  background-color: rgba(146, 146, 146, 0.2);
+}
   

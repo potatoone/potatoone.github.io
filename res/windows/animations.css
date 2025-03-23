@@ -1,0 +1,15 @@
+/* 
+ * Windows风格窗口管理器 - 动画
+ * 包含所有动画定义
+ */
+
+/* 加载指示器动画 */
+@keyframes loading {
+  0% { background-position: 100% 0; } /* 从右侧开始 */
+  100% { background-position: -100% 0; } /* 移动到左侧 */
+}
+
+/* 旋转动画定义 */
+@keyframes spin {
+  100% { transform: rotate(360deg); } /* 完整旋转一周 */
+}

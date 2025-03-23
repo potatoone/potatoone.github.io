@@ -6,9 +6,9 @@ const PlayModeManager = (() => {
   let currentMode = 'order'; // 默认为顺序播放模式
   const modes = ['order', 'shuffle', 'repeat']; // 可用的播放模式
   const modeIcons = {
-    order: 'fa-list-ol',     // 顺序播放图标
-    shuffle: 'fa-random',    // 随机播放图标
-    repeat: 'fa-sync-alt'    // 单曲循环图标
+    order: 'fa-bars',     // 顺序播放图标
+    shuffle: 'fa-shuffle',    // 随机播放图标
+    repeat: 'fa-repeat'    // 单曲循环图标
   };
   const modeNames = {
     order: '顺序播放',
@@ -63,7 +63,7 @@ const PlayModeManager = (() => {
     const modeIcon = modeButton.querySelector('i');
     
     // 清除所有可能的图标类
-    modeIcon.classList.remove('fa-sync-alt', 'fa-list-ol', 'fa-random');
+    modeIcon.classList.remove('fa-repeat', 'fa-bars', 'fa-shuffle');
     
     // 添加当前模式的图标类
     modeIcon.classList.add(modeIcons[currentMode]);

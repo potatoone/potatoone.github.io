@@ -8,13 +8,11 @@
     <title>One Potato</title>
 
     <!-- 网站图标 -->
-    <link rel="icon" href="./res/home.png" type="image/png">
-    
-    <link rel="stylesheet" href="./windows/window.css" media="(min-width: 768px)">
+    <link rel="icon" href="./res/icon/home.png" type="image/png">
+    <link rel="stylesheet" href="./res/click/loader.css" />
 
-    <link rel="stylesheet" href="./normalize.min.css" />
-    <link rel="stylesheet" href="./body.css" />
-    <link rel="stylesheet" href="./click/loader.css" />
+    <link rel="stylesheet" href="./body/normalize.min.css" />
+    <link rel="stylesheet" href="./body/body.css" />
 
     <link rel="stylesheet" href="./layout-top/sentence.css" />
     <link rel="stylesheet" href="./layout-top/weather.css" />
@@ -37,7 +35,7 @@
 
 
     <!-- 引入Font Awesome图标库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" />
 
   </head>
 
@@ -56,7 +54,7 @@
           
           <div class="content-container">
             <div class="content-tab1">
-              <a href="https://potatoone.github.io/wiki/site" class="tab-link" title="访问我的Wiki">
+              <a href="https://potatoone.github.io/wiki/site" class="tab-link" title="我的Wiki">
                 <i class="fas fa-book-open"></i>
                 <span>Wiki</span>
               </a>
@@ -68,9 +66,9 @@
               </a>
             </div>
             <div class="content-tab3">
-              <a href="#" class="tab-link" title="音乐集">
+              <a href="https://music.163.com/#/user/home?id=46311222" class="tab-link" title="网易云">
                 <i class="fas fa-music"></i>
-                <span>音乐集</span>
+                <span>网易云</span>
               </a>
             </div>
             <div class="content-tab4">
@@ -83,6 +81,7 @@
 
           <div class="chart">
             <div class="tab1">
+              <a href="https://github.com/potatoone" class="tab-link" title="Github">
                 <i class="fab fa-github"></i>
               </a>
             </div>
@@ -102,7 +101,7 @@
           <!-- 头像区域 -->
           <div class="avatar-container">
             <div class="avatar" id="avatar">
-              <img src="./res/avatar.jpg" alt="avatar" />
+              <img src="./res/icon/avatar.jpg" alt="avatar" />
             </div>
           </div>
           
@@ -155,7 +154,7 @@
             <ul></ul><!-- 播放列表由JavaScript动态生成 -->
           </div>
           
-          <div id="playlist-toggle"><i class="fas fa-chevron-circle-down"></i></div>
+          <div id="playlist-toggle"><i class="fas fa-angle-up"></i></div>
 
           <div class="control">
             <div class="control-title"></div>  <!-- 音乐标题 -->
@@ -163,7 +162,7 @@
               <button id="prev"><i class="fas fa-backward"></i></button>
               <button id="play"><i class="fas fa-play"></i></button>
               <button id="next"><i class="fas fa-forward"></i></button>
-              <button id="mode"><i class="fas fa-sync-alt"></i></button>
+              <button id="mode"><i class="fas fa-bars"></i></button>
             </div>
             <div class="time-info">   <!-- 时间 -->
               <span class="current-time">0:00</span>
@@ -196,11 +195,10 @@
 
     </div>
 
-    <script>
 
-    </script>
-
-    <script src="./body.js"></script> <!-- 主体 -->
+    <script src="./res/wallpaper.js"></script>  <!-- Bing壁纸 -->
+    <script src="./res/click/loader.js"></script> <!-- 点击效果 -->
+    <script src="./body/body.js"></script> <!-- 主体 -->
 
     <script src="./layout-top/sentence.js"></script> <!-- 一言 -->
     <script src="./layout-top/weather.js"></script>  <!-- 天气 -->
@@ -217,9 +215,5 @@
     <script src="./layout-bottom/music/mode.js"></script> <!-- 播放模式 -->
     <script src="./layout-bottom/music/mobile.js"></script> <!-- 移动端适配 -->
 
-    <script src="./res/wallpaper.js"></script>  <!-- Bing壁纸 -->
-    <script src="./click/loader.js"></script> <!-- 点击效果 -->
-
-    
   </body>
 </html>

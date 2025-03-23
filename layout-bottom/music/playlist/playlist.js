@@ -61,7 +61,7 @@ const PlaylistManager = (() => {
         Math.min(playlist.scrollHeight, window.innerHeight * 0.6) + 'px' : '0';
       
       const icon = playlistToggle.querySelector('i');
-      if (icon) icon.className = expanded ? 'fas fa-chevron-circle-up' : 'fas fa-chevron-circle-down';
+      if (icon) icon.className = expanded ? 'fas fa-angle-up' : 'fas fa-angle-down';
       saveState();
     });
     
@@ -184,12 +184,12 @@ const PlaylistManager = (() => {
           playlist.classList.add('expanded');
           playlist.style.maxHeight = Math.min(playlist.scrollHeight, window.innerHeight * 0.6) + 'px';
           const icon = playlistToggle.querySelector('i');
-          if (icon) icon.className = 'fas fa-chevron-circle-up';
+          if (icon) icon.className = 'fas fa-angle-up';
         } else {
           playlist.classList.remove('expanded');
           playlist.style.maxHeight = '0';
           const icon = playlistToggle.querySelector('i');
-          if (icon) icon.className = 'fas fa-chevron-circle-down';
+          if (icon) icon.className = 'fas fa-angle-down';
         }
       }
     } catch (e) {

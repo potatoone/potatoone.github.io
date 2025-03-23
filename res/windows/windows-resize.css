@@ -1,0 +1,75 @@
+/* 
+ * Windows风格窗口管理器 - 大小调整
+ * 包含窗口大小调整手柄样式
+ */
+
+/* 窗口大小调整手柄基础样式 */
+.resize-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+
+/* 左上角调整手柄 */
+.resize-handle.top-left {
+  top: 0;
+  left: 0;
+  cursor: nwse-resize; /* 对角线调整光标 */
+}
+
+/* 右上角调整手柄 */
+.resize-handle.top-right {
+  top: 0;
+  right: 0;
+  cursor: nesw-resize; /* 对角线调整光标 */
+}
+
+/* 左下角调整手柄 */
+.resize-handle.bottom-left {
+  bottom: 0;
+  left: 0;
+  cursor: nesw-resize; /* 对角线调整光标 */
+}
+
+/* 右下角调整手柄 */
+.resize-handle.bottom-right {
+  bottom: 0;
+  right: 0;
+  cursor: nwse-resize; /* 对角线调整光标 */
+}
+
+/* 顶部调整手柄 */
+.resize-handle.top {
+  top: 0;
+  left: 10px;
+  right: 10px;
+  width: auto;
+  cursor: ns-resize; /* 垂直调整光标 */
+}
+
+/* 右侧调整手柄 */
+.resize-handle.right {
+  top: 10px;
+  bottom: 10px;
+  right: 0;
+  height: auto;
+  cursor: ew-resize; /* 水平调整光标 */
+}
+
+/* 底部调整手柄 */
+.resize-handle.bottom {
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  width: auto;
+  cursor: ns-resize; /* 垂直调整光标 */
+}
+
+/* 左侧调整手柄 */
+.resize-handle.left {
+  top: 10px;
+  bottom: 10px;
+  left: 0;
+  height: auto;
+  cursor: ew-resize; /* 水平调整光标 */
+}

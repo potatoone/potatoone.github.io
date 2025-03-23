@@ -1,0 +1,13 @@
+/* 
+ * Windows风格窗口管理器
+ * 此CSS实现了类似Windows系统的窗口界面，使外部链接可以在网页内部窗口打开
+ * 拆分成多个模块以便维护
+ */
+
+ @import 'window-base.css';
+ @import 'window-controls.css';
+ @import 'window-content.css';
+ @import 'window-resize.css';
+ @import 'taskbar.css';
+ @import 'animations.css';
+ @import 'responsive.css';

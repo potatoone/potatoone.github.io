@@ -1,51 +1,51 @@
 
 /* 天气组件 - 右上角 */
 .weather {
-    position: fixed;
-    display: flex;
-    top: 20px; right: 20px; padding: 12px;
-    border-radius: 15px;
-    color: #ffffff;
-    align-items: center;
-    background-color: rgba(146, 146, 146, 0.129);
-    backdrop-filter: blur(5px);
-    box-sizing: border-box;
-    border: 1px solid rgba(236, 236, 236, 0.332);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-  }
+  position: fixed;
+  display: flex;
+  top: 20px; right: 20px; padding: 12px;
+  border-radius: 15px;
+  color: #ffffff;
+  align-items: center;
+  background-color: rgba(146, 146, 146, 0.129);
+  backdrop-filter: blur(5px);
+  box-sizing: border-box;
+  border: 1px solid rgba(236, 236, 236, 0.332);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
 
-  .weather-icon {
-    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
-    color: #ffffff;
-    margin-right: 10px;
-  }
-  
-  .weather-info {
-    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .weather-data-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .weather-temp {
-    font-size: 16px;
-    font-weight: bold;
-    margin-right: 8px;
-  }
-  
-  .weather-humidity {
-    font-size: 12px;
-    opacity: 0.8;
-  }
-  
-  .weather-city {
-    font-size: 14px;
-    opacity: 0.9;
-  }
+.weather-icon {
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.weather-info {
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weather-temp {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.weather-humidity {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.weather-city {
+  font-size: 14px;
+  opacity: 0.9;
+}
   
