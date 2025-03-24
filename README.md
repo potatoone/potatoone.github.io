@@ -5,18 +5,22 @@ Personal homepage
 
 
 
-mkdocs WIKI 配置
+# VitePress 配置
 
-终端激活python myenv 虚拟环境
- .\wiki\myenv\Scripts\Activate
+## 创建wiki目录
+mkdir vitepress
+cd vitepress
 
-cd wiki
+## 安装vitepress
+npm add -D vitepress
 
-构建静态页面
-mkdocs build
+## 创建基本项目
+npx vitepress init
 
-推送github pages分支gh-pages
-mkdocs gh-deploy
+## 运行开发测试
+pnpm run docs:dev
 
-本地启动 127.0.0.1:8000
-mkdocs serve
+## 构建
+npm run docs:build
+
+输出目录： docs/.vitepress/dist

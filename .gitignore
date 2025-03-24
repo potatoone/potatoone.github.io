@@ -1,2 +1,4 @@
-# 忽略python虚拟环境目录
-wiki/myenv/
+
+
+# 忽略vitepress开发构建
+vitepress/
