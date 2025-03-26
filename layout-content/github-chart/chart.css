@@ -6,6 +6,7 @@
   --contrib-level3: rgba(95, 38, 250, 0.938);
   --contrib-level4: rgba(207, 23, 84, 0.8);
   --contrib-text: rgba(255, 255, 255, 0.5);
+  --contrib-tooltip: rgba(127, 60, 153, 0.536);
 }
 
 /* GitHub贡献图样式 */
@@ -16,10 +17,9 @@
   grid-template-columns: 25px repeat(53, minmax(10px, 1fr)); /* 第一列给星期标签 */
   grid-gap: 3px; /* 统一的间隙 */
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(5px);
   width: 100%;
   aspect-ratio: 12/2;
+  backdrop-filter: blur(10px);
 }
 
 /* 贡献格子基础样式 - 固定大小 */
@@ -33,7 +33,6 @@
   /* 确保格子在网格中居中 */
   justify-self: center;
   align-self: center;
-  /* 移除aspect-ratio，改用固定大小 */
 }
 
 /* 贡献等级颜色 - 使用CSS变量 */
@@ -42,6 +41,7 @@
 .level-2 { background-color: var(--contrib-level2); }
 .level-3 { background-color: var(--contrib-level3); }
 .level-4 { background-color: var(--contrib-level4); }
+.tooltip { background-color: var(--contrib-tooltip); }
 
 /* 鼠标悬停效果 */
 .contribution-cell:hover {
@@ -57,7 +57,8 @@
   bottom: 130%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--contrib-tooltip);
+  backdrop-filter: blur(10px);
   color: white;
   padding: 5px 8px;
   border-radius: 4px;
@@ -67,12 +68,13 @@
   opacity: 0;
   transition: visibility 0s, opacity 0.2s ease;
   pointer-events: none;
-  z-index: 10;
+  z-index: 9999; /* 将z-index提高到一个非常高的值 */
 }
 
 .contribution-cell:hover .contribution-tooltip {
   visibility: visible;
   opacity: 1;
+  z-index: 9999; /* 确保悬停时也保持高z-index */
 }
 
 /* 周标签 - 修改为固定在第一列 */

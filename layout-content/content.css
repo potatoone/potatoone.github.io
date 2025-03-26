@@ -6,6 +6,7 @@
   height: auto; /* 允许高度自适应 */
   padding: 20px;
   box-sizing: border-box; /* 确保padding不影响总宽度 */
+  z-index: 10;
 }
 
 .content-container {

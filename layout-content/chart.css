@@ -7,6 +7,7 @@
   max-width: 1000px; /* 限制最大宽度 */
   gap: 20px; /* 元素之间的间距 */
   padding: 20px;
+  z-index: 10;
 }
 
 .tab1 {
@@ -37,7 +38,7 @@
   border-radius: 10px;
   backdrop-filter: blur(10px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden; /* 确保内容不溢出 */
+  overflow: visible; /* 改为visible允许tooltip显示在外部 */
   display: flex;
   justify-content: center;
   align-items: center;

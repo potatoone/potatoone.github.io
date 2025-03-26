@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // 预加载图片
       const img = new Image();
       
+      // 在 wallpaper.js 的 applyWallpaper 函数中添加
       img.onload = function() {
         // 图片加载完成后设置为背景
         container.style.backgroundImage = `url('${data.url}')`;
@@ -129,6 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         console.log('必应壁纸设置成功');
+        
+        // 壁纸加载完成后，激活烟花效果
+        if (window.toggleFireworks) {
+          window.toggleFireworks(true);
+        }
       };
       
       img.onerror = function() {

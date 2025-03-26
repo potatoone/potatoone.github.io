@@ -59,60 +59,136 @@ function hslToRgbaString(h, s, l, a) {
   return `rgba(${r}, ${g}, ${b}, ${a})`;
 }
 
-// 分析页面获取主要颜色
-function getDominantColors() {
+// 计算两个颜色的欧几里得距离（用于颜色相似性比较）
+function colorDistance(color1, color2) {
+  return Math.sqrt(
+    Math.pow(color1.r - color2.r, 2) +
+    Math.pow(color1.g - color2.g, 2) +
+    Math.pow(color1.b - color2.b, 2)
+  );
+}
+
+// 从图片或背景中获取主要颜色
+async function getDominantColor() {
   // 获取背景元素
   const backgroundElement = document.querySelector('.background') || document.body;
-  
-  // 获取元素样式
   const style = window.getComputedStyle(backgroundElement);
   
-  // 提取颜色信息
-  let colors = [];
+  // 创建一个Canvas来分析背景
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
   
-  // 1. 尝试获取backgroundColor
-  const bgColor = style.backgroundColor;
-  if (bgColor && bgColor !== 'transparent' && bgColor !== 'rgba(0, 0, 0, 0)') {
-    colors.push(parseRgbColor(bgColor));
+  // 设置画布尺寸
+  const size = 100; // 减小尺寸以提高性能
+  canvas.width = size;
+  canvas.height = size;
+  
+  return new Promise((resolve, reject) => {
+    // 检查背景是否为图片
+    if (style.backgroundImage && style.backgroundImage !== 'none' && !style.backgroundImage.includes('gradient')) {
+      // 从background-image URL中提取图片URL
+      const imgUrl = style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+      
+      const img = new Image();
+      img.crossOrigin = 'Anonymous'; // 允许跨域图片
+      img.onload = () => {
+        // 将图片绘制到canvas
+        ctx.drawImage(img, 0, 0, size, size);
+        const dominantColor = analyzeCanvasColors(ctx, size);
+        resolve(dominantColor);
+      };
+      img.onerror = () => {
+        console.error('Failed to load background image');
+        // 回退到简单的背景颜色分析
+        resolve(fallbackColorExtraction());
+      };
+      img.src = imgUrl;
+    } else {
+      // 如果没有背景图片，直接分析背景颜色
+      resolve(fallbackColorExtraction());
+    }
+  });
+}
+
+// 分析Canvas中的颜色并返回最常见的颜色
+function analyzeCanvasColors(ctx, size) {
+  // 获取像素数据
+  const imageData = ctx.getImageData(0, 0, size, size);
+  const data = imageData.data;
+  
+  // 颜色频率映射
+  const colorFrequency = {};
+  
+  // 遍历所有像素
+  for (let i = 0; i < data.length; i += 4) {
+    // 忽略完全透明的像素
+    if (data[i+3] < 10) continue;
+    
+    // 简化颜色以减少可能的变体数量（量化）
+    const r = Math.floor(data[i] / 10) * 10;
+    const g = Math.floor(data[i+1] / 10) * 10;
+    const b = Math.floor(data[i+2] / 10) * 10;
+    
+    const colorKey = `${r},${g},${b}`;
+    
+    if (!colorFrequency[colorKey]) {
+      colorFrequency[colorKey] = 1;
+    } else {
+      colorFrequency[colorKey]++;
+    }
   }
   
-  // 2. 尝试获取backgroundImage (简单处理线性渐变)
+  // 找出出现频率最高的颜色
+  let maxFrequency = 0;
+  let dominantColorKey = '0,0,0'; // 默认黑色
+  
+  Object.keys(colorFrequency).forEach(colorKey => {
+    if (colorFrequency[colorKey] > maxFrequency) {
+      maxFrequency = colorFrequency[colorKey];
+      dominantColorKey = colorKey;
+    }
+  });
+  
+  // 解析颜色值
+  const [r, g, b] = dominantColorKey.split(',').map(Number);
+  return { r, g, b };
+}
+
+// 备用的颜色提取方法
+function fallbackColorExtraction() {
+  const backgroundElement = document.querySelector('.background') || document.body;
+  const style = window.getComputedStyle(backgroundElement);
+  
+  // 尝试提取背景颜色
+  const bgColor = style.backgroundColor;
+  if (bgColor && bgColor !== 'transparent' && bgColor !== 'rgba(0, 0, 0, 0)') {
+    return parseRgbColor(bgColor);
+  }
+  
+  // 尝试从渐变中提取
   const bgImage = style.backgroundImage;
   if (bgImage && bgImage.includes('linear-gradient')) {
     const gradientColors = extractGradientColors(bgImage);
-    colors = colors.concat(gradientColors);
+    if (gradientColors.length > 0) {
+      return gradientColors[0];
+    }
   }
   
-  // 3. 如果没有找到颜色或颜色太少，采样DOM树中的其他元素
-  if (colors.length < 4) {
-    colors = colors.concat(sampleColorsFromDOM());
+  // 默认颜色
+  return { r: 30, g: 40, b: 70 }; // 默认深蓝色
+}
+
+// 解析RGB颜色字符串为对象
+function parseRgbColor(colorStr) {
+  const rgbMatch = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*[\d.]+)?\)/);
+  if (rgbMatch) {
+    return {
+      r: parseInt(rgbMatch[1]),
+      g: parseInt(rgbMatch[2]),
+      b: parseInt(rgbMatch[3])
+    };
   }
-  
-  // 4. 如果仍然没有足够的颜色，添加默认颜色
-  if (colors.length === 0) {
-    // 默认暗色方案
-    return [
-      { r: 10, g: 15, b: 30 },    // 深蓝色
-      { r: 30, g: 40, b: 70 },    // 中蓝色
-      { r: 100, g: 80, b: 180 },  // 紫色
-      { r: 190, g: 30, b: 80 }    // 红色
-    ];
-  }
-  
-  // 如果颜色数量不足4个，复制现有颜色
-  while (colors.length < 4) {
-    colors.push({...colors[colors.length % colors.length]});
-  }
-  
-  // 根据亮度排序颜色
-  colors.sort((a, b) => {
-    const brightnessA = (a.r * 299 + a.g * 587 + a.b * 114) / 1000;
-    const brightnessB = (b.r * 299 + b.g * 587 + b.b * 114) / 1000;
-    return brightnessA - brightnessB;
-  });
-  
-  // 返回前4种主要颜色
-  return colors.slice(0, 4);
+  return { r: 0, g: 0, b: 0 }; // 默认黑色
 }
 
 // 从CSS线性渐变中提取颜色
@@ -132,128 +208,54 @@ function extractGradientColors(gradientStr) {
   return colors;
 }
 
-// 从DOM树采样颜色
-function sampleColorsFromDOM() {
-  const colors = [];
-  const elements = document.querySelectorAll('div, section, header, footer, nav');
-  
-  // 仅采样前20个元素以避免性能问题
-  const samplesToTake = Math.min(elements.length, 20);
-  
-  for (let i = 0; i < samplesToTake; i++) {
-    const style = window.getComputedStyle(elements[i]);
-    const bgColor = style.backgroundColor;
-    const textColor = style.color;
-    
-    if (bgColor && bgColor !== 'transparent' && bgColor !== 'rgba(0, 0, 0, 0)') {
-      colors.push(parseRgbColor(bgColor));
-    }
-    
-    if (textColor && textColor !== 'transparent' && textColor !== 'rgba(0, 0, 0, 0)') {
-      colors.push(parseRgbColor(textColor));
-    }
-  }
-  
-  return colors;
-}
-
-// 解析RGB颜色字符串为对象
-function parseRgbColor(colorStr) {
-  const rgbMatch = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*[\d.]+)?\)/);
-  if (rgbMatch) {
-    return {
-      r: parseInt(rgbMatch[1]),
-      g: parseInt(rgbMatch[2]),
-      b: parseInt(rgbMatch[3])
-    };
-  }
-  return null;
-}
-
-// 根据主要颜色生成贡献图调色板
-function generateContributionPalette(dominantColors) {
-  // 确定背景是亮色还是暗色
-  const bgColor = dominantColors[0]; // 最暗的颜色（已排序）
-  const brightness = (bgColor.r * 299 + bgColor.g * 587 + bgColor.b * 114) / 1000;
-  const isDark = brightness < 128;
-  
+// 根据主要颜色生成贡献图调色板（简化版）
+function generateContributionPalette(dominantColor) {
   // 转换为HSL来获取色相
-  const bgHSL = rgbToHsl(bgColor.r, bgColor.g, bgColor.b);
-  const mainHue = bgHSL[0]; // 主色相
+  const [h, s, l] = rgbToHsl(dominantColor.r, dominantColor.g, dominantColor.b);
+  
+  // 计算亮度
+  const brightness = (dominantColor.r * 299 + dominantColor.g * 587 + dominantColor.b * 114) / 1000;
+  const isDark = brightness < 128;
   
   // 生成调色板
   const palette = {
-    level0: isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.05)',
-    level1: '',
-    level2: '',
-    level3: '',
-    level4: ''
+    level0: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
   };
   
-  // 使用其他采集的颜色或在主色相基础上生成颜色
-  if (dominantColors.length >= 4) {
-    // 使用排序后的颜色（从暗到亮）
-    const color1 = dominantColors[1];
-    const color2 = dominantColors[2];
-    const color3 = dominantColors[3];
-    
-    // 转换为HSL获取色相
-    const hsl1 = rgbToHsl(color1.r, color1.g, color1.b);
-    const hsl2 = rgbToHsl(color2.r, color2.g, color2.b);
-    const hsl3 = rgbToHsl(color3.r, color3.g, color3.b);
-    
-    // 生成调色板，调整透明度和亮度
-    palette.level1 = isDark ? 
-      `rgba(${color1.r}, ${color1.g}, ${color1.b}, 0.7)` : 
-      `rgba(${color1.r}, ${color1.g}, ${color1.b}, 0.6)`;
-      
-    palette.level2 = isDark ? 
-      `rgba(${color2.r}, ${color2.g}, ${color2.b}, 0.8)` : 
-      `rgba(${color2.r}, ${color2.g}, ${color2.b}, 0.7)`;
-      
-    palette.level3 = isDark ? 
-      `rgba(${color3.r}, ${color3.g}, ${color3.b}, 0.85)` : 
-      `rgba(${color3.r}, ${color3.g}, ${color3.b}, 0.8)`;
-      
-    // level4使用色相互补色，保持对比度
-    palette.level4 = isDark ? 
-      hslToRgbaString((hsl3[0] + 180) % 360, hsl3[1], hsl3[2], 0.9) : 
-      hslToRgbaString((hsl3[0] + 180) % 360, hsl3[1], Math.max(30, hsl3[2] - 20), 0.9);
+  // 简化：使用相同的色相，只调整透明度和亮度
+  if (isDark) {
+    // 暗背景下使用亮色系列
+    palette.level1 = hslToRgbaString(h, 70, 70, 0.3);
+    palette.level2 = hslToRgbaString(h, 80, 75, 0.5);
+    palette.level3 = hslToRgbaString(h, 90, 80, 0.7);
+    palette.level4 = hslToRgbaString(h, 100, 85, 0.9);
   } else {
-    // 回退到基于主色相的方案
-    palette.level1 = isDark ? 
-      hslToRgbaString(mainHue, 80, 70, 0.7) : 
-      hslToRgbaString(mainHue, 70, 40, 0.7);
-      
-    palette.level2 = isDark ? 
-      hslToRgbaString(mainHue, 85, 65, 0.8) : 
-      hslToRgbaString(mainHue, 80, 35, 0.8);
-      
-    palette.level3 = isDark ? 
-      hslToRgbaString(mainHue, 90, 60, 0.85) : 
-      hslToRgbaString(mainHue, 90, 30, 0.85);
-      
-    palette.level4 = isDark ? 
-      hslToRgbaString((mainHue + 180) % 360, 80, 50, 0.9) : 
-      hslToRgbaString((mainHue + 180) % 360, 80, 35, 0.9);
+    // 亮背景下使用深色系列
+    palette.level1 = hslToRgbaString(h, 70, 40, 0.3);
+    palette.level2 = hslToRgbaString(h, 80, 35, 0.5);
+    palette.level3 = hslToRgbaString(h, 90, 30, 0.7);
+    palette.level4 = hslToRgbaString(h, 100, 25, 0.9);
   }
   
   return palette;
 }
 
 // 动态采集网站背景色并调整贡献图颜色
-function adjustContributionColors() {
+async function adjustContributionColors() {
   try {
     // 获取主要颜色
-    const dominantColors = getDominantColors();
+    const dominantColor = await getDominantColor();
+    console.log('Dominant color:', dominantColor);
     
     // 生成贡献图调色板
-    const palette = generateContributionPalette(dominantColors);
+    const palette = generateContributionPalette(dominantColor);
     
     // 判断背景亮度以设置文字颜色
-    const bgColor = dominantColors[0];
-    const brightness = (bgColor.r * 299 + bgColor.g * 587 + bgColor.b * 114) / 1000;
+    const brightness = (dominantColor.r * 299 + dominantColor.g * 587 + dominantColor.b * 114) / 1000;
     const isDark = brightness < 128;
+    
+    // 转换为HSL来获取色相（为tooltip颜色使用）
+    const [h, s, l] = rgbToHsl(dominantColor.r, dominantColor.g, dominantColor.b);
     
     // 设置CSS变量
     document.documentElement.style.setProperty('--contrib-level0', palette.level0);
@@ -266,8 +268,14 @@ function adjustContributionColors() {
     document.documentElement.style.setProperty('--contrib-text', isDark ? 
       'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)');
     
+    // 设置tooltip颜色 - 使用与主色相相同但更深的颜色
+    document.documentElement.style.setProperty('--contrib-tooltip', 
+      isDark ? 
+        hslToRgbaString(h, 60, 30, 1) :  // 暗色背景下使用稍亮但深色的tooltip
+        hslToRgbaString(h, 60, 15, 1)    // 亮色背景下使用更深色的tooltip
+    );
+    
     // 输出调试信息
-    console.log('Dominant colors:', dominantColors);
     console.log('Generated palette:', palette);
     
   } catch (error) {
@@ -285,6 +293,7 @@ function setDefaultColors() {
   document.documentElement.style.setProperty('--contrib-level3', 'rgba(95, 38, 250, 0.85)');
   document.documentElement.style.setProperty('--contrib-level4', 'rgba(207, 23, 84, 0.9)');
   document.documentElement.style.setProperty('--contrib-text', 'rgba(255, 255, 255, 0.7)');
+  document.documentElement.style.setProperty('--contrib-tooltip', 'rgba(0, 0, 0, 0.85)');
 }
 
 // 导出函数，使其可以在chart.js中使用
@@ -299,5 +308,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 窗口大小改变时重新适应
 window.addEventListener('resize', function() {
-  adjustContributionColors();
+  // 使用节流函数避免过于频繁地调用
+  if (window.resizeTimer) {
+    clearTimeout(window.resizeTimer);
+  }
+  window.resizeTimer = setTimeout(function() {
+    adjustContributionColors();
+  }, 250);
 });
