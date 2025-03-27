@@ -40,13 +40,13 @@ const bloomPass = new THREE.UnrealBloomPass(
     0.85  // 泛光阈值
 );
 bloomPass.threshold = 0.1;
-bloomPass.strength = 0;
+bloomPass.strength = 0.25; // 背景透明度
 bloomPass.radius = 0.1;
 composer.addPass(renderPass);
 composer.addPass(bloomPass);
 
 // 创建烟花粒子的几何体
-const particleCount = 10000;
+const particleCount = 600;
 const geometry = new THREE.BufferGeometry();
 const positions = new Float32Array(particleCount * 3);
 const colors = new Float32Array(particleCount * 3);
