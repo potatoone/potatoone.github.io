@@ -42,5 +42,5 @@ document.addEventListener('DOMContentLoaded', function() {
             // 如果10秒后仍未隐藏，则强制隐藏加载页面
             hideLoadingScreen();
         }
-    }, 22000); // 22秒超时
+    }, 10000); // 10秒超时
 });

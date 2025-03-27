@@ -78,7 +78,7 @@ class WindowManager {
         iconClass = 'fas fa-compass'; // 导航图标
       } else if (url.includes('music') || url.includes('song') || url.includes('audio')) {
         iconClass = 'fas fa-music'; // 音乐图标
-      } else if (url.includes('photo') || url.includes('image') || url.includes('gallery') || url.includes('album')) {
+      } else if (url.includes('photo') || url.includes('image') || url.includes('gallery') || url.includes('huaban')) {
         iconClass = 'fas fa-images'; // 图片图标
       }
       

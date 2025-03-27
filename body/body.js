@@ -10,9 +10,6 @@ function isMobileDevice() {
     // 只在非移动设备上加载
     document.write('<link rel="stylesheet" href="./res/windows/window.css">');
     document.write('<script src="./res/windows/window.js" defer><\/script>');
-    
-    // 添加烟花效果脚本
-    document.write('<script src="./res/fireworks.js" defer><\/script>');
   }
   
   // 添加音乐播放监听器

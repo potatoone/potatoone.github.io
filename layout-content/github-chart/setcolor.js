@@ -196,7 +196,7 @@ function generateContributionPalette(dominantColor) {
     level3: isDark ? hslToRgbaString(h, 90, 50, 0.7) : hslToRgbaString(h, 50, 50, 0.9),
     level4: isDark ? hslToRgbaString(h, 100, 40, 0.9) : hslToRgbaString(h, 60, 40, 0.9),
     textColor: isDark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(255, 255, 255, 0.9)',
-    tooltipColor: isDark ? hslToRgbaString(h, 60, 15, 1) : hslToRgbaString(h, 60, 30, 1)
+    tooltipColor: isDark ? hslToRgbaString(h, 70, 25, 1) : hslToRgbaString(h, 50, 40, 1)
   };
 }
 
