@@ -5,34 +5,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>One Potato</title>
+    <title>One Potato</title>   <!-- 网站标题 -->
 
-    <!-- 网站图标 -->
-    <link rel="icon" href="./res/icon/home.png" type="image/png">
-    <link rel="stylesheet" href="./res/click/loader.css" />
+    <link rel="icon" href="./res/icon/home.png" type="image/png">    <!-- 网站图标 -->
+    <link rel="stylesheet" href="./body/loading/loading.css" />    <!-- ...loading... -->
+    <link rel="stylesheet" href="./body/click/loader.css" />    <!-- 点击效果 -->
 
-    <link rel="stylesheet" href="./body/normalize.min.css" />
-    <link rel="stylesheet" href="./body/body.css" />
+    <link rel="stylesheet" href="./body/normalize.min.css" /> <!-- 重置样式 -->
+    <link rel="stylesheet" href="./body/body.css" />  <!-- 主体 -->
 
-    <link rel="stylesheet" href="./layout-top/sentence.css" />
-    <link rel="stylesheet" href="./layout-top/weather.css" />
-    <link rel="stylesheet" href="./layout-top/mobile.css" />
+    <link rel="stylesheet" href="./layout-top/sentence.css" />  <!-- 一言 -->
+    <link rel="stylesheet" href="./layout-top/weather.css" /> <!-- 天气 -->
+    <link rel="stylesheet" href="./layout-top/mobile.css" />  <!-- 移动端适配 -->
 
-    <link rel="stylesheet" href="./layout-content/content.css" />
-    <link rel="stylesheet" href="./layout-content/mobile.css" />
+    <link rel="stylesheet" href="./layout-content/content.css" /> <!-- 内容区域 -->
+    <link rel="stylesheet" href="./layout-content/mobile.css" />  <!-- 移动端适配 -->
 
-    <link rel="stylesheet" href="./layout-content/chart.css" />
-    <link rel="stylesheet" href="./layout-content/github-chart/chart.css" />
+    <link rel="stylesheet" href="./layout-content/chart.css" /> <!-- Github图表 -->
+    <link rel="stylesheet" href="./layout-content/github-chart/chart.css" />  <!-- Github图表 -->
 
-    <link rel="stylesheet" href="./layout-bottom/personal/info.css" />
-    <link rel="stylesheet" href="./layout-bottom/personal/mobile.css" />
+    <link rel="stylesheet" href="./layout-bottom/personal/info.css" />  <!-- 个人信息区域 -->
+    <link rel="stylesheet" href="./layout-bottom/personal/mobile.css" />  <!-- 移动端适配 -->
     <link rel="stylesheet" href="./layout-bottom/personal/card/card.css" /> <!-- 模态窗口 -->
 
-    <link rel="stylesheet" href="./layout-bottom/music/player.css" />
-    <link rel="stylesheet" href="./layout-bottom/music/playlist/playlist.css" />
-    
-    <link rel="stylesheet" href="./layout-bottom/music/progress/progress.css" />
-
+    <link rel="stylesheet" href="./layout-bottom/music/player.css" />  <!-- 音乐播放器 -->
+    <link rel="stylesheet" href="./layout-bottom/music/playlist/playlist.css" />  <!-- 播放列表 -->
+    <link rel="stylesheet" href="./layout-bottom/music/progress/progress.css" />  <!-- 进度条 -->
 
     <!-- 引入Font Awesome图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" />
@@ -41,15 +39,19 @@
 
   <body>
 
+    <!-- loading组件 -->
+    <div id="loading-screen">
+      <div class="loading"></div>
+      <div class="loading-text">Loading...</div>
+    </div>
+
     <div class="background">
 
       <div class="container">
 
-
         <div class="sentence"></div>
         <div class="weather"></div>
         
-
         <div class="content">
           
           <div class="content-container">
@@ -93,7 +95,6 @@
           </div>
 
         </div>
-
 
 
         <div class="info-container" id="infoContainer">
@@ -195,12 +196,14 @@
         </div>
       </div>
 
+
     </div>
 
 
-    <script src="./res/wallpaper.js"></script>   <!-- Bing壁纸 -->
-    <script src="./res/click/loader.js"></script> <!-- 点击效果 -->
-    <script src="./body/body.js"></script> <!-- 主体 -->
+    <script src="./body/loading/loading.js"></script>  <!-- 页面加载控制脚本 -->
+    <script src="./res/wallpaper.js"></script>  <!-- Bing壁纸 -->
+    <script src="./body/click/loader.js"></script>  <!-- 点击效果 -->
+    <script src="./body/body.js"></script>  <!-- 主体 -->
 
     <script src="./layout-top/sentence.js"></script> <!-- 一言 -->
     <script src="./layout-top/weather.js"></script>  <!-- 天气 -->
@@ -212,10 +215,10 @@
     <script src="./layout-bottom/personal/card/card.js"></script>  <!-- 模态窗口 -->
 
     <script src="./layout-bottom/music/player.js"></script>  <!-- 音乐播放器区域 -->
-    <script src="./layout-bottom/music/playlist/playlist.js"></script> <!-- 播放列表 -->
-    <script src="./layout-bottom/music/progress/progress.js"></script> <!-- 进度条 -->
-    <script src="./layout-bottom/music/mode.js"></script> <!-- 播放模式 -->
-    <script src="./layout-bottom/music/mobile.js"></script> <!-- 移动端适配 -->
+    <script src="./layout-bottom/music/playlist/playlist.js"></script>  <!-- 播放列表 -->
+    <script src="./layout-bottom/music/progress/progress.js"></script>  <!-- 进度条 -->
+    <script src="./layout-bottom/music/mode.js"></script>  <!-- 播放模式 -->
+    <script src="./layout-bottom/music/mobile.js"></script>  <!-- 移动端适配 -->
 
     <!-- THREE.js库 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -226,9 +229,9 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
-
-    <!-- 最后添加烟花效果 -->
+    <!-- 烟花效果 -->
     <script src="./res/fireworks.js"></script>
 
   </body>
+
 </html>
