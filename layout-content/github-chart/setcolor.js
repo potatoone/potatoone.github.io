@@ -59,105 +59,16 @@ function hslToRgbaString(h, s, l, a) {
   return `rgba(${r}, ${g}, ${b}, ${a})`;
 }
 
-// 计算两个颜色的欧几里得距离（用于颜色相似性比较）
-function colorDistance(color1, color2) {
-  return Math.sqrt(
-    Math.pow(color1.r - color2.r, 2) +
-    Math.pow(color1.g - color2.g, 2) +
-    Math.pow(color1.b - color2.b, 2)
-  );
-}
-
 // 从图片或背景中获取主要颜色
 async function getDominantColor() {
   // 获取背景元素
   const backgroundElement = document.querySelector('.background') || document.body;
   const style = window.getComputedStyle(backgroundElement);
   
-  // 创建一个Canvas来分析背景
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d', { willReadFrequently: true });
-  
-  // 设置画布尺寸
-  const size = 100; // 减小尺寸以提高性能
-  canvas.width = size;
-  canvas.height = size;
-  
-  return new Promise((resolve, reject) => {
-    // 检查背景是否为图片
-    if (style.backgroundImage && style.backgroundImage !== 'none' && !style.backgroundImage.includes('gradient')) {
-      // 从background-image URL中提取图片URL
-      const imgUrl = style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
-      
-      const img = new Image();
-      img.crossOrigin = 'Anonymous'; // 允许跨域图片
-      img.onload = () => {
-        // 将图片绘制到canvas
-        ctx.drawImage(img, 0, 0, size, size);
-        const dominantColor = analyzeCanvasColors(ctx, size);
-        resolve(dominantColor);
-      };
-      img.onerror = () => {
-        console.error('Failed to load background image');
-        // 回退到简单的背景颜色分析
-        resolve(fallbackColorExtraction());
-      };
-      img.src = imgUrl;
-    } else {
-      // 如果没有背景图片，直接分析背景颜色
-      resolve(fallbackColorExtraction());
-    }
-  });
-}
-
-// 分析Canvas中的颜色并返回最常见的颜色
-function analyzeCanvasColors(ctx, size) {
-  // 获取像素数据
-  const imageData = ctx.getImageData(0, 0, size, size);
-  const data = imageData.data;
-  
-  // 颜色频率映射
-  const colorFrequency = {};
-  
-  // 遍历所有像素
-  for (let i = 0; i < data.length; i += 4) {
-    // 忽略完全透明的像素
-    if (data[i+3] < 10) continue;
-    
-    // 简化颜色以减少可能的变体数量（量化）
-    const r = Math.floor(data[i] / 10) * 10;
-    const g = Math.floor(data[i+1] / 10) * 10;
-    const b = Math.floor(data[i+2] / 10) * 10;
-    
-    const colorKey = `${r},${g},${b}`;
-    
-    if (!colorFrequency[colorKey]) {
-      colorFrequency[colorKey] = 1;
-    } else {
-      colorFrequency[colorKey]++;
-    }
+  // 检查背景是否为图片
+  if (style.backgroundImage && style.backgroundImage !== 'none' && !style.backgroundImage.includes('gradient')) {
+    return extractColorFromImage(style.backgroundImage);
   }
-  
-  // 找出出现频率最高的颜色
-  let maxFrequency = 0;
-  let dominantColorKey = '0,0,0'; // 默认黑色
-  
-  Object.keys(colorFrequency).forEach(colorKey => {
-    if (colorFrequency[colorKey] > maxFrequency) {
-      maxFrequency = colorFrequency[colorKey];
-      dominantColorKey = colorKey;
-    }
-  });
-  
-  // 解析颜色值
-  const [r, g, b] = dominantColorKey.split(',').map(Number);
-  return { r, g, b };
-}
-
-// 备用的颜色提取方法
-function fallbackColorExtraction() {
-  const backgroundElement = document.querySelector('.background') || document.body;
-  const style = window.getComputedStyle(backgroundElement);
   
   // 尝试提取背景颜色
   const bgColor = style.backgroundColor;
@@ -166,29 +77,89 @@ function fallbackColorExtraction() {
   }
   
   // 尝试从渐变中提取
-  const bgImage = style.backgroundImage;
-  if (bgImage && bgImage.includes('linear-gradient')) {
-    const gradientColors = extractGradientColors(bgImage);
+  if (style.backgroundImage && style.backgroundImage.includes('linear-gradient')) {
+    const gradientColors = extractGradientColors(style.backgroundImage);
     if (gradientColors.length > 0) {
       return gradientColors[0];
     }
   }
   
   // 默认颜色
-  return { r: 30, g: 40, b: 70 }; // 默认深蓝色
+  return { r: 30, g: 40, b: 70 };
+}
+
+// 从背景图像中提取颜色
+function extractColorFromImage(backgroundImage) {
+  return new Promise((resolve) => {
+    // 从background-image URL中提取图片URL
+    const imgUrl = backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+    
+    const img = new Image();
+    img.crossOrigin = 'Anonymous'; // 允许跨域图片
+    
+    // 创建Canvas
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const size = 100; // 减小尺寸以提高性能
+    canvas.width = size;
+    canvas.height = size;
+    
+    img.onload = () => {
+      // 将图片绘制到canvas
+      ctx.drawImage(img, 0, 0, size, size);
+      
+      // 获取像素数据
+      const imageData = ctx.getImageData(0, 0, size, size);
+      const data = imageData.data;
+      
+      // 颜色频率映射
+      const colorFrequency = {};
+      
+      // 遍历所有像素
+      for (let i = 0; i < data.length; i += 4) {
+        // 忽略完全透明的像素
+        if (data[i+3] < 10) continue;
+        
+        // 简化颜色（量化）
+        const r = Math.floor(data[i] / 10) * 10;
+        const g = Math.floor(data[i+1] / 10) * 10;
+        const b = Math.floor(data[i+2] / 10) * 10;
+        
+        const colorKey = `${r},${g},${b}`;
+        colorFrequency[colorKey] = (colorFrequency[colorKey] || 0) + 1;
+      }
+      
+      // 找出出现频率最高的颜色
+      let maxFrequency = 0;
+      let dominantColorKey = '30,40,70'; // 默认颜色
+      
+      Object.keys(colorFrequency).forEach(colorKey => {
+        if (colorFrequency[colorKey] > maxFrequency) {
+          maxFrequency = colorFrequency[colorKey];
+          dominantColorKey = colorKey;
+        }
+      });
+      
+      // 解析颜色值
+      const [r, g, b] = dominantColorKey.split(',').map(Number);
+      resolve({ r, g, b });
+    };
+    
+    img.onerror = () => {
+      console.error('Failed to load background image');
+      resolve({ r: 30, g: 40, b: 70 });
+    };
+    
+    img.src = imgUrl;
+  });
 }
 
 // 解析RGB颜色字符串为对象
 function parseRgbColor(colorStr) {
   const rgbMatch = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*[\d.]+)?\)/);
-  if (rgbMatch) {
-    return {
-      r: parseInt(rgbMatch[1]),
-      g: parseInt(rgbMatch[2]),
-      b: parseInt(rgbMatch[3])
-    };
-  }
-  return { r: 0, g: 0, b: 0 }; // 默认黑色
+  return rgbMatch ? 
+    { r: parseInt(rgbMatch[1]), g: parseInt(rgbMatch[2]), b: parseInt(rgbMatch[3]) } : 
+    { r: 0, g: 0, b: 0 };
 }
 
 // 从CSS线性渐变中提取颜色
@@ -208,36 +179,25 @@ function extractGradientColors(gradientStr) {
   return colors;
 }
 
-// 根据主要颜色生成贡献图调色板（简化版）
+// 根据主要颜色生成贡献图调色板
 function generateContributionPalette(dominantColor) {
   // 转换为HSL来获取色相
   const [h, s, l] = rgbToHsl(dominantColor.r, dominantColor.g, dominantColor.b);
   
-  // 计算亮度
+  // 计算亮度判断是暗色还是亮色背景
   const brightness = (dominantColor.r * 299 + dominantColor.g * 587 + dominantColor.b * 114) / 1000;
-  const isDark = brightness < 128;
+  const isDark = brightness < 100;
   
-  // 生成调色板
-  const palette = {
-    level0: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
+  // 生成调色板，贡献越多颜色越深
+  return {
+    level0: isDark ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.1)',
+    level1: isDark ? hslToRgbaString(h, 70, 70, 0.4) : hslToRgbaString(h, 30, 70, 0.9),
+    level2: isDark ? hslToRgbaString(h, 80, 60, 0.5) : hslToRgbaString(h, 40, 60, 0.9),
+    level3: isDark ? hslToRgbaString(h, 90, 50, 0.7) : hslToRgbaString(h, 50, 50, 0.9),
+    level4: isDark ? hslToRgbaString(h, 100, 40, 0.9) : hslToRgbaString(h, 60, 40, 0.9),
+    textColor: isDark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(255, 255, 255, 0.9)',
+    tooltipColor: isDark ? hslToRgbaString(h, 60, 15, 1) : hslToRgbaString(h, 60, 30, 1)
   };
-  
-  // 简化：使用相同的色相，只调整透明度和亮度
-  if (isDark) {
-    // 暗背景下使用亮色系列
-    palette.level1 = hslToRgbaString(h, 70, 70, 0.3);
-    palette.level2 = hslToRgbaString(h, 80, 75, 0.5);
-    palette.level3 = hslToRgbaString(h, 90, 80, 0.7);
-    palette.level4 = hslToRgbaString(h, 100, 85, 0.9);
-  } else {
-    // 亮背景下使用深色系列
-    palette.level1 = hslToRgbaString(h, 70, 40, 0.3);
-    palette.level2 = hslToRgbaString(h, 80, 35, 0.5);
-    palette.level3 = hslToRgbaString(h, 90, 30, 0.7);
-    palette.level4 = hslToRgbaString(h, 100, 25, 0.9);
-  }
-  
-  return palette;
 }
 
 // 动态采集网站背景色并调整贡献图颜色
@@ -250,69 +210,79 @@ async function adjustContributionColors() {
     // 生成贡献图调色板
     const palette = generateContributionPalette(dominantColor);
     
-    // 判断背景亮度以设置文字颜色
-    const brightness = (dominantColor.r * 299 + dominantColor.g * 587 + dominantColor.b * 114) / 1000;
-    const isDark = brightness < 128;
-    
-    // 转换为HSL来获取色相（为tooltip颜色使用）
-    const [h, s, l] = rgbToHsl(dominantColor.r, dominantColor.g, dominantColor.b);
-    
     // 设置CSS变量
     document.documentElement.style.setProperty('--contrib-level0', palette.level0);
     document.documentElement.style.setProperty('--contrib-level1', palette.level1);
     document.documentElement.style.setProperty('--contrib-level2', palette.level2);
     document.documentElement.style.setProperty('--contrib-level3', palette.level3);
     document.documentElement.style.setProperty('--contrib-level4', palette.level4);
+    document.documentElement.style.setProperty('--contrib-text', palette.textColor);
+    document.documentElement.style.setProperty('--contrib-tooltip', palette.tooltipColor);
     
-    // 设置文本颜色
-    document.documentElement.style.setProperty('--contrib-text', isDark ? 
-      'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)');
-    
-    // 设置tooltip颜色 - 使用与主色相相同但更深的颜色
-    document.documentElement.style.setProperty('--contrib-tooltip', 
-      isDark ? 
-        hslToRgbaString(h, 60, 30, 1) :  // 暗色背景下使用稍亮但深色的tooltip
-        hslToRgbaString(h, 60, 15, 1)    // 亮色背景下使用更深色的tooltip
-    );
-    
-    // 输出调试信息
-    console.log('Generated palette:', palette);
-    
+    console.log('Updated color palette:', palette);
+    return palette;
   } catch (error) {
     console.error('Error adjusting contribution colors:', error);
-    // 出错时使用默认配色
     setDefaultColors();
+    return null;
   }
 }
 
 // 设置默认颜色
 function setDefaultColors() {
-  document.documentElement.style.setProperty('--contrib-level0', 'rgba(255, 255, 255, 0.15)');
-  document.documentElement.style.setProperty('--contrib-level1', 'rgba(160, 145, 216, 0.8)');
-  document.documentElement.style.setProperty('--contrib-level2', 'rgba(106, 80, 255, 0.8)');
-  document.documentElement.style.setProperty('--contrib-level3', 'rgba(95, 38, 250, 0.85)');
-  document.documentElement.style.setProperty('--contrib-level4', 'rgba(207, 23, 84, 0.9)');
-  document.documentElement.style.setProperty('--contrib-text', 'rgba(255, 255, 255, 0.7)');
-  document.documentElement.style.setProperty('--contrib-tooltip', 'rgba(0, 0, 0, 0.85)');
+  const defaultPalette = {
+    level0: 'rgba(255, 255, 255, 0.15)',
+    level1: 'rgba(160, 145, 216, 0.8)',
+    level2: 'rgba(106, 80, 255, 0.8)',
+    level3: 'rgba(95, 38, 250, 0.85)',
+    level4: 'rgba(207, 23, 84, 0.9)',
+    textColor: 'rgba(255, 255, 255, 0.7)',
+    tooltipColor: 'rgba(0, 0, 0, 0.85)'
+  };
+  
+  // 设置CSS变量
+  Object.entries(defaultPalette).forEach(([key, value]) => {
+    const cssVar = `--contrib-${key.replace('Color', '')}`;
+    document.documentElement.style.setProperty(cssVar, value);
+  });
+  
+  return defaultPalette;
 }
 
-// 导出函数，使其可以在chart.js中使用
-window.colorUtils = {
-  adjustContributionColors
-};
-
-// 页面加载完成后初始化颜色
-document.addEventListener('DOMContentLoaded', function() {
-  adjustContributionColors();
-});
-
-// 窗口大小改变时重新适应
-window.addEventListener('resize', function() {
-  // 使用节流函数避免过于频繁地调用
-  if (window.resizeTimer) {
-    clearTimeout(window.resizeTimer);
-  }
-  window.resizeTimer = setTimeout(function() {
+// 初始化颜色监听和更新
+function initColorHandling() {
+  // 初始延迟加载
+  setTimeout(adjustContributionColors, 300);
+  
+  // 监听DOM变化
+  const observer = new MutationObserver((mutations) => {
+    if (document.querySelector('.contribution-chart') || document.querySelector('.js-calendar-graph')) {
+      adjustContributionColors();
+      observer.disconnect();
+    }
+  });
+  
+  // 监听整个文档变化
+  observer.observe(document.body, { childList: true, subtree: true });
+  
+  // 长延迟保底更新
+  setTimeout(() => {
     adjustContributionColors();
-  }, 250);
-});
+    observer.disconnect();
+  }, 1500);
+  
+  // 窗口大小变化时更新
+  window.addEventListener('resize', debounce(adjustContributionColors, 250));
+}
+
+// 节流函数
+function debounce(func, wait) {
+  let timeout;
+  return function() {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, arguments), wait);
+  };
+}
+
+// 页面加载完成后初始化
+document.addEventListener('DOMContentLoaded', initColorHandling);

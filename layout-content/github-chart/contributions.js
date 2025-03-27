@@ -75,14 +75,14 @@ function renderContributions(contributions, container) {
     const contribution = contributions.find(c => c.date === dateString);
     const count = contribution ? contribution.count : 0;
     
-    // 根据贡献数量确定等级
-    let level = 0;
-    if (count > 0) {
-      if (count <= 3) level = 1;
-      else if (count <= 6) level = 2;
-      else if (count <= 9) level = 3;
-      else level = 4;
-    }
+  // 根据贡献数量确定等级
+  let level = 0;
+  if (count > 0) {
+    if (count <= 3) level = 1;        // 1-3次贡献：淡色
+    else if (count <= 6) level = 2;   // 4-6次贡献：浅色
+    else if (count <= 9) level = 3;   // 7-9次贡献：中等色
+    else level = 4;                   // 10+次贡献：深色
+  }
     
     cell.classList.add(`level-${level}`);
     

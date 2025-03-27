@@ -1,0 +1,124 @@
+:root {
+  /* 默认颜色变量，将被JavaScript动态替换 */
+  --contrib-level0: rgba(255, 255, 255, 0.15);
+  --contrib-level1: rgb(160, 145, 216);
+  --contrib-level2: rgba(106, 80, 255, 0.93);
+  --contrib-level3: rgba(95, 38, 250, 0.938);
+  --contrib-level4: rgba(207, 23, 84, 0.8);
+  --contrib-text: rgba(255, 255, 255, 0.5);
+  --contrib-tooltip: rgba(127, 60, 153, 0.536);
+}
+
+/* GitHub贡献图样式 */
+.github-contributions {
+  display: grid;
+  /* 修改网格模板，确保一致性 */
+  grid-template-rows: 15px repeat(7, minmax(10px, 1fr)); /* 第一行给月份标签 */
+  grid-template-columns: 25px repeat(53, minmax(10px, 1fr)); /* 第一列给星期标签 */
+  grid-gap: 3px; /* 统一的间隙 */
+  padding: 10px;
+  width: 100%;
+  aspect-ratio: 12/2;
+  backdrop-filter: blur(10px);
+}
+
+/* 贡献格子基础样式 - 固定大小 */
+.contribution-cell {
+  width: 10px; /* 固定宽度 */
+  height: 10px; /* 固定高度 */
+  border-radius: 1px;
+  transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  /* 确保格子在网格中居中 */
+  justify-self: center;
+  align-self: center;
+}
+
+/* 贡献等级颜色 - 使用CSS变量 */
+.level-0 { background-color: var(--contrib-level0); }
+.level-1 { background-color: var(--contrib-level1); }
+.level-2 { background-color: var(--contrib-level2); }
+.level-3 { background-color: var(--contrib-level3); }
+.level-4 { background-color: var(--contrib-level4); }
+.tooltip { background-color: var(--contrib-tooltip); }
+
+/* 鼠标悬停效果 */
+.contribution-cell:hover {
+  transform: scale(1.2);
+  z-index: 1;
+  filter: brightness(1.2);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* 贡献信息提示 */
+.contribution-tooltip {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--contrib-tooltip);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 9999; /* 将z-index提高到一个非常高的值 */
+}
+
+.contribution-cell:hover .contribution-tooltip {
+  visibility: visible;
+  opacity: 1;
+  z-index: 9999; /* 确保悬停时也保持高z-index */
+}
+
+/* 周标签 - 修改为固定在第一列 */
+.day-label {
+  grid-column: 1; /* 固定在第一列 */
+  font-size: 7px;
+  color: var(--contrib-text);
+  align-self: center;
+  justify-self: end;
+  padding-right: 8px;
+}
+
+/* 月份标签 - 修改为固定在第一行 */
+.month-label {
+  grid-row: 1; /* 固定在第一行 */
+  width: auto;
+  font-size: 9px;
+  color: var(--contrib-text);
+  align-self: center;
+  justify-self: center;
+  /* 确保月份标签不会扩展列宽 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* 添加pointerEvents: none，防止影响鼠标事件 */
+  pointer-events: none;
+}
+
+/* 响应式布局 */
+@media screen and (max-width: 768px) {
+  .github-contributions {
+    padding: 8px; grid-gap: 1px; /* 统一的间隙 */
+    grid-template-rows: 12px repeat(7, minmax(6px, 1fr));
+    grid-template-columns: 17px repeat(53, minmax(6px, 1fr));
+  }
+  
+  .contribution-cell {
+    width: 5px; /* 移动端更小格子 */
+    height: 5px;
+    grid-gap: 1px; /* 移动端更小间隙 */
+    border-radius: 1px;
+  }
+  
+  .day-label, .month-label {
+    font-size: 5px;
+  }
+}

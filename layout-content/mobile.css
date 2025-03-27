@@ -5,7 +5,7 @@
       padding: 15px;
     }
     
-    .content-container {
+    .content1 {
       width: 95%;
       grid-template-columns: repeat(2, 1fr); /* 2列 */
       grid-template-rows: repeat(2, 1fr); /* 2行 */
@@ -33,7 +33,7 @@
   
   /* 超小屏幕 */
   @media (max-width: 480px) {
-    .content-container {
+    .content1 {
       grid-template-columns: repeat(2, 1fr); /* 2列 */
       grid-template-rows: repeat(2, 1fr); /* 2行 */
     }

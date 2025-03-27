@@ -21,8 +21,8 @@
     <link rel="stylesheet" href="./layout-content/content.css" /> <!-- 内容区域 -->
     <link rel="stylesheet" href="./layout-content/mobile.css" />  <!-- 移动端适配 -->
 
-    <link rel="stylesheet" href="./layout-content/chart.css" /> <!-- Github图表 -->
-    <link rel="stylesheet" href="./layout-content/github-chart/chart.css" />  <!-- Github图表 -->
+    <link rel="stylesheet" href="./layout-content/github-chart/chart.css" />  <!-- 容器 -->
+    <link rel="stylesheet" href="./layout-content/github-chart/contributions.css" />  <!-- Github贡献图 -->
 
     <link rel="stylesheet" href="./layout-bottom/personal/info.css" />  <!-- 个人信息区域 -->
     <link rel="stylesheet" href="./layout-bottom/personal/mobile.css" />  <!-- 移动端适配 -->
@@ -42,7 +42,6 @@
     <!-- loading组件 -->
     <div id="loading-screen">
       <div class="loading"></div>
-      <div class="loading-text">Loading...</div>
     </div>
 
     <div class="background">
@@ -54,7 +53,7 @@
         
         <div class="content">
           
-          <div class="content-container">
+          <div class="content1">
             <div class="content-tab1">
               <a href="https://potatoone.github.io/wiki/" class="tab-link" title="我的Wiki">
                 <i class="fas fa-book-open"></i>
@@ -81,10 +80,11 @@
             </div>
           </div>
 
-          <div class="chart">
+          <div class="content2">
             <div class="tab1">
-              <a href="https://github.com/potatoone" class="tab-link" title="Github">
+              <a href="https://github.com/potatoone/" class="tab-link" title="Github">
                 <i class="fab fa-github"></i>
+                <span>Github</span>
               </a>
             </div>
             <div class="tab2">
@@ -208,7 +208,7 @@
     <script src="./layout-top/sentence.js"></script> <!-- 一言 -->
     <script src="./layout-top/weather.js"></script>  <!-- 天气 -->
 
-    <script src="./layout-content/github-chart/chart.js"></script> <!-- Github图表 -->
+    <script src="./layout-content/github-chart/contributions.js"></script> <!-- Github图表 -->
     <script src="./layout-content/github-chart/setcolor.js"></script> <!-- Github图表颜色 -->
 
     <script src="./layout-bottom/personal/info.js"></script>  <!-- 个人信息区域 -->

@@ -44,7 +44,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.403);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 /* 确保所有元素都继承字体设置 */

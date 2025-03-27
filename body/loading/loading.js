@@ -2,8 +2,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 记录页面开始加载的时间戳
     const startTime = new Date().getTime();
-    // 设置最小加载显示时间为5秒，确保加载动画至少显示这么长时间
-    const minLoadingTime = 5000;
+    // 设置最小加载显示时间为5.5秒，确保加载动画至少显示这么长时间
+    const minLoadingTime = 5500;
     
     // 隐藏加载页面并显示主内容的函数
     function hideLoadingScreen() {
@@ -42,5 +42,5 @@ document.addEventListener('DOMContentLoaded', function() {
             // 如果10秒后仍未隐藏，则强制隐藏加载页面
             hideLoadingScreen();
         }
-    }, 10000); // 10秒超时
+    }, 22000); // 22秒超时
 });
