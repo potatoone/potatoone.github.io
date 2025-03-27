@@ -40,8 +40,8 @@ const bloomPass = new THREE.UnrealBloomPass(
     0.85  // 泛光阈值
 );
 bloomPass.threshold = 0.1;
-bloomPass.strength = 0.25; // 背景透明度
-bloomPass.radius = 0.1;
+bloomPass.strength = 0.26; // 背景透明度
+bloomPass.radius = 0;
 composer.addPass(renderPass);
 composer.addPass(bloomPass);
 
@@ -111,24 +111,36 @@ class Firework {
         const fireworkGeometry = geometry.clone();
         this.particles = new THREE.Points(fireworkGeometry, fireworkMaterial);
         
-        // 进一步限制烟花的生成位置
-        // 使用固定值而不是相对于屏幕尺寸的值
+        // 修改：扩展X轴发射位置到整个屏幕宽度
+        // 将范围从(-5,5)扩展到整个可视区域
+        const viewportWidth = camera.aspect * (camera.position.z * Math.tan(Math.PI * camera.fov / 360) * 2);
+        
         this.particles.position.set(
-            (Math.random() - 1) * 100,  // 限制X轴范围 (-5 到 5)
+            (Math.random() - 0.5) * viewportWidth * 0.9,  // 使用90%的可视区域宽度
             -15,  // 从屏幕底部往上发射，保持固定值
-            0  // 保持Z轴为0，使烟花平面化，避免深度问题
+            0  // 保持Z轴为0，使烟花平面化
         );
         
+        // 微调速度，确保烟花不会飞出屏幕
         this.velocity = new THREE.Vector3(
-            (Math.random() - 0.5) * 0.1,  // 进一步减小X轴速度
-            Math.random() * 0.5 + 0.3,  // 减小向上的速度
-            0  // 保持Z轴速度为0
+            (Math.random() - 0.5) * 0.08,  // 减小水平速度
+            Math.random() * 0.4 + 0.3,  // 垂直速度
+            0  // Z轴速度保持为0
         );
         
         this.age = 0;
         this.exploded = false;
         this.dead = false;
         scene.add(this.particles);
+        
+        // 随机调整烟花初始大小
+        const sizes = this.particles.geometry.attributes.size.array;
+        const sizeVariation = Math.random() * 0.5 + 0.8; // 0.8-1.3倍变化
+        
+        for (let i = 0; i < sizes.length; i++) {
+            sizes[i] = sizes[i] * sizeVariation;
+        }
+        this.particles.geometry.attributes.size.needsUpdate = true;
     }
 
     update() {
@@ -136,7 +148,7 @@ class Firework {
         
         if (!this.exploded) {
             this.particles.position.add(this.velocity);
-            this.velocity.y -= 0.01; // 减小重力作用
+            this.velocity.y -= 0.01; // 重力作用
             
             // 检查是否达到最高点
             if (this.velocity.y < 0) {
@@ -144,10 +156,15 @@ class Firework {
                 this.exploded = true;
             }
             
+            // 修改：扩展边界检查范围，匹配更宽的发射区域
+            // 获取当前视口宽度
+            const viewportWidth = camera.aspect * (camera.position.z * Math.tan(Math.PI * camera.fov / 360) * 2);
+            const boundaryX = viewportWidth * 0.6; // 60%的视口宽度作为边界
+            
             // 如果超出屏幕边界，立即爆炸
-            if (Math.abs(this.particles.position.x) > 15 || 
+            if (Math.abs(this.particles.position.x) > boundaryX || 
                 this.particles.position.y > 15 ||
-                this.particles.position.y < -100) {
+                this.particles.position.y < -20) {
                 this.explode();
                 this.exploded = true;
             }
@@ -180,7 +197,7 @@ class Firework {
             this.particles.geometry.attributes.size.needsUpdate = true;
             
             // 减少粒子生命周期
-            if (this.age > 10000) {
+            if (this.age > 15000) {
                 this.dead = true;
             }
         }
@@ -226,16 +243,29 @@ class Firework {
 
 // 在 animate 函数中进一步减小生成频率
 const fireworks = [];
+
+let animationId = null; // 存储动画帧ID
+let isFireworksActive = false; // 跟踪烟花是否活跃
+
+// 修改animate函数以便能够停止
 function animate() {
-    requestAnimationFrame(animate);
+    if (!isFireworksActive) return; // 如果不活跃，不继续动画
     
-    // 降低生成频率到合理水平
-    if (Math.random() < 0.2) {  // 从0.5改回0.005，否则会产生太多烟花
+    animationId = requestAnimationFrame(animate);
+    
+    // 降低生成频率，但根据屏幕宽度动态调整
+    const viewportWidth = window.innerWidth;
+    const baseRate = 0.02; // 基础生成概率
+    const widthFactor = Math.min(1, viewportWidth / 1920); // 根据屏幕宽度调整
+    const finalRate = baseRate * (0.5 + widthFactor * 0.5); // 动态生成率
+    
+    if (Math.random() < finalRate) {
         fireworks.push(new Firework());
     }
     
-    // 减小同时存在的烟花数量上限到合理值
-    const maxFireworks = 100;  // 从100改为5，否则性能会受到很大影响
+    // 根据视口宽度动态调整最大烟花数量
+    const maxFireworks = Math.min(25, Math.max(10, Math.floor(viewportWidth / 100)));
+    
     if (fireworks.length > maxFireworks) {
         scene.remove(fireworks[0].particles);
         fireworks.shift();
@@ -264,10 +294,38 @@ function onWindowResize() {
 
 window.addEventListener('resize', onWindowResize);
 
-// 启动动画
-animate();
-
 // 提供一个方法来控制烟花的显示/隐藏
 window.toggleFireworks = function(show) {
-    fireworksContainer.style.display = show ? 'block' : 'none';
+    if (show && !isFireworksActive) {
+        // 启动烟花
+        console.log('启动烟花效果');
+        fireworksContainer.style.display = 'block';
+        isFireworksActive = true;
+        animate(); // 重新开始动画循环
+    } else if (!show && isFireworksActive) {
+        // 停止烟花
+        console.log('停止烟花效果');
+        isFireworksActive = false;
+        
+        // 取消动画帧
+        if (animationId !== null) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+        
+        // 清理所有现有烟花
+        while(fireworks.length > 0) {
+            scene.remove(fireworks[0].particles);
+            fireworks.shift();
+        }
+        
+        // 隐藏容器
+        fireworksContainer.style.display = 'none';
+    }
 };
+
+// 初始状态下不自动启动动画
+isFireworksActive = false;
+fireworksContainer.style.display = 'none';
+
+// 不要自动调用animate()，让toggleFireworks控制启动
