@@ -13,7 +13,8 @@ const PlaylistManager = (() => {
     { id: 2667995012, name: "Find MY Way" },
     { id: 2664858270, name: "流星季 Night" },
     { id: 2667994989, name: "天鹅的祝歌" },
-    { id: 2667995042, name: "微风中的绿野" }
+    { id: 2667995042, name: "微风中的绿野" },
+    { id: 1375804780, name: "瓷意千年" }
   ];
   
   // 初始化
