@@ -1,137 +1,190 @@
 // 播放列表管理模块
 const PlaylistManager = (() => {
   // 核心变量
-  let currentTrack = 0;
-  let playlist, playlistToggle;
-  let isPlaying = false; // 跟踪播放状态
+  let currentTrack = 0, playlist, playlistToggle, isPlaying = false;
+  let SONGS = [], CATEGORIES = [], currentCategory = -1; // -1 表示显示全部
   const STORAGE_KEY = 'musicPlayerState';
   
-  // 网易云音乐源
-  const SONGS = [
-    { id: 2646148624, name: "Together Till Infinity" },
-    { id: 2676045527, name: "花焰照亮的旅途" },
-    { id: 2667995012, name: "Find MY Way" },
-    { id: 2664858270, name: "流星季 Night" },
-    { id: 2667994989, name: "天鹅的祝歌" },
-    { id: 2667995042, name: "微风中的绿野" },
-    { id: 1375804780, name: "瓷意千年" }
-  ];
-  
+  // 辅助函数
+  const getItems = () => playlist?.querySelectorAll('li') || [];
+  const getItem = i => getItems()[i] || null;
+  const updateUI = expanded => {
+    const categoriesContainer = document.getElementById('playlist-categories');
+    if (categoriesContainer) {
+      categoriesContainer.style.display = expanded ? 'flex' : 'none';
+      categoriesContainer.style.opacity = expanded ? '1' : '0';
+      categoriesContainer.style.transform = expanded ? 'translateY(0)' : 'translateY(-10px)';
+    }
+    
+    const icon = playlistToggle?.querySelector('i');
+    if (icon) icon.className = expanded ? 'fas fa-angle-up' : 'fas fa-angle-down';
+  };
+
   // 初始化
   function init() {
     playlist = document.getElementById('playlist');
     playlistToggle = document.getElementById('playlist-toggle');
     if (!playlist || !playlistToggle) return false;
     
-    // 生成列表
-    playlist.querySelector('ul').innerHTML = SONGS.map(t => 
-      `<li data-src="https://music.163.com/song/media/outer/url?id=${t.id}" data-id="${t.id}">
-        <span class="track-name">${t.name}</span>
-        <div class="audio-wave"><span></span><span></span><span></span></div>
-      </li>`).join('');
-    
-    setupEvents();
-    loadState();
-    
-    // 播放初始曲目
-    setTimeout(() => {
-      const tracks = playlist.querySelectorAll('li');
-      if (tracks.length > 0 && window.MusicPlayer) {
-        const state = getState();
-        
-        // 根据保存的播放状态决定是否播放
-        if (state?.isPlaying) {
-          // 如果之前是播放状态，则继续播放
-          window.MusicPlayer.playTrack(tracks[currentTrack], currentTrack, state?.playbackTime || 0);
+    fetch('./layout-bottom/music/playlist/music.json')
+      .then(response => response.ok ? response.json() : Promise.reject('加载失败'))
+      .then(data => {
+        if (data?.songs?.length) {
+          SONGS = data.songs;
+          CATEGORIES = data.categories || [];
+          initializePlaylist();
+          initCategories();
         } else {
-          // 仅加载音乐但不自动播放
-          window.MusicPlayer.loadTrack(tracks[currentTrack], currentTrack, state?.playbackTime || 0);
+          Promise.reject('格式错误');
         }
-      }
-    }, 300);
+      })
+      .catch(error => {
+        console.error('加载失败:', error);
+        playlist.innerHTML = '<div class="playlist-error">无法加载音乐列表</div>';
+      });
     
     return true;
   }
   
+  // 初始化播放列表
+  function initializePlaylist() {
+    const ulElement = playlist.querySelector('ul') || document.createElement('ul');
+    ulElement.innerHTML = SONGS.map((t, index) => 
+      `<li data-src="https://music.163.com/song/media/outer/url?id=${t.id}" data-id="${t.id}" data-index="${index}" data-category="${t.category}">
+        <span class="track-name">${t.name}</span>
+        <div class="audio-wave"><span></span><span></span><span></span></div>
+      </li>`).join('');
+    
+    if (!playlist.contains(ulElement)) playlist.appendChild(ulElement);
+    
+    setupEvents();
+    loadState();
+    
+    document.dispatchEvent(new CustomEvent('playlistInitialized'));
+    
+    setTimeout(() => {
+      const state = getState();
+      if (getItems().length && window.MusicPlayer) {
+        window.MusicPlayer[state?.isPlaying ? 'playTrack' : 'loadTrack'](
+          getItem(currentTrack), currentTrack, state?.playbackTime || 0
+        );
+      }
+    }, 300);
+  }
+
+  // 初始化分类按钮
+  function initCategories() {
+    if (!CATEGORIES.length) return;
+    
+    const categoriesContainer = document.getElementById('playlist-categories');
+    if (!categoriesContainer) return;
+    
+    // 创建分类按钮
+    let buttonsHtml = CATEGORIES.map((category, index) => 
+      `<button class="category-btn${currentCategory === index ? ' active' : ''}" data-category="${index}">${category}</button>`
+    ).join('');
+    
+    // 添加全部按钮
+    buttonsHtml += `<button class="category-btn${currentCategory === -1 ? ' active' : ''}" data-category="-1">全部</button>`;
+    
+    categoriesContainer.innerHTML = buttonsHtml;
+    
+    // 添加点击事件
+    categoriesContainer.addEventListener('click', e => {
+      const btn = e.target.closest('.category-btn');
+      if (!btn) return;
+      
+      const category = parseInt(btn.dataset.category);
+      currentCategory = category;
+      
+      categoriesContainer.querySelectorAll('.category-btn')
+        .forEach(b => b.classList.toggle('active', b === btn));
+      
+      filterByCategory(category);
+      saveState();
+    });
+  }
+  
+  // 按分类过滤歌曲
+  function filterByCategory(category) {
+    getItems().forEach(track => {
+      const trackCategory = parseInt(track.dataset.category);
+      track.style.display = (category === -1 || trackCategory === category) ? '' : 'none';
+    });
+    
+    playlist.scrollTop = 0;
+    handleScroll.call(playlist);
+  }
+  
   // 设置事件
   function setupEvents() {
-    // 折叠按钮
-    playlistToggle.addEventListener('click', () => {
-      const expanded = playlist.classList.toggle('expanded');
-      playlist.style.maxHeight = expanded ? 
-        Math.min(playlist.scrollHeight, window.innerHeight * 0.6) + 'px' : '0';
+    // 基本交互
+    playlistToggle.addEventListener('click', togglePlaylist);
+    playlist.addEventListener('scroll', handleScroll);
+    playlist.addEventListener('click', e => {
+      const target = e.target.closest('li');
+      if (!target || !window.MusicPlayer) return;
       
-      const icon = playlistToggle.querySelector('i');
-      if (icon) icon.className = expanded ? 'fas fa-angle-up' : 'fas fa-angle-down';
+      const index = [...getItems()].indexOf(target);
+      if (index < 0) return;
+      
+      if (index === currentTrack) {
+        window.MusicPlayer.togglePlay();
+      } else {
+        currentTrack = index;
+        window.MusicPlayer[isPlaying ? 'playTrack' : 'loadTrack'](target, currentTrack);
+      }
+      
       saveState();
     });
     
-    // 列表点击
-    playlist.addEventListener('click', e => {
-      let target = e.target;
-      while (target !== playlist && target.tagName !== 'LI') {
-        target = target.parentNode;
-        if (!target) return;
-      }
-      
-      if (target.tagName === 'LI') {
-        const index = [...playlist.querySelectorAll('li')].indexOf(target);
-        
-        if (index === currentTrack && window.MusicPlayer) {
-          // 点击当前曲目，切换播放/暂停
-          window.MusicPlayer.togglePlay();
-          // togglePlay会更新isPlaying状态
-        } else if (window.MusicPlayer) {
-          // 选择新曲目
-          currentTrack = index;
-          
-          // 根据当前播放状态决定是加载还是播放
-          if (isPlaying) {
-            // 如果当前是播放状态，则播放新选择的曲目
-            window.MusicPlayer.playTrack(target, currentTrack);
-          } else {
-            // 如果当前是停止状态，则只加载但不播放
-            window.MusicPlayer.loadTrack(target, currentTrack);
-          }
-        }
-        
-        saveState();
-      }
-    });
+    // 状态保存
+    window.addEventListener('beforeunload', saveState);
+    setInterval(saveWithTime, 30000);
     
-    // 监听播放状态变化
+    // 播放器状态监听
     if (window.MusicPlayer) {
-      // 监听播放器状态变化
       window.addEventListener('musicPlayerStateChange', e => {
         isPlaying = e.detail.isPlaying;
         saveState();
       });
+      
+      const audio = window.MusicPlayer.getAudioElement?.();
+      if (audio) {
+        let saveTimer;
+        audio.addEventListener('timeupdate', () => {
+          clearTimeout(saveTimer);
+          saveTimer = setTimeout(() => saveTime(audio.currentTime), 5000);
+        });
+        
+        audio.addEventListener('play', () => { isPlaying = true; saveState(); });
+        audio.addEventListener('pause', () => { isPlaying = false; saveState(); });
+      }
+    }
+  }
+  
+  // 切换播放列表显示状态
+  function togglePlaylist() {
+    const expanded = playlist.classList.toggle('expanded');
+    updateUI(expanded);
+    
+    if (expanded) {
+      setTimeout(() => {
+        const playing = playlist.querySelector('li.playing');
+        playing?.scrollIntoView({behavior: 'smooth', block: 'center'});
+      }, 100);
     }
     
-    // 自动保存
-    window.addEventListener('beforeunload', saveWithTime);
-    setInterval(saveWithTime, 30000);
-    
-    // 时间更新
-    const audio = window.MusicPlayer?.getAudioElement?.();
-    if (audio) {
-      let timer;
-      audio.addEventListener('timeupdate', () => {
-        clearTimeout(timer);
-        timer = setTimeout(() => saveTime(audio.currentTime), 5000);
-      });
-      
-      // 监听播放/暂停事件以更新状态
-      audio.addEventListener('play', () => {
-        isPlaying = true;
-        saveState();
-      });
-      
-      audio.addEventListener('pause', () => {
-        isPlaying = false;
-        saveState();
-      });
-    }
+    saveState();
+  }
+
+  // 滚动处理
+  function handleScroll() {
+    this.classList.toggle('scrolled', this.scrollTop > 10);
+    this.classList.toggle('overflow', 
+      this.scrollHeight > this.clientHeight && 
+      this.scrollTop + this.clientHeight < this.scrollHeight - 5
+    );
   }
   
   // 状态管理
@@ -148,12 +201,13 @@ const PlaylistManager = (() => {
   
   function saveState() {
     try {
-      const state = getState() || {};
-      state.currentTrack = currentTrack;
-      state.isExpanded = playlist.classList.contains('expanded');
-      state.isPlaying = isPlaying; // 保存播放/暂停状态
-      state.timestamp = Date.now();
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        currentTrack,
+        isExpanded: playlist.classList.contains('expanded'),
+        isPlaying,
+        currentCategory,
+        timestamp: Date.now()
+      }));
     } catch (e) {}
   }
   
@@ -162,7 +216,7 @@ const PlaylistManager = (() => {
       const state = getState() || {};
       state.playbackTime = time;
       state.currentTrack = currentTrack;
-      state.isPlaying = isPlaying; // 保存播放/暂停状态
+      state.isPlaying = isPlaying;
       state.timestamp = Date.now();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch (e) {}
@@ -173,52 +227,46 @@ const PlaylistManager = (() => {
     audio && !audio.paused ? saveTime(audio.currentTime) : saveState();
   }
   
+  // 加载保存的状态
   function loadState() {
     try {
       const state = getState();
-      if (state) {
-        // 恢复曲目和状态
-        currentTrack = state.currentTrack || 0;
-        isPlaying = state.isPlaying || false; // 恢复播放状态
-        
-        if (state.isExpanded) {
-          playlist.classList.add('expanded');
-          playlist.style.maxHeight = Math.min(playlist.scrollHeight, window.innerHeight * 0.6) + 'px';
-          const icon = playlistToggle.querySelector('i');
-          if (icon) icon.className = 'fas fa-angle-up';
-        } else {
-          playlist.classList.remove('expanded');
-          playlist.style.maxHeight = '0';
-          const icon = playlistToggle.querySelector('i');
-          if (icon) icon.className = 'fas fa-angle-down';
-        }
-      }
+      if (!state) return;
+      
+      currentTrack = state.currentTrack || 0;
+      isPlaying = state.isPlaying || false;
+      currentCategory = state.hasOwnProperty('currentCategory') ? state.currentCategory : -1;
+      
+      const expanded = state.isExpanded;
+      playlist.classList.toggle('expanded', expanded);
+      updateUI(expanded);
+      
+      expanded && setTimeout(handleScroll.bind(playlist), 300);
     } catch (e) {
-      currentTrack = 0;
-      isPlaying = false;
-      playlist.classList.remove('expanded');
-      playlist.style.maxHeight = '0';
+      console.error('加载状态失败:', e);
     }
-  }
-  
-  // 更新播放状态
-  function updatePlayingStatus(index) {
-    playlist.querySelectorAll('li').forEach(t => t.classList.remove('playing'));
-    playlist.querySelectorAll('li')[index]?.classList.add('playing');
-    currentTrack = index;
-    saveState();
   }
   
   // 公开API
   return {
     init,
-    updatePlayingStatus,
+    updatePlayingStatus: index => {
+      getItems().forEach(t => t.classList.remove('playing'));
+      getItem(index)?.classList.add('playing');
+      currentTrack = index;
+      saveState();
+    },
     getCurrentTrackIndex: () => currentTrack,
-    getTotalTracks: () => playlist.querySelectorAll('li').length,
-    getTrackElement: (i) => playlist.querySelectorAll('li')[i] || null,
-    togglePlaylist: () => playlistToggle.click(),
+    getTotalTracks: () => getItems().length,
+    getTrackElement: i => getItem(i),
+    togglePlaylist,
     savePlayTime: saveTime,
-    setPlayingState: (playing) => { isPlaying = playing; saveState(); }
+    setPlayingState: playing => { isPlaying = playing; saveState(); },
+    filterByCategory: category => {
+      currentCategory = category;
+      filterByCategory(category);
+    },
+    getCurrentCategory: () => currentCategory
   };
 })();
 

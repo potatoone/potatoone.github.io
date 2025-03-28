@@ -30,6 +30,7 @@
 
     <link rel="stylesheet" href="./layout-bottom/music/player.css" />  <!-- 音乐播放器 -->
     <link rel="stylesheet" href="./layout-bottom/music/playlist/playlist.css" />  <!-- 播放列表 -->
+    <link rel="stylesheet" href="./layout-bottom/music/playlist/categories.css" />  <!-- 播放列表分类切换按钮 -->
     <link rel="stylesheet" href="./layout-bottom/music/progress/progress.css" />  <!-- 进度条 -->
 
     <!-- 引入Font Awesome图标库 -->
@@ -152,11 +153,15 @@
         <!-- 音乐播放器区域 -->
         <div class="player">
 
-          <div id="playlist" class="playlist">
-            <ul></ul><!-- 播放列表由JavaScript动态生成 -->
-          </div>
+          <div id="playlist-toggle"><i class="fas fa-angle-down"></i></div>
+  
+          <!-- 分类按钮容器 -->
+          <div id="playlist-categories" class="playlist-categories"></div>
           
-          <div id="playlist-toggle"><i class="fas fa-angle-up"></i></div>
+          <!-- 播放列表区域 -->
+          <div id="playlist" class="playlist">
+            <ul><!-- 歌曲列表由JavaScript动态生成 --></ul>
+          </div>
 
           <div class="control">
             <div class="control-title"></div>  <!-- 音乐标题 -->
@@ -215,6 +220,7 @@
 
     <script src="./layout-bottom/music/player.js"></script>  <!-- 音乐播放器区域 -->
     <script src="./layout-bottom/music/playlist/playlist.js"></script>  <!-- 播放列表 -->
+    <script src="./layout-bottom/music/playlist/categories.js"></script>  <!-- 播放列表分类切换按钮 -->
     <script src="./layout-bottom/music/progress/progress.js"></script>  <!-- 进度条 -->
     <script src="./layout-bottom/music/mode.js"></script>  <!-- 播放模式 -->
     <script src="./layout-bottom/music/mobile.js"></script>  <!-- 移动端适配 -->

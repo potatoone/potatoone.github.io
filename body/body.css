@@ -5,6 +5,11 @@
 body {
     font-family: "DaBaoTaoTaoTi"; /* 大宝桃桃体 */
     font-weight: normal;
+    /* 确保内容可选择和复制 */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 /* 全局性能优化 */

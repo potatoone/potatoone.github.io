@@ -40,35 +40,49 @@
   color: white;
 }
 
+
+
+
 /* ===== 2. 播放列表主体 ===== */
 .playlist { /* 播放列表主体 */
-  /* 位置和尺寸 */
-  position: absolute; /* 改为固定定位，与control一致 */
-  width: 250px; /* 固定宽度 */ 
-  bottom: 110px;
-  max-height: 0; /* 初始状态下收起 */
-  overflow: hidden; /* 隐藏溢出内容 */
+  position: relative;
+  max-height: 0; /* 初始高度为0 */
+  bottom: 10px;
+  overflow-y: auto; /* 保留滚动功能 */
   border-radius: 10px;
-
-  /* 颜色和效果 */
   color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(5px);
-  transition: max-height 0.3s, box-shadow 0.3s, padding 0.3s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: max-height 0.3s ease;
+  
+  /* 隐藏滚动条但保留滚动功能 */
+  scrollbar-width: none; /* Firefox */
 }
 
-#playlist.expanded {
-  max-height: 500px; /* 展开时的最大高度 */
-  scrollbar-width: none;
+/* 展开状态 - 高度限制在CSS中定义 */
+.playlist.expanded {
+  max-height: 40vh; /* 使用视口高度的40%作为最大高度 */
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-#playlist ul {
-  padding: 0;
-  margin: 0;
-  width: 100%;
+/* 在小屏幕上保持相同的最大高度 */
+@media (max-width: 768px) {
+  .playlist.expanded {
+    max-height: 30vh;
+  }
 }
 
+
+
+
+
 /* ===== 3. 播放列表项 ===== */
+#playlist ul { /* 列表容器 */
+  padding: 0;
+  margin: 0;
+  width: 100%; /* 调整为占据整个宽度 */
+}
+
 #playlist li { /* 播放列表项 */
   /* 布局 */
   display: flex;

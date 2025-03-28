@@ -1,0 +1,24 @@
+{
+    "categories": ["暖暖", "古风", "流行"],
+    "songs": [
+      { "id": 2646148624, "name": "Together Till Infinity", "category": 0 },
+      { "id": 2676045527, "name": "花焰照亮的旅途", "category": 0 },
+      { "id": 2667995012, "name": "Find MY Way", "category": 0 },
+      { "id": 2664858270, "name": "流星季 Night", "category": 0 },
+      { "id": 2667994989, "name": "天鹅的祝歌", "category": 0 },
+      { "id": 2667995042, "name": "微风中的绿野", "category": 0 },
+      { "id": 2653015569, "name": "With you", "category": 0 },
+      { "id": 2124079303, "name": "人间最值得", "category": 1 },
+      { "id": 532548942, "name": "金风玉露", "category": 1 },
+      { "id": 1301573518, "name": "芦汀有雪", "category": 1 },
+      { "id": 1375804780, "name": "瓷意千年", "category": 1 },
+      { "id": 28188426, "name": "腐草为萤", "category": 1 },
+      { "id": 1971054019, "name": "归期", "category": 1 },
+      { "id": 1476417629, "name": "折扇", "category": 1 },
+      { "id": 570088077, "name": "翩翩", "category": 1 },
+      { "id": 1362195312, "name": "云山入梦舟", "category": 1 },
+      { "id": 1418495601, "name": "遇你同行", "category": 2 },
+      { "id": 2085988952, "name": "平潭谣", "category": 2 },
+      { "id": 1880127698, "name": "门的另一端", "category": 2 }
+    ]
+}
