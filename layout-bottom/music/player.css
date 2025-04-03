@@ -11,7 +11,6 @@
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 10px;
-  transition: all 0.3s ease;
   position: relative; /* 为通知定位提供参考点 */
 }
 
@@ -64,7 +63,6 @@
     border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: transform 0.3s ease;
   }
 
   /* 播放动画 */

@@ -18,7 +18,7 @@
   transform: translateZ(0); /* 硬件加速 */
   transition: transform 0.3s ease, opacity 0.3s ease;
   pointer-events: auto; /* 允许点击 */
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .sentence:hover {

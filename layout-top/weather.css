@@ -16,15 +16,9 @@
 }
 
 .weather-icon {
-  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  font-size: 25px;
   color: #ffffff;
   margin-right: 10px;
-}
-
-.weather-info {
-  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
-  display: flex;
-  flex-direction: column;
 }
 
 .weather-data-row {
@@ -34,7 +28,7 @@
 }
 
 .weather-temp {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   margin-right: 8px;
 }

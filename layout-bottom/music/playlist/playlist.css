@@ -30,9 +30,6 @@
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  
-  /* 动画 */
-  transition: all 0.3s ease;
 }
 
 #playlist-toggle:hover {
@@ -45,24 +42,26 @@
 
 /* ===== 2. 播放列表主体 ===== */
 .playlist { /* 播放列表主体 */
+  display: flex;
   position: relative;
-  max-height: 0; /* 初始高度为0 */
+  max-height: 0vh; /* 初始高度为0 */
   bottom: 10px;
   overflow-y: auto; /* 保留滚动功能 */
   border-radius: 10px;
   color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: max-height 0.3s ease;
-  
-  /* 隐藏滚动条但保留滚动功能 */
-  scrollbar-width: none; /* Firefox */
+  border: 0px solid rgba(255, 255, 255, 0.2); /* 初始边框为0 */
+  scrollbar-width: none;   /* 隐藏滚动条但保留滚动功能 */
+  transition: 0.5s; /* 过渡效果 */
 }
 
 /* 展开状态 - 高度限制在CSS中定义 */
 .playlist.expanded {
   max-height: 40vh; /* 使用视口高度的40%作为最大高度 */
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: 0.5s; /* 过渡效果 */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box; /* 包括边框和内边距在内的总宽度和高度 */
 }
 
 /* 在小屏幕上保持相同的最大高度 */

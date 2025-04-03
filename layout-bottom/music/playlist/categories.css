@@ -6,13 +6,14 @@
   .playlist-categories {
     display: flex;
     justify-content: space-around;  /* 水平居中 */
-    padding: 5px; gap: 2px;
+    padding: 5px; gap: 3px;
     border-radius: 10px;
     backdrop-filter: blur(8px);
     position: relative;
     bottom: 20px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: 0.5s;
   }
 
   /* 当列表折叠时隐藏分类按钮 - 合并选择器 */
@@ -20,7 +21,7 @@
   .playlist:not(.expanded) ~ #playlist-categories {
     display: none;
     opacity: 0;
-    transform: translateY(-10px);
+    transition: 0.5s;
   }
   
   /* 分类按钮基本样式 */
@@ -29,7 +30,7 @@
     background: transparent;
     color: rgba(255, 255, 255, 0.7);
     padding: 7px;
-    border-radius: 10px;
+    border-radius: 7px;
     cursor: pointer;
     font-size: 12px;
     border: none;
@@ -49,9 +50,9 @@
   
   .category-btn.active {
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.107);
+    background-color: rgba(255, 255, 255, 0.107);
     font-weight: 500;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: 0.5s;
   }
   
   /* 点击效果 */
