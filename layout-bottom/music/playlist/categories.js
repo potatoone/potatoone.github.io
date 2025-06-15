@@ -6,13 +6,13 @@
 class PlaylistCategories {
     constructor() {
       this.categories = {
-        favorite: { text: '收藏' },
-        recent: { text: '最近' },
-        mood: {  text: '情绪' },
-        all: {  text: '全部' }
+        all: {  text: '全部' },
+        categorie1: { text: '' },
+        categorie2: { text: '' },
+        categorie3: { text: '' }
       };
       
-      this.currentCategory = 'favorite'; // 默认分类
+      this.currentCategory = 'all'; // 默认分类
       this.init();
     }
     

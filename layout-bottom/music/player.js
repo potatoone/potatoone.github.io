@@ -51,11 +51,9 @@ const MusicPlayer = (() => {
     
     // 超时处理
     let timeout = setTimeout(() => {
-      playBtn.querySelector('i').className = 'fas fa-exclamation-circle';
-      showNotification('加载超时，切换下一首...');
-      setTimeout(() => advanceTrack(true), 1500);
-    }, 10000);
-    
+      handleLoadError('加载超时，切换下一首...');
+    }, 20000);
+
     // 加载完成后播放
     player.oncanplaythrough = () => {
       clearTimeout(timeout);
@@ -66,22 +64,24 @@ const MusicPlayer = (() => {
           notifyStateChange(true);
         })
         .catch(() => {
-          playBtn.querySelector('i').className = 'fas fa-play';
-          updateWave(false);
-          notifyStateChange(false);
-          showNotification('播放失败，切换下一首...');
-          setTimeout(() => advanceTrack(true), 1500);
+          handleLoadError('播放失败，切换下一首...');
         });
     };
-    
+
     // 错误处理
     player.onerror = () => {
+      handleLoadError('播放失败，切换下一首...');
+    };
+
+    // 加载失败处理函数
+    function handleLoadError(message) {
       clearTimeout(timeout);
       playBtn.querySelector('i').className = 'fas fa-exclamation-circle';
-      showNotification('播放失败，切换下一首...');
+      showNotification(message);
       updateWave(false);
-      setTimeout(() => advanceTrack(true), 1500);
-    };
+      notifyStateChange(false); // 确保状态同步
+      setTimeout(() => advanceTrack(true), 5000);
+    }
     
     // 设置起始位置
     player.currentTime = startTime;

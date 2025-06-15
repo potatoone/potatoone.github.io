@@ -79,14 +79,14 @@ const PlaylistManager = (() => {
     const categoriesContainer = document.getElementById('playlist-categories');
     if (!categoriesContainer) return;
     
+    // 创建全部按钮
+    let buttonsHtml = `<button class="category-btn${currentCategory === -1 ? ' active' : ''}" data-category="-1">全部</button>`;
+
     // 创建分类按钮
-    let buttonsHtml = CATEGORIES.map((category, index) => 
+    buttonsHtml += CATEGORIES.map((category, index) => 
       `<button class="category-btn${currentCategory === index ? ' active' : ''}" data-category="${index}">${category}</button>`
     ).join('');
-    
-    // 添加全部按钮
-    buttonsHtml += `<button class="category-btn${currentCategory === -1 ? ' active' : ''}" data-category="-1">全部</button>`;
-    
+
     categoriesContainer.innerHTML = buttonsHtml;
     
     // 添加点击事件
