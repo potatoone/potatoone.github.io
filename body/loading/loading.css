@@ -8,7 +8,7 @@
   background: linear-gradient(90deg, #ffffff 0%, #ffffff 100%) 0/0% 100% no-repeat;
   background-clip: text;
   -webkit-background-clip: text;
-  animation: l1 6s linear infinite;
+  animation: l1 1.5s linear infinite;
   text-align: center; /* 确保在小屏幕上居中 */
   margin: 0.5em;
 }
