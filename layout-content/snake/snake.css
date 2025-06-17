@@ -21,3 +21,7 @@
 .play-button:hover {
   transform: scale(1.1);
 }
+
+#snakeCanvas {
+    margin-left: 9px;
+}

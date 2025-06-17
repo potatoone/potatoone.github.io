@@ -3,15 +3,25 @@ class SnakeGame {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.gridSize = 12;
-        this.margin = 9;         // 边距
-        this.gameAreaTop = 9;    // 顶部分数栏高度
-        this.canvas.width = 150; // 画布宽度
-        this.canvas.height = 150; // 画布高度
-        this.gameAreaWidth = this.canvas.width - this.margin * 2;
-        this.gameAreaHeight = this.canvas.height - this.gameAreaTop - this.margin * 2;
-        this.isGameOver = false;
+        this.scoreBarHeight = 16;
+        this.canvas.width = 150;
+        this.canvas.height = 150;
 
-        this.snake = [{ x: this.margin + this.gridSize * 3, y: this.gameAreaTop + this.margin + this.gridSize * 3 }];
+        this.gameAreaWidth = this.canvas.width;
+        this.gameAreaHeight = this.canvas.height - this.scoreBarHeight;
+        this.gameAreaTop = this.scoreBarHeight;
+
+        this.radius = (this.gridSize - 2) / 2;
+
+        // 允许的格子数（保证圆心不会超出边界）
+        this.xCount = Math.floor((this.gameAreaWidth - this.radius * 2) / this.gridSize) + 1;
+        this.yCount = Math.floor((this.gameAreaHeight - this.radius * 2) / this.gridSize) + 1;
+
+        this.isGameOver = false;
+        this.snake = [{
+            x: this.radius + this.gridSize * 3,
+            y: this.gameAreaTop + this.radius + this.gridSize * 3
+        }];
         this.direction = 'right';
         this.score = 0;
         this.food = this.generateFood();
@@ -22,7 +32,10 @@ class SnakeGame {
 
     start() {
         this.isGameOver = false;
-        this.snake = [{ x: this.margin + this.gridSize * 3, y: this.gameAreaTop + this.margin + this.gridSize * 3 }];
+        this.snake = [{
+            x: this.radius + this.gridSize * 3,
+            y: this.gameAreaTop + this.radius + this.gridSize * 3
+        }];
         this.direction = 'right';
         this.score = 0;
         this.food = this.generateFood();
@@ -30,7 +43,7 @@ class SnakeGame {
         this.gameLoop = setInterval(() => {
             this.update();
             this.draw();
-        }, 450);
+        }, 500);
     }
 
     handleKeyPress(event) {
@@ -52,12 +65,11 @@ class SnakeGame {
     }
 
     generateFood() {
-        const x = Math.floor(Math.random() * (this.gameAreaWidth / this.gridSize)) * this.gridSize + this.margin;
-        const y = Math.floor(Math.random() * (this.gameAreaHeight / this.gridSize)) * this.gridSize + this.gameAreaTop + this.margin;
-        // 避免食物生成在蛇身上
-        if (this.snake.some(segment => segment.x === x && segment.y === y)) {
-            return this.generateFood();
-        }
+        let x, y;
+        do {
+            x = this.radius + Math.floor(Math.random() * this.xCount) * this.gridSize;
+            y = this.gameAreaTop + this.radius + Math.floor(Math.random() * this.yCount) * this.gridSize;
+        } while (this.snake.some(segment => segment.x === x && segment.y === y));
         return { x, y };
     }
 
@@ -72,12 +84,12 @@ class SnakeGame {
             case 'right': head.x += this.gridSize; break;
         }
 
-        // 边界和自撞检测
+        // 边界和自撞检测（严格用radius做边界）
         if (
-            head.x < this.margin ||
-            head.x >= this.margin + this.gameAreaWidth ||
-            head.y < this.gameAreaTop + this.margin ||
-            head.y >= this.gameAreaTop + this.margin + this.gameAreaHeight ||
+            head.x - this.radius < 0 ||
+            head.x + this.radius > this.gameAreaWidth ||
+            head.y - this.radius < this.gameAreaTop ||
+            head.y + this.radius > this.gameAreaTop + this.gameAreaHeight ||
             this.snake.some(segment => segment.x === head.x && segment.y === head.y)
         ) {
             this.gameOver();
@@ -95,59 +107,35 @@ class SnakeGame {
         }
     }
 
-    drawRoundedRect(ctx, x, y, width, height, radius) {
-        ctx.beginPath();
-        ctx.moveTo(x + radius, y);
-        ctx.lineTo(x + width - radius, y);
-        ctx.arcTo(x + width, y, x + width, y + radius, radius);
-        ctx.lineTo(x + width, y + height - radius);
-        ctx.arcTo(x + width, y + height, x + width - radius, y + height, radius);
-        ctx.lineTo(x + radius, y + height);
-        ctx.arcTo(x, y + height, x, y + height - radius, radius);
-        ctx.lineTo(x, y + radius);
-        ctx.arcTo(x, y, x + radius, y, radius);
-        ctx.closePath();
-        ctx.stroke();
-    }
-
     draw() {
-        // 清空画布
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // 绘制圆角边框
-        this.ctx.strokeStyle = '#ffffff3f';
-        this.ctx.lineWidth = 0.6;
-        this.drawRoundedRect(
-            this.ctx,
-            this.margin,
-            this.gameAreaTop + this.margin,
-            this.gameAreaWidth,
-            this.gameAreaHeight,
-            12
-        );
-
         // 分数栏
-        this.ctx.font = '10px';
+        this.ctx.font = '10px Arial';
         this.ctx.fillStyle = '#fff';
         this.ctx.textAlign = 'center';
         this.ctx.fillText(
             `SCORES: ${this.score}`,
-            this.canvas.width / 2,
-            this.margin + 5
+            Math.round(this.canvas.width / 2) - 5, // 补偿左边距
+            Math.round(12)
         );
+
+        // 添加分隔线
+        this.ctx.strokeStyle = '#ffffff3f'; // 分隔线颜色
+        this.ctx.lineWidth = 1; // 分隔线粗细
+        this.ctx.beginPath();
+        this.ctx.moveTo(0, this.scoreBarHeight); // 分隔线起点
+        this.ctx.lineTo(this.canvas.width, this.scoreBarHeight); // 分隔线终点
+        this.ctx.stroke();
 
         // 蛇
         this.snake.forEach((segment, index) => {
             this.ctx.beginPath();
-            if (index === 0) {
-                this.ctx.fillStyle = '#927fff'; // 蛇头
-            } else {
-                this.ctx.fillStyle = '#d4c5ff'; // 蛇身
-            }
+            this.ctx.fillStyle = index === 0 ? '#927fff' : '#d4c5ff';
             this.ctx.arc(
-                segment.x + this.gridSize / 2,
-                segment.y + this.gridSize / 2,
-                (this.gridSize - 2) / 2,
+                segment.x,
+                segment.y,
+                this.radius,
                 0,
                 Math.PI * 2
             );
@@ -158,9 +146,9 @@ class SnakeGame {
         this.ctx.beginPath();
         this.ctx.fillStyle = '#ff277a';
         this.ctx.arc(
-            this.food.x + this.gridSize / 2,
-            this.food.y + this.gridSize / 2,
-            (this.gridSize - 2) / 2,
+            this.food.x,
+            this.food.y,
+            this.radius,
             0,
             Math.PI * 2
         );
@@ -171,10 +159,10 @@ class SnakeGame {
             this.ctx.save();
             this.ctx.globalAlpha = 0.85;
             this.ctx.fillStyle = '#fff';
-            this.ctx.font = 'bold 17px Arial';
+            this.ctx.font = 'bold 20px Arial';
             this.ctx.textAlign = 'center';
             this.ctx.textBaseline = 'middle';
-            this.ctx.fillText('GAME OVER', this.canvas.width / 2, this.canvas.height / 2);
+            this.ctx.fillText('GAME OVER', Math.round(this.canvas.width / 2) - 5, this.canvas.height / 2); // 补偿左边距
             this.ctx.restore();
         }
     }
@@ -182,7 +170,7 @@ class SnakeGame {
     gameOver() {
         clearInterval(this.gameLoop);
         this.isGameOver = true;
-        this.draw(); // 立即刷新为gameover画面
+        this.draw();
         setTimeout(() => {
             document.getElementById('startSnakeGame').style.display = 'block';
             this.canvas.style.display = 'none';
