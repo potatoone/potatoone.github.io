@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="./body/loading/loading.css" />    <!-- ...loading... -->
     <link rel="stylesheet" href="./body/click/loader.css" />    <!-- 点击效果 -->
 
+    <link rel="stylesheet" href="./layout-content/snake/snake.css"/>  <!-- 贪吃蛇游戏样式 -->
+
     <link rel="stylesheet" href="./body/normalize.min.css" /> <!-- 重置样式 -->
     <link rel="stylesheet" href="./body/body.css" />  <!-- 主体 -->
 
@@ -18,10 +20,10 @@
     <link rel="stylesheet" href="./layout-top/weather.css" /> <!-- 天气 -->
     <link rel="stylesheet" href="./layout-top/mobile.css" />  <!-- 移动端适配 -->
 
-    <link rel="stylesheet" href="./layout-content/content.css" /> <!-- 内容区域 -->
+    <link rel="stylesheet" href="./layout-content/content1.css" /> <!-- 内容区域2 上 -->
     <link rel="stylesheet" href="./layout-content/mobile.css" />  <!-- 移动端适配 -->
 
-    <link rel="stylesheet" href="./layout-content/github-chart/chart.css" />  <!-- 容器 -->
+    <link rel="stylesheet" href="./layout-content/content2.css" />  <!-- 内容区域2 下 -->
     <link rel="stylesheet" href="./layout-content/github-chart/contributions.css" />  <!-- Github贡献图 -->
 
     <link rel="stylesheet" href="./layout-bottom/personal/info.css" />  <!-- 个人信息区域 -->
@@ -83,9 +85,12 @@
 
           <div class="content2">
             <div class="tab1">
-              <a href="https://github.com/potatoone/" class="tab-link" title="Github">
-                <i class="fab fa-github"></i>
-              </a>
+              <div class="snake-game-container">
+                <button id="startSnakeGame" class="play-button">
+                  <i class="fas fa-play"></i>
+                </button>
+                <canvas id="snakeCanvas" style="display: none;"></canvas>
+              </div>
             </div>
             <div class="tab2">
               <div class="github-contributions">
@@ -208,6 +213,8 @@
     <script src="./res/wallpaper.js"></script>  <!-- Bing壁纸 -->
     <script src="./body/click/loader.js"></script>  <!-- 点击效果 -->
     <script src="./body/body.js"></script>  <!-- 主体 -->
+
+    <script src="./layout-content/snake/snake.js"></script>  <!-- 贪吃蛇游戏 -->
 
     <script src="./layout-top/sentence.js"></script> <!-- 一言 -->
     <script src="./layout-top/weather.js"></script>  <!-- 天气 -->

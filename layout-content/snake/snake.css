@@ -1,0 +1,23 @@
+.snake-game-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.play-button {
+  position: absolute;
+  background: none;
+  border: none;
+  font-size: 40px;
+  cursor: pointer;
+  padding: 10px;
+  transition: transform 0.2s;
+  z-index: 2;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+}
