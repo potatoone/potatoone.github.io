@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const imageData = {
             url: data.url,
             copyright: data.copyright,
-            date: data.start_date,
+            date: data.end_date,
             index: index
           };
           
