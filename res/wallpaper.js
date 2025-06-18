@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         width: '17px', height: '17px', borderRadius: '50%',
         backgroundColor: 'rgba(0,0,0,0.3)', color: 'white',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: '10px', cursor: 'pointer', zIndex: '1000',
+        fontSize: '10px', cursor: 'pointer', zIndex: '10',
         opacity: '0.4', transition: 'opacity 0.3s, background-color 0.3s'
       });
       infoButton.innerHTML = '<i>i</i>';
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         background: 'rgba(0,0,0,0.37)', backdropFilter: 'blur(5px)',
         color: 'white', padding: '8px 12px', borderRadius: '4px',
         boxSizing: 'border-box', fontSize: '10px', maxWidth: '300px',
-        zIndex: '999', display: 'none', opacity: '0', transition: 'opacity 0.3s'
+        zIndex: '10', display: 'none', opacity: '0', transition: 'opacity 0.3s'
       });
       
       // 点击事件
