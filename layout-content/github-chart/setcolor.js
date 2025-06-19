@@ -170,30 +170,17 @@ class ColorPicker {
 
 // 初始化监听
 document.addEventListener('DOMContentLoaded', () => {
-  // 初始取色
-  setTimeout(() => ColorPicker.updateColors(), 500);
+  // 初始取色（可根据需要保留或移除）
+  // ColorPicker.updateColors();
   
-  // 防抖函数
-  let timeout;
-  const debounce = (func, delay) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(func, delay);
-  };
-  
-  // 监听DOM变化
-  const observer = new MutationObserver(() => {
-    debounce(() => ColorPicker.updateColors(), 300);
-  });
-  
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: ['style', 'class'],
-    childList: true,
-    subtree: true
-  });
-  
-  // 监听窗口变化
-  window.addEventListener('resize', () => {
-    debounce(() => ColorPicker.updateColors(), 300);
+  // 监听壁纸更新事件
+  document.addEventListener('wallpaperUpdated', () => {
+    console.log('检测到壁纸更新，等待图片渲染完成后取色...');
+    
+    // 添加500ms延迟，确保壁纸图片完全加载
+    setTimeout(() => {
+      console.log('开始取色');
+      ColorPicker.updateColors();
+    }, 500);
   });
 });    

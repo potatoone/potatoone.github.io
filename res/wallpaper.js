@@ -121,6 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
         container.style.background = `url('${data.url}') no-repeat center/cover fixed`;
         createInfoButton();
         console.log(`壁纸设置成功，index=${data.index}，日期: ${formatShortDate(data.date)}`);
+        
+        // 触发壁纸更新事件，通知取色器
+        document.dispatchEvent(new CustomEvent('wallpaperUpdated', {
+          detail: {
+            url: data.url,
+            date: data.date
+          }
+        }));
+        
         window.toggleFireworks?.();
       };
       img.onerror = () => console.error('图片加载失败:', data.url);
