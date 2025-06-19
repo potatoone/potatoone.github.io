@@ -23,18 +23,6 @@ class WindowManager {
       
       document.body.appendChild(this.taskbar);
       
-      // 尝试获取sentence宽度以便定位
-      const sentence = document.querySelector('.sentence');
-      if (sentence) {
-        const sentenceWidth = sentence.offsetWidth;
-        document.documentElement.style.setProperty('--sentence-width', `${sentenceWidth}px`);
-        
-        // 监听窗口大小变化，更新句子宽度变量
-        window.addEventListener('resize', () => {
-          document.documentElement.style.setProperty('--sentence-width', `${sentence.offsetWidth}px`);
-        });
-      }
-      
       // 拦截链接点击
       this.setupLinkInterception();
       
@@ -202,20 +190,6 @@ class WindowManager {
       
       windowEl.appendChild(body);
       
-      // 调整大小的句柄
-      const positions = [
-        'top-left', 'top', 'top-right',
-        'right', 'bottom-right', 'bottom',
-        'bottom-left', 'left'
-      ];
-      
-      positions.forEach(pos => {
-        const handle = document.createElement('div');
-        handle.className = `resize-handle ${pos}`;
-        handle.setAttribute('data-resize', pos);
-        windowEl.appendChild(handle);
-      });
-      
       // 添加到DOM
       this.container.appendChild(windowEl);
       
@@ -238,9 +212,6 @@ class WindowManager {
       
       // 设置窗口拖拽
       this.setupWindowDrag(windowId, header);
-      
-      // 设置窗口大小调整
-      this.setupWindowResize(windowId);
       
       // 聚焦新窗口
       this.focusWindow(windowId);
@@ -330,107 +301,6 @@ class WindowManager {
       
       function closeDragElement() {
         // 停止移动时停止跟踪
-        document.onmouseup = null;
-        document.onmousemove = null;
-      }
-    }
-    
-    setupWindowResize(windowId) {
-      const windowObj = this.windows.find(w => w.id === windowId);
-      const windowEl = windowObj.el;
-      const handles = windowEl.querySelectorAll('.resize-handle');
-      
-      handles.forEach(handle => {
-        handle.onmousedown = resizeMouseDown;
-      });
-      
-      let startX, startY, startWidth, startHeight, resizeType;
-      
-      function resizeMouseDown(e) {
-        e.preventDefault();
-        
-        if (windowEl.classList.contains('maximized')) return;
-        
-        // 获取鼠标位置和窗口初始尺寸
-        startX = e.clientX;
-        startY = e.clientY;
-        startWidth = windowEl.offsetWidth;
-        startHeight = windowEl.offsetHeight;
-        resizeType = e.target.getAttribute('data-resize');
-        
-        // 当鼠标移动或释放时调用函数
-        document.onmousemove = resizeElementDrag;
-        document.onmouseup = closeResizeElement;
-      }
-      
-      function resizeElementDrag(e) {
-        e.preventDefault();
-        
-        // 根据调整类型计算新尺寸
-        switch (resizeType) {
-          case 'top-left':
-            const newWidthTL = startWidth - (e.clientX - startX);
-            const newHeightTL = startHeight - (e.clientY - startY);
-            if (newWidthTL >= 300) {
-              windowEl.style.width = `${newWidthTL}px`;
-              windowEl.style.left = `${windowEl.offsetLeft + (e.clientX - startX)}px`;
-            }
-            if (newHeightTL >= 200) {
-              windowEl.style.height = `${newHeightTL}px`;
-              windowEl.style.top = `${windowEl.offsetTop + (e.clientY - startY)}px`;
-            }
-            break;
-          case 'top':
-            const newHeightT = startHeight - (e.clientY - startY);
-            if (newHeightT >= 200) {
-              windowEl.style.height = `${newHeightT}px`;
-              windowEl.style.top = `${windowEl.offsetTop + (e.clientY - startY)}px`;
-            }
-            break;
-          case 'top-right':
-            const newWidthTR = startWidth + (e.clientX - startX);
-            const newHeightTR = startHeight - (e.clientY - startY);
-            if (newWidthTR >= 300) windowEl.style.width = `${newWidthTR}px`;
-            if (newHeightTR >= 200) {
-              windowEl.style.height = `${newHeightTR}px`;
-              windowEl.style.top = `${windowEl.offsetTop + (e.clientY - startY)}px`;
-            }
-            break;
-          case 'right':
-            const newWidthR = startWidth + (e.clientX - startX);
-            if (newWidthR >= 300) windowEl.style.width = `${newWidthR}px`;
-            break;
-          case 'bottom-right':
-            const newWidthBR = startWidth + (e.clientX - startX);
-            const newHeightBR = startHeight + (e.clientY - startY);
-            if (newWidthBR >= 300) windowEl.style.width = `${newWidthBR}px`;
-            if (newHeightBR >= 200) windowEl.style.height = `${newHeightBR}px`;
-            break;
-          case 'bottom':
-            const newHeightB = startHeight + (e.clientY - startY);
-            if (newHeightB >= 200) windowEl.style.height = `${newHeightB}px`;
-            break;
-          case 'bottom-left':
-            const newWidthBL = startWidth - (e.clientX - startX);
-            const newHeightBL = startHeight + (e.clientY - startY);
-            if (newWidthBL >= 300) {
-              windowEl.style.width = `${newWidthBL}px`;
-              windowEl.style.left = `${windowEl.offsetLeft + (e.clientX - startX)}px`;
-            }
-            if (newHeightBL >= 200) windowEl.style.height = `${newHeightBL}px`;
-            break;
-          case 'left':
-            const newWidthL = startWidth - (e.clientX - startX);
-            if (newWidthL >= 300) {
-              windowEl.style.width = `${newWidthL}px`;
-              windowEl.style.left = `${windowEl.offsetLeft + (e.clientX - startX)}px`;
-            }
-            break;
-        }
-      }
-      
-      function closeResizeElement() {
-        // 停止调整大小时停止跟踪
         document.onmouseup = null;
         document.onmousemove = null;
       }
