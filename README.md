@@ -2,9 +2,6 @@
 Personal homepage
 
 
-
-
-
 # VitePress 配置
 
 ## 创建wiki目录

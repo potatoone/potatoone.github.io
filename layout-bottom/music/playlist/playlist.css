@@ -58,7 +58,7 @@
 
 /* 展开状态 - 高度限制在CSS中定义 */
 .playlist.expanded {
-  max-height: 40vh; /* 使用视口高度的40%作为最大高度 */
+  max-height: 36vh; /* 使用视口高度的36%作为最大高度 */
   transition: 0.5s; /* 过渡效果 */
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-sizing: border-box; /* 包括边框和内边距在内的总宽度和高度 */

@@ -1,62 +1,66 @@
-/**
- * 播放列表分类切换按钮样式
- */
+/* 隐藏原始 radio */
+input[type="radio"] {
+  display: none;
+}
 
-  /* 分类按钮容器 */
-  .playlist-categories {
-    display: flex;
-    justify-content: space-around;  /* 水平居中 */
-    padding: 5px; gap: 3px;
-    border-radius: 10px;
-    backdrop-filter: blur(8px);
-    position: relative;
-    bottom: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transition: 0.5s;
-  }
+.playlist-categories {
+  display: flex;
+  position: relative;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
 
-  /* 当列表折叠时隐藏分类按钮 - 合并选择器 */
-  .player.collapsed #playlist-categories,
-  .playlist:not(.expanded) ~ #playlist-categories {
-    display: none;
-    opacity: 0;
-    transition: 0.5s;
-  }
-  
-  /* 分类按钮基本样式 */
-  .category-btn {
-    flex: 1;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.7);
-    padding: 7px;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 12px;
-    border: none;
-  }
-  
-  /* 悬停和活跃状态 */
-  .category-btn:hover {
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .category-btn:hover i,
-  .category-btn.active i {
-    transform: scale(1);
+/* 分类按钮 */
+.category-btn {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  color: rgba(255, 255, 255, 0.353);
+  cursor: pointer;
+  z-index: 1;
+  transition: color 0.3s ease;
+  position: relative;
+  font-size: 12px;
+}
 
-  }
-  
-  .category-btn.active {
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.107);
-    font-weight: 500;
-    transition: 0.5s;
-  }
-  
-  /* 点击效果 */
-  .category-btn:active {
-    transform: scale(0.9);
-  }
+.category-btn:hover {
+  color: #ffffff;
+}
 
+/* 选中状态下的按钮 */
+.slider {
+  position: absolute;
+  top: 5px; /* 与上内边距对齐 */
+  left: 5px; /* 与左内边距对齐 */
+  width: 55.75px;  /* 每个按钮宽60px，减去左边距 */
+  height: calc(100% - 10px); /* 减去上下内边距 */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  z-index: 0;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 平滑滑动位置控制 */
+#tab-all:checked ~ .playlist-categories .slider {
+  transform: translateX(0%);
+}
+#tab-1:checked ~ .playlist-categories .slider {
+  transform: translateX(calc(100% + 4.5px));
+}
+#tab-2:checked ~ .playlist-categories .slider {
+  transform: translateX(calc(200% + 10.5px));
+}
+#tab-3:checked ~ .playlist-categories .slider {
+  transform: translateX(calc(300% + 15.2px));
+}
+
+/* 选中状态下的文字高亮 */
+#tab-all:checked ~ .playlist-categories label[for="tab-all"],
+#tab-1:checked ~ .playlist-categories label[for="tab-1"],
+#tab-2:checked ~ .playlist-categories label[for="tab-2"],
+#tab-3:checked ~ .playlist-categories label[for="tab-3"] {
+  color: #ffffff;
+}

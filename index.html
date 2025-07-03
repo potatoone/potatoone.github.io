@@ -160,8 +160,21 @@
 
           <div id="playlist-toggle"><i class="fas fa-angle-down"></i></div>
   
-          <!-- 分类按钮容器 -->
-          <div id="playlist-categories" class="playlist-categories"></div>
+          <!-- 播放列表分类切换按钮 -->
+          <div class="playlist-tabs">
+            <input type="radio" name="tab" id="tab-all" checked>
+            <input type="radio" name="tab" id="tab-1">
+            <input type="radio" name="tab" id="tab-2">
+            <input type="radio" name="tab" id="tab-3">
+
+            <div id="playlist-categories" class="playlist-categories">
+              <label for="tab-all" class="category-btn"></label>
+              <label for="tab-1" class="category-btn"></label>
+              <label for="tab-2" class="category-btn"></label>
+              <label for="tab-3" class="category-btn"></label>
+              <div class="slider"></div>
+            </div>
+          </div>
           
           <!-- 播放列表区域 -->
           <div id="playlist" class="playlist">
