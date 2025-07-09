@@ -69,3 +69,12 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   }
 }
 
+/* 壁纸信息面板的状态切换 */
+#wallpaper-info-toggle:checked ~ .wallpaper-info-panel {
+  opacity: 1;
+  pointer-events: auto;
+}
+#wallpaper-info-toggle:not(:checked) ~ .wallpaper-info-panel {
+  opacity: 0;
+  pointer-events: none;
+}
