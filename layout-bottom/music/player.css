@@ -89,7 +89,7 @@
 .music-notification {
   position: absolute;
   width: 80%;
-  top: -55px; left: 50%;  /* 定位到顶部中间 */
+  top: -450px; left: 50%;  /* 定位到顶部中间 */
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.288);
   backdrop-filter: blur(5px);

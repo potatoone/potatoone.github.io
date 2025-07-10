@@ -118,8 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.dispatchEvent(new CustomEvent('wallpaperUpdated', {
           detail: { url: data.url, date: data.date }
         }));
-        
-        window.toggleFireworks?.();
+
       };
       img.onerror = () => console.error('图片加载失败:', data.url);
       img.src = data.url;
@@ -144,13 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
       // 创建信息面板
       infoElement = document.createElement('div');
       infoElement.className = 'wallpaper-info-panel';
-      infoElement.style.cssText = 'position:fixed;top:22px;right:22px;background:rgba(0,0,0,0.37);backdrop-filter:blur(5px);color:white;padding:7px;border-radius:4px;box-sizing:border-box;font-size:9px;max-width:220px;z-index:10;opacity:0;pointer-events:none;transition:opacity 0.3s';
+      infoElement.style.cssText = 'position:fixed;top:22px;right:22px;background:rgba(0,0,0,0.37);backdrop-filter:blur(5px);color:white;padding:7px;border-radius:4px;box-sizing:border-box;font-size:9px;max-width:240px;z-index:10;opacity:0;pointer-events:none;transition:opacity 0.3s';
 
       // 切换事件
       infoToggle.addEventListener('change', () => {
         isInfoPanelVisible = infoToggle.checked;
-        infoElement.style.cssText = `position:fixed;top:22px;right:22px;background:rgba(0,0,0,0.37);backdrop-filter:blur(5px);color:white;padding:7px;border-radius:4px;box-sizing:border-box;font-size:9px;max-width:220px;z-index:10;opacity:${isInfoPanelVisible ? '1' : '0'};pointer-events:${isInfoPanelVisible ? 'auto' : 'none'};transition:opacity 0.3s`;
-        
+        infoElement.style.cssText = `position:fixed;top:22px;right:22px;background:rgba(0,0,0,0.37);backdrop-filter:blur(5px);color:white;padding:7px;border-radius:4px;box-sizing:border-box;font-size:9px;max-width:240px;z-index:10;opacity:${isInfoPanelVisible ? '1' : '0'};pointer-events:${isInfoPanelVisible ? 'auto' : 'none'};transition:opacity 0.3s`;
         if (isInfoPanelVisible) updateInfoPanelContent(currentWallpaperData);
       });
 
@@ -169,10 +167,10 @@ document.addEventListener('DOMContentLoaded', () => {
       infoElement.innerHTML = `
         <div style="display:flex;align-items:center;height:32px"> <!-- 外层容器垂直居中，设置最小高度确保对齐 -->
           <div style="display:flex;flex-direction:column;margin-right:8px">
-            <div style="font-weight:bold;margin-bottom:4px;text-align:center">${formatShortDate(data.date)}</div>
+            <div style="font-weight:bold;margin-bottom:3px;text-align:center">${formatShortDate(data.date)}</div>
             <div style="display:flex">
-              <button style="background:rgba(255,255,255,0.1);color:white;border:none;border-radius:3px;padding:1px 6px;margin-right:2px;cursor:pointer;font-size:12px;opacity:${data.index < 7 ? '0.8' : '0.3'}" ${data.index < 7 ? '' : 'disabled'}>-</button>
-              <button style="background:rgba(255,255,255,0.1);color:white;border:none;border-radius:3px;padding:1px 6px;cursor:pointer;font-size:12px;opacity:${data.index > 0 ? '0.8' : '0.3'}" ${data.index > 0 ? '' : 'disabled'}>+</button>
+              <button style="background:rgba(255, 255, 255, 0.06);color:white;border:none;border-radius:3px;padding:1px 6px;margin-right:3px;cursor:pointer;font-size:12px;opacity:${data.index < 7 ? '1' : '0.25'}" ${data.index < 7 ? '' : 'disabled'}>-</button>
+              <button style="background:rgba(255, 255, 255, 0.06);color:white;border:none;border-radius:3px;padding:1px 6px;cursor:pointer;font-size:12px;opacity:${data.index > 0 ? '1' : '0.25'}" ${data.index > 0 ? '' : 'disabled'}>+</button>
             </div>
           </div>
           <!-- 版权信息容器添加 vertical-align: middle 增强居中效果 -->

@@ -1,0 +1,39 @@
+
+/* 上升轨迹线 */
+.trail-line {
+    position: absolute;
+    border-radius: 2px;
+    z-index: 2;
+    transform-origin: bottom center;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    transform-origin: center;
+}
+
+/* 轨迹线上移动画 */
+@keyframes rise {
+    0% { 
+        bottom: 0;
+        height: 0;
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% { 
+        bottom: var(--rise-distance);
+        height: var(--trail-length);
+        opacity: 0;
+    }
+}
+
+/* 粒子爆炸 */
+@keyframes explode {
+    0% { transform: translate(0, 0); opacity: 1; }
+    60% { opacity: 0.9; }
+    100% { opacity: 0; }
+}

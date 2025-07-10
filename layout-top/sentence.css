@@ -19,6 +19,7 @@
   transition: transform 0.3s ease, opacity 0.3s ease;
   pointer-events: auto; /* 允许点击 */
   font-size: 15px;
+  z-index: 1;
 }
 
 .sentence:hover {
