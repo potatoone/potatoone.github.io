@@ -1,0 +1,149 @@
+/* ===== 网址卡片容器 ===== */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 110px; /* 为底部导航栏预留空间 */
+  transition: all 0.5s ease;
+}
+
+/* ===== 单个网址卡片 ===== */
+.card {
+  background-color: var(--card);
+  border-radius: 20px;
+  padding: 20px;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* 作为内部绝对定位元素的基准 */
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+
+/* ===== 卡片标题区域 ===== */
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 徽章与标题之间的间距 */
+}
+
+/* 网站标识徽章 */
+.badge {
+  width: 40px;
+  height: 40px;
+  background-color: var(--botton-2);
+  color: var(--active);
+  font-size: 16px;
+  border-radius: 50%;
+  flex-shrink: 0; /* 防止被挤压变形 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+/* 徽章悬停效果 */
+.card:hover .badge {
+  background-color: var(--active);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+/* 标题容器 */
+.card-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1; /* 占据剩余空间 */
+  min-width: 0; /* 允许内容溢出时收缩 */
+}
+
+/* 主标题（网站名称） */
+.card-maintitle {
+  font-size: 18px;
+  font-weight: 100;
+  color: var(--font-1);
+  margin: 0;
+}
+
+/* 子标题（网站URL） */
+.card-subtitle {
+  font-size: 12px;
+  color: var(--font-1);
+  opacity: 0.3; /* 半透明效果增强层次感 */
+  margin: 0;
+  white-space: nowrap; /* 强制不换行 */
+  overflow: hidden; /* 超出部分隐藏 */
+  text-overflow: ellipsis; /* 超出部分显示省略号 */
+}
+
+/* ===== 卡片描述区域 ===== */
+.card-desc {
+  font-size: 14px;
+  color: var(--font-1);
+  opacity: 0.7;
+  padding: 15px;
+  margin: 0;
+}
+
+/* ===== 访问按钮 ===== */
+.card-btn {
+  font-family: "DaBaoTaoTaoTi";
+  background-color: var(--botton-1);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* 按钮悬停效果 */
+.card-btn:hover {
+  background-color: var(--hover);
+}
+
+/* ===== 移动端适配 ===== */
+@media screen and (max-width: 768px) {
+  .cards-container {
+    margin-bottom: 90px; /* 适配移动端底部导航栏 */
+    grid-template-columns: repeat(2, minmax(80px, 1fr)); /* 固定两列布局 */
+    gap: 15px; /* 减小卡片间距 */
+  }
+  
+  .card {
+    padding: 12px;
+    min-height: 140px;
+  }
+  
+  .badge {
+    width: 30px; /* 缩小徽章尺寸 */
+    height: 30px;
+    font-size: 12px;
+  }
+  
+  .card-maintitle {
+    font-size: 14px; /* 减小主标题字体 */
+  }
+
+  .card-subtitle {
+    font-size: 9px; /* 减小子标题字体 */
+  }
+  
+  .card-desc {
+    font-size: 11px; /* 减小描述文字字体 */
+  }
+
+  .card-btn {
+    padding: 6px 12px; /* 缩小按钮尺寸 */
+    font-size: 12px;
+    bottom: 12px; /* 调整按钮位置 */
+    right: 12px;
+  }
+}

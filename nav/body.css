@@ -1,0 +1,49 @@
+/* 字体导入 */
+@import url("https://static.zeoseven.com/zsft/41/main/result.css");
+
+/* 全局盒模型统一 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "DaBaoTaoTaoTi"; /* 大宝桃桃体 */
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  user-select: none;
+}
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* 标题区域 */
+.title {
+  display: flex;
+  height: 60px;
+  padding: 10px;
+  align-items: center;
+  color: var(--font);
+}
+.title h1 {
+  color: var(--font-1);
+  font-size: 36px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+  height: 35px;
+  }
+  .title h1 {
+    font-size: 24px;
+  }
+}
+

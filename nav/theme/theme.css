@@ -1,0 +1,130 @@
+/* 主题切换容器 */
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+}
+
+/* 切换按钮 */
+.theme-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--botton-2);
+  color: var(--font-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+.theme-btn:hover {
+  transform: scale(1.05);
+  background: var(--botton-1);
+  color: var(--white);
+}
+
+/* 主题面板（默认隐藏） */
+.theme-panel {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  width: 220px;
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.theme-panel.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* 夜间模式选项 */
+.theme-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.theme-option span {
+  color: var(--font-1);
+  font-size: 14px;
+}
+
+/* 安卓风格开关 */
+.android-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+}
+.android-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch-track {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--active);
+  border-radius: 20px;
+  transition: .3s;
+}
+.switch-track:before {
+  position: absolute;
+  content: "";
+  width: 18px;
+  height: 18px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .3s;
+}
+input:checked + .switch-track {
+  background-color: var(--hover);
+}
+input:checked + .switch-track:before {
+  transform: translateX(18px);
+}
+
+/* 主题颜色选择区 */
+.theme-colors {
+  padding-top: 10px;
+}
+.colors-title {
+  display: block;
+  color: var(--font-1);
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* 颜色选择器 */
+.color-palette {
+  display: flex;
+  gap: 10px;
+}
+.color-item {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.color-item.active {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 2px var(--hover);
+}

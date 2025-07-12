@@ -1,0 +1,55 @@
+/* 分类Tab容器 */
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0px 10px 10px 10px;
+  width: 100%;
+}
+
+/* 横向布局容器 */
+.tabs-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 5px 0;
+  min-width: max-content;
+}
+
+/* Tab项样式 */
+.tab-item {
+  display: inline-flex;
+  padding: 8px 18px;
+  background-color: var(--card);
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--font-1);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* 悬停效果 */
+.tab-item:hover {
+  background-color: var(--botton-2);
+}
+
+/* 选中状态 */
+.tab-item.active {
+  color: var(--active);
+  background-color: var(--botton-2);
+}
+
+/* 指示器样式 */
+.tab-indicator {
+  position: absolute;
+  bottom: 10px;
+  height: 2px;
+  background-color: var(--botton-2);
+  opacity: 0.6;
+  border-radius: 1px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}

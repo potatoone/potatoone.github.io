@@ -1,0 +1,104 @@
+
+/* 悬浮底部导航栏 - 核心布局 */
+.nav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: 600px;
+  height: 80px;
+  padding: 10px 50px 10px 50px;
+  background-color: var(--card);
+  border-radius: 15px;
+}
+
+/* 导航项 - 平分宽度 */
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* 垂直居中，解决靠下问题 */
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 5px 0;
+}
+
+/* 未选中状态：调整图标位置（不再过度下沉） */
+.nav-item:not(.active) .icon {
+  transform: translateY(10px); /* 减少下沉距离 */
+}
+
+/* 文字样式 */
+.nav-item span {
+  font-size: 14px;
+  color: var(--font-1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+/* 图标样式 - 基础样式统一 */
+.nav-item .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: var(--font-3);
+  transition: all 0.3s ease;
+}
+
+/* 选中状态图标效果 - 长方形圆角 */
+.nav-item.active .icon {
+  background-color: var(--botton-2);
+  color: var(--active);
+  border-radius: 20px; /* 圆角适中，保持长方形 */
+  padding: 7px 25px; /* 横向留白，强化长方形视觉 */
+  transform: translateY(0); /* 回到居中位置 */
+}
+
+/* 选中文字显示样式 */
+.nav-item.active span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+  .nav {
+    width: 100%;
+    bottom: 0;
+    border-radius: 15px 15px 0 0; /* 保留顶部圆角 */
+    height: 60px; /* 略微增加高度，保持与桌面端比例 */
+    padding: 8px 15px; /* 减少横向padding，增加内部空间 */
+    max-width: 100%; /* 确保填满屏幕 */
+  }
+
+  .nav-item:not(.active) .icon {
+    transform: translateY(8px); /* 未选中图标位置微调 */
+  }
+
+  .nav-item .icon {
+    font-size: 18px; /* 减小图标尺寸 */
+  }
+
+  .nav-item span {
+    font-size: 10px; /* 减小文字尺寸 */
+    transform: translateY(15px); /* 调整文字初始位置 */
+  }
+
+  /* 选中状态保持长方形圆角，但缩小尺寸 */
+  .nav-item.active .icon {
+    border-radius: 15px; /* 圆角稍小 */
+    padding: 5px 15px; /* 缩小背景尺寸 */
+  }
+
+  .nav-item.active span {
+    margin-top: 2px; /* 微调文字与图标的间距 */
+  }
+}

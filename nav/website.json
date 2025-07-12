@@ -1,0 +1,84 @@
+{
+  "1": {
+    "tabs": {
+      "新闻": [
+        { "title": "新华网", "desc": "官方新闻媒体", "url": "https://www.xinhuanet.com/", "icon": "fa-newspaper" },
+        { "title": "人民网", "desc": "人民日报官网", "url": "https://www.people.com.cn/", "icon": "fa-newspaper" },
+        { "title": "澎湃新闻", "desc": "综合新闻平台", "url": "https://www.thepaper.cn/", "icon": "fa-newspaper" },
+        { "title": "新浪新闻", "desc": "中文综合新闻", "url": "https://news.sina.com.cn/", "icon": "fa-newspaper" },
+        { "title": "BBC中文", "desc": "BBC中文新闻", "url": "https://www.bbc.co.uk/zhongwen/", "icon": "fa-newspaper" }
+      ],
+      "社交": [
+        { "title": "微信公众平台", "desc": "公众号运营", "url": "https://mp.weixin.qq.com/", "icon": "fa-brands fa-weixin" },
+        { "title": "微博", "desc": "社交媒体平台", "url": "https://www.weibo.com/", "icon": "fa-brands fa-weibo" },
+        { "title": "QQ空间", "desc": "腾讯社交平台", "url": "https://qzone.qq.com/", "icon": "fa-star" },
+        { "title": "知乎", "desc": "知识分享社区", "url": "https://www.zhihu.com/", "icon": "fa-brands fa-zhihu" },
+        { "title": "豆瓣", "desc": "文化社交平台", "url": "https://www.douban.com/", "icon": "fa-book" }
+      ],
+      "娱乐": [
+        { "title": "优酷", "desc": "在线视频平台", "url": "https://www.youku.com/", "icon": "fa-film" },
+        { "title": "爱奇艺", "desc": "综合视频网站", "url": "https://www.iqiyi.com/", "icon": "fa-film" },
+        { "title": "腾讯视频", "desc": "在线视频服务", "url": "https://v.qq.com/", "icon": "fa-film" },
+        { "title": "网易云音乐", "desc": "音乐流媒体", "url": "https://music.163.com/", "icon": "fa-music" },
+        { "title": "哔哩哔哩", "desc": "视频弹幕网站", "url": "https://www.bilibili.com/", "icon": "fa-play-circle" }
+      ],
+      "游戏": [
+        { "title": "腾讯游戏", "desc": "腾讯游戏平台", "url": "https://game.qq.com/", "icon": "fa-gamepad" },
+        { "title": "网易游戏", "desc": "网易游戏中心", "url": "https://game.163.com/", "icon": "fa-gamepad" },
+        { "title": "Steam", "desc": "数字游戏平台", "url": "https://store.steampowered.com/", "icon": "fa-gamepad" },
+        { "title": "Epic Games", "desc": "游戏商城与引擎", "url": "https://www.epicgames.com/", "icon": "fa-gamepad" },
+        { "title": "TapTap", "desc": "手游发现平台", "url": "https://www.taptap.com/", "icon": "fa-gamepad" }
+      ]
+    }
+  },
+  "2": {
+    "tabs": {
+      "在线工具": [
+        { "title": "Canva", "desc": "在线设计工具", "url": "https://www.canva.com/", "icon": "fa-paint-brush" },
+        { "title": "小熊猫PDF", "desc": "PDF处理工具", "url": "https://www.xpdf.cn/", "icon": "fa-file-pdf" },
+        { "title": "一个木涵", "desc": "一个木涵", "url": "https://ol.woobx.cn/", "icon": "fa-qrcode" },
+        { "title": "ProcessOn", "desc": "在线流程图工具", "url": "https://www.processon.com/", "icon": "fa-sitemap" },
+        { "title": "Convertio", "desc": "文件格式转换", "url": "https://convertio.co/zh/", "icon": "fa-exchange" }
+      ],
+      "设计": [
+        { "title": "站酷", "desc": "设计师交流平台", "url": "https://www.zcool.com.cn/", "icon": "fa-pencil-ruler" },
+        { "title": "Dribbble", "desc": "全球设计社区", "url": "https://dribbble.com/", "icon": "fa-pencil-ruler" },
+        { "title": "Behance", "desc": "创意作品展示", "url": "https://www.behance.net/", "icon": "fa-pencil-ruler" },
+        { "title": "Figma", "desc": "在线协作设计工具", "url": "https://www.figma.com/", "icon": "fa-pencil-ruler" },
+        { "title": "Adobe Fonts", "desc": "免费字体库", "url": "https://fonts.adobe.com/", "icon": "fa-font" }
+      ],
+      "图床": [
+        { "title": "SM.MS", "desc": "免费图床服务", "url": "https://sm.ms/", "icon": "fa-image" },
+        { "title": "路过图床", "desc": "简单图床工具", "url": "https://imgchr.com/", "icon": "fa-image" },
+        { "title": "Imgur", "desc": "国际图床平台", "url": "https://imgur.com/", "icon": "fa-image" },
+        { "title": "七牛云", "desc": "专业云存储", "url": "https://www.qiniu.com/", "icon": "fa-cloud" },
+        { "title": "阿里云OSS", "desc": "阿里云对象存储", "url": "https://www.aliyun.com/product/oss", "icon": "fa-cloud" }
+      ]
+    }
+  },
+  "3": {
+    "tabs": {
+      "前端": [
+        { "title": "MDN Web Docs", "desc": "Web开发文档", "url": "https://developer.mozilla.org/zh-CN/", "icon": "fa-code" },
+        { "title": "W3Schools", "desc": "Web技术教程", "url": "https://www.w3schools.com/", "icon": "fa-code" },
+        { "title": "Vue.js", "desc": "渐进式JavaScript框架", "url": "https://cn.vuejs.org/", "icon": "fa-code" },
+        { "title": "React", "desc": "用于构建用户界面的JavaScript库", "url": "https://reactjs.org/", "icon": "fa-code" },
+        { "title": "TypeScript", "desc": "JavaScript的类型超集", "url": "https://www.typescriptlang.org/", "icon": "fa-code" }
+      ],
+      "后端": [
+        { "title": "Node.js", "desc": "JavaScript运行环境", "url": "https://nodejs.org/en/", "icon": "fa-code" },
+        { "title": "Python", "desc": "编程语言官网", "url": "https://www.python.org/", "icon": "fa-code" },
+        { "title": "Go语言", "desc": "Google开发的编程语言", "url": "https://go.dev/", "icon": "fa-code" },
+        { "title": "Spring", "desc": "Java企业级应用框架", "url": "https://spring.io/", "icon": "fa-code" },
+        { "title": "Django", "desc": "Python Web框架", "url": "https://www.djangoproject.com/", "icon": "fa-code" }
+      ],
+      "运维": [
+        { "title": "Docker", "desc": "容器化平台", "url": "https://www.docker.com/", "icon": "fa-cogs" },
+        { "title": "Kubernetes", "desc": "容器编排系统", "url": "https://kubernetes.io/zh-cn/", "icon": "fa-cogs" },
+        { "title": "Linux", "desc": "开源操作系统", "url": "https://www.linux.org/", "icon": "fa-cogs" },
+        { "title": "GitHub", "desc": "代码托管平台", "url": "https://github.com/", "icon": "fa-brands fa-github" },
+        { "title": "GitLab", "desc": "开源代码管理平台", "url": "https://about.gitlab.com/", "icon": "fa-brands fa-gitlab" }
+      ]
+    }
+  }
+}
