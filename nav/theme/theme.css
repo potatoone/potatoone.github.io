@@ -128,3 +128,56 @@ input:checked + .switch-track:before {
   transform: scale(1.05);
   box-shadow: 0 0 0 2px var(--hover);
 }
+
+
+/* 自动模式复选框样式 */
+.auto-toggle {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+/* 自动模式复选框样式 */
+.auto-toggle input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--font-1);
+  border-radius: 10px;
+  margin-right: 4px;
+  position: relative;
+  cursor: pointer;
+}
+/* 自动模式复选框选中状态样式 */
+.auto-toggle input:checked {
+  background-color: var(--active);
+  border-color: var(--active);
+}
+/* 自动模式复选框选中状态后的小勾 */
+.auto-toggle input:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 1px;
+  width: 3px;
+  height: 6px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+/* 自动模式复选框文本样式 */
+.auto-toggle span {
+  color: var(--font-1);
+  font-size: 12px;
+  user-select: none;
+}
+
+/* 禁用状态样式 */
+.auto-toggle input:checked + span {
+  color: var(--active);
+}
+/* 禁用状态下的开关轨道 */
+.android-switch input:disabled + .switch-track {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

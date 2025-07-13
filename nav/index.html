@@ -19,8 +19,15 @@
   <link rel="stylesheet" href="./theme/theme.css" />
   <link rel="stylesheet" href="./theme/color.css" />
 
+  <link rel="stylesheet" href="./loading/loading.css" />
+
 
 </head>
+
+<!-- 全屏加载容器 -->
+<div class="loader-container">
+  <div class="loader"></div> <!-- 原有进度条 -->
+</div>
 
 <body>
   <!-- 标题区域 -->
@@ -93,6 +100,10 @@
       <!-- 夜间模式切换 -->
       <div class="theme-option">
         <span>夜间模式</span>
+        <label class="auto-toggle">
+          <input type="checkbox" id="autoModeSwitch" checked>
+          <span>AUTO</span>
+        </label>
         <label class="android-switch">
           <input type="checkbox" id="nightModeSwitch">
           <span class="switch-track"></span>
@@ -112,6 +123,7 @@
   <script src="./card/card.js"></script>
   <script src="./search/search.js"></script>
   <script src="./theme/theme.js"></script>
+  <script src="./loading/loading.js"></script>
 
 </body>
 

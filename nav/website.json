@@ -45,7 +45,13 @@
         { "title": "Dribbble", "desc": "全球设计社区", "url": "https://dribbble.com/", "icon": "fa-pencil-ruler" },
         { "title": "Behance", "desc": "创意作品展示", "url": "https://www.behance.net/", "icon": "fa-pencil-ruler" },
         { "title": "Figma", "desc": "在线协作设计工具", "url": "https://www.figma.com/", "icon": "fa-pencil-ruler" },
-        { "title": "Adobe Fonts", "desc": "免费字体库", "url": "https://fonts.adobe.com/", "icon": "fa-font" }
+        { "title": "Adobe Fonts", "desc": "免费字体库", "url": "https://fonts.adobe.com/", "icon": "fa-font" },
+        { "title": "Font Awesome", "desc": "图标字体库", "url": "https://fontawesome.com/", "icon": "fa-icons" },
+        { "title": "Iconfont", "desc": "阿里巴巴矢量图标库", "url": "https://www.iconfont.cn/", "icon": "fa-icons" },
+        { "title": "Unsplash", "desc": "免费高质量图片", "url": "https://unsplash.com/", "icon": "fa-image" },
+        { "title": "Pexels", "desc": "免费摄影素材", "url": "https://www.pexels.com/", "icon": "fa-image" },
+        { "title": "稿定设计", "desc": "在线设计平台", "url": "https://www.gaoding.com/", "icon": "fa-pencil-ruler" },
+        { "title": "Pixabay", "desc": "免费图片素材", "url": "https://pixabay.com/", "icon": "fa-image" }
       ],
       "图床": [
         { "title": "SM.MS", "desc": "免费图床服务", "url": "https://sm.ms/", "icon": "fa-image" },
@@ -58,12 +64,17 @@
   },
   "3": {
     "tabs": {
+      "资源与工具": [
+        { "title": "Free For Dev", "desc": "免费开发者资源", "url": "https://free-for.dev/#/", "icon": "fa-gift" },
+        { "title": "LeetCode", "desc": "编程题库", "url": "https://leetcode.cn/", "icon": "fa-code" }
+      ],
       "前端": [
         { "title": "MDN Web Docs", "desc": "Web开发文档", "url": "https://developer.mozilla.org/zh-CN/", "icon": "fa-code" },
         { "title": "W3Schools", "desc": "Web技术教程", "url": "https://www.w3schools.com/", "icon": "fa-code" },
         { "title": "Vue.js", "desc": "渐进式JavaScript框架", "url": "https://cn.vuejs.org/", "icon": "fa-code" },
         { "title": "React", "desc": "用于构建用户界面的JavaScript库", "url": "https://reactjs.org/", "icon": "fa-code" },
-        { "title": "TypeScript", "desc": "JavaScript的类型超集", "url": "https://www.typescriptlang.org/", "icon": "fa-code" }
+        { "title": "TypeScript", "desc": "JavaScript的类型超集", "url": "https://www.typescriptlang.org/", "icon": "fa-code" },
+        { "title": "CodePen", "desc": "前端代码分享平台", "url": "https://codepen.io/", "icon": "fa-code" }
       ],
       "后端": [
         { "title": "Node.js", "desc": "JavaScript运行环境", "url": "https://nodejs.org/en/", "icon": "fa-code" },
