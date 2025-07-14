@@ -8,7 +8,7 @@ with(backgroundOverlay.style) {
   position = 'absolute';      // 绝对定位，覆盖整个页面
   top = left = 0;             // 定位到页面左上角
   width = height = '100%';    // 宽度和高度均占满整个页面
-  backgroundColor = 'rgba(0,0,0,0.57)';  // 半透明黑色（透明度57%）
+  backgroundColor = 'rgba(0, 0, 0, 0.75)';  // 半透明黑色（透明度75%）
   display = 'none';           // 默认隐藏，需要时再显示
 }
 // 将遮罩层添加到页面中
@@ -77,10 +77,10 @@ function createFirework() {
     document.body.appendChild(explosion);
     
     // 生成200个爆炸粒子
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 300; i++) {
       const particle = document.createElement('div');
       // 计算粒子扩散角度（360度均匀分布）
-      const angle = (i / 200) * 2 * Math.PI;
+      const angle = (i / 300) * 2 * Math.PI;
       // 计算粒子扩散距离（随机分布，中心密集边缘稀疏）
       const distance = (120 + Math.random() * 80) * (0.2 + 0.8 * Math.sqrt(Math.random()));
       // 计算粒子大小（中心大边缘小）
@@ -111,7 +111,7 @@ let fireworksActive = false; // 烟花活动状态标记
 
 // 初始发射一批烟花（4个，间隔900ms）
 function startShow() {
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     setTimeout(createFirework, i * 900);
   }
 }

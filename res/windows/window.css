@@ -4,9 +4,76 @@
  * 拆分成多个模块以便维护
  */
 
- @import 'window-base.css';
- @import 'window-controls.css';
- @import 'window-content.css';
- @import 'taskbar.css';
- @import 'animations.css';
- @import 'responsive.css';
+ @import 'window-base.css'; /* 基础样式 */
+ @import 'window-controls.css'; /* 窗口标题栏样式 */
+ @import 'window-content.css'; /* 窗口内容样式 */
+ @import 'taskbar.css'; /* 任务栏样式 */
+
+
+ /* 
+ * Windows风格窗口管理器 - 动画
+ * 包含所有动画定义
+ */
+
+/* 加载指示器动画 */
+@keyframes loading {
+  0% { background-position: 100% 0; } /* 从右侧开始 */
+  100% { background-position: -100% 0; } /* 移动到左侧 */
+}
+
+/* 旋转动画定义 */
+@keyframes spin {
+  100% { transform: rotate(360deg); } /* 完整旋转一周 */
+}
+
+
+/* 
+ * Windows风格窗口管理器 - 响应式设计
+ * 包含适配不同屏幕尺寸的样式
+ */
+
+/* 特小屏幕设备适配 (小于600px) */
+@media (max-width: 600px) {
+  /* 极小屏幕窗口进一步优化 */
+  .window {
+    width: 90% !important; /* 减少边距 */
+    left: 5% !important;
+  }
+  
+  /* 极小屏幕任务栏优化 */
+  .taskbar {
+    width: auto; /* 自动宽度 */
+    max-width: 100vw; /* 最大宽度可以到100% */
+    padding: 4px;
+    border-radius: 5px; /* 保留圆角但略微减小 */
+    font-size: 5px;
+  }
+  
+  /* 任务栏项目缩小 */
+  .taskbar-item {
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+  }
+
+  /* 任务栏项目中的Font Awesome图标 */
+  .taskbar-item i {
+    font-size: 10px;
+  }
+
+  /* 窗口标题进一步减小 */
+  .window-title {
+    max-width: 50%; /* 极小屏幕上进一步缩小标题区域 */
+    font-size: 11px;
+  }
+  
+  /* 窗口控制按钮进一步优化 */
+  .window-button {
+    width: 32px;
+  }
+  
+  /* 最大化窗口调整任务栏高度 */
+  .window.maximized {
+    height: calc(100vh - 3px) !important;
+  }
+}

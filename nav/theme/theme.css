@@ -8,9 +8,10 @@
 
 /* 切换按钮 */
 .theme-btn {
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   border-radius: 50%;
+  font-size: 12px;
   background: var(--card);
   border: 2px solid var(--botton-2);
   color: var(--font-1);
@@ -18,11 +19,10 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   transition: all 0.3s ease;
 }
 .theme-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
   background: var(--botton-1);
   color: var(--white);
 }

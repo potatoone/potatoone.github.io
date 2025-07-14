@@ -11,8 +11,8 @@
 
 /* 控制按钮基础样式 */
 .window-button {
-  width: 46px;
-  height: 32px;
+  width: 55px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,17 +50,17 @@
 
 /* 最小化按钮悬停效果 */
 .window-button.minimize:hover {
-  background-color: rgba(135, 135, 135, 0.414); /* 灰色背景 */
+  background-color: rgba(0, 0, 0, 0.307); /* 灰色背景 */
 }
 
 /* 最大化按钮悬停效果 */
 .window-button.maximize:hover {
-  background-color: rgba(95, 95, 95, 0.1); /* 浅灰色背景 */
+  background-color: rgba(0, 0, 0, 0.307);  /* 浅灰色背景 */
 }
 
 /* 关闭按钮悬停效果 - Windows标准红色 */
 .window-button.close:hover {
-  background-color: #e81123; /* Windows红色关闭按钮 */
+  background-color: #9162ff9e; /* Windows红色关闭按钮 */
 }
 
 /* 最大化状态下切换为compress图标 */

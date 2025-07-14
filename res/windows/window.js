@@ -1,412 +1,226 @@
-// Windows风格窗口管理器
-
+// Windows 风格窗口管理器类，管理多窗口的创建、切换、拖动等功能
 class WindowManager {
-    constructor() {
-      this.windows = [];
-      this.zIndex = 9000;
-      this.init();
-    }
-    
-    init() {
-      // 创建窗口容器
-      this.container = document.createElement('div');
-      this.container.className = 'window-container';
-      document.body.appendChild(this.container);
-      
-      // 创建任务栏 - 放在sentence旁边
-      this.taskbar = document.createElement('div');
-      this.taskbar.className = 'taskbar';
-      
-      this.taskbarItems = document.createElement('div');
-      this.taskbarItems.className = 'taskbar-items';
-      this.taskbar.appendChild(this.taskbarItems);
-      
-      document.body.appendChild(this.taskbar);
-      
-      // 拦截链接点击
-      this.setupLinkInterception();
-      
-      // 添加全局事件处理
-      document.addEventListener('mousedown', this.handleGlobalMouseDown.bind(this));
-    }
-    
-    setupLinkInterception() {
-      // 拦截所有链接点击
-      document.addEventListener('click', (e) => {
-        const link = e.target.closest('a');
-        if (!link) return;
-        
-        // 排除特定链接
-        if (link.getAttribute('target') === '_self' || 
-            link.hasAttribute('data-no-window') ||
-            link.href.startsWith('javascript:')) {
-          return;
-        }
-        
-        // 获取链接URL和标题
-        const url = link.href;
-        const title = link.getAttribute('title') || link.textContent || url;
-        const favicon = link.querySelector('img')?.src || this.getFavicon(url);
-        
-        // 创建窗口
-        this.createWindow(url, title, favicon);
-        
-        // 阻止默认行为
-        e.preventDefault();
-      });
-    }
-    // 完成getFavicon方法，确保返回正确的图标类
-    getFavicon(url) {
-      // 使用页面上已有的四个Font Awesome图标
-      let iconClass = 'fas fa-globe'; // 默认图标
-      
-      if (url.includes('wiki') || url.includes('book')) {
-        iconClass = 'fas fa-book-open'; // Wiki图标
-      } else if (url.includes('nav') || url.includes('guide') || url.includes('compass')) {
-        iconClass = 'fas fa-compass'; // 导航图标
-      } else if (url.includes('music') || url.includes('song') || url.includes('audio')) {
-        iconClass = 'fas fa-music'; // 音乐图标
-      } else if (url.includes('photo') || url.includes('image') || url.includes('gallery') || url.includes('huaban')) {
-        iconClass = 'fas fa-images'; // 图片图标
-      }
-      
-      return iconClass; // 返回图标类名
-    }
-    
-    createWindow(url, title, favicon = '/windows/icons.svg', options = {}) {
-      const defaultOptions = {
-        width: 800,
-        height: 600,
-        x: Math.max(50, Math.random() * (window.innerWidth - 800 - 50)),
-        y: Math.max(50, Math.random() * (window.innerHeight - 600 - 50))
-      };
-      
-      const opts = { ...defaultOptions, ...options };
-      
-      // 创建窗口元素
-      const windowEl = document.createElement('div');
-      windowEl.className = 'window';
-      windowEl.style.width = `${opts.width}px`;
-      windowEl.style.height = `${opts.height}px`;
-      windowEl.style.left = `${opts.x}px`;
-      windowEl.style.top = `${opts.y}px`;
-      windowEl.style.zIndex = this.zIndex++;
-      
-      // 窗口ID
-      const windowId = `window-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
-      windowEl.id = windowId;
-      
-      // 窗口标题栏
-      const header = document.createElement('div');
-      header.className = 'window-header';
-      
-      const titleEl = document.createElement('div');
-      titleEl.className = 'window-title';
-      
-      // 使用Font Awesome图标替代图片
-      const iconClass = this.getFavicon(url);
-      const faviconEl = document.createElement('i');
-      faviconEl.className = iconClass;
-      faviconEl.style.marginRight = '8px';
-      titleEl.appendChild(faviconEl);
-      
-      const titleText = document.createElement('span');
-      titleText.textContent = title;
-      titleEl.appendChild(titleText);
-      
-      header.appendChild(titleEl);
-      
-      // 窗口控制按钮 - 使用FontAwesome图标
-      const controls = document.createElement('div');
-      controls.className = 'window-controls';
-      
-      const minimizeBtn = document.createElement('div');
-      minimizeBtn.className = 'window-button minimize';
-      minimizeBtn.addEventListener('click', () => this.minimizeWindow(windowId));
-      
-      const maximizeBtn = document.createElement('div');
-      maximizeBtn.className = 'window-button maximize';
-      maximizeBtn.addEventListener('click', () => this.toggleMaximize(windowId));
-      
-      const closeBtn = document.createElement('div');
-      closeBtn.className = 'window-button close';
-      closeBtn.addEventListener('click', () => this.closeWindow(windowId));
-      
-      controls.appendChild(minimizeBtn);
-      controls.appendChild(maximizeBtn);
-      controls.appendChild(closeBtn);
-      header.appendChild(controls);
-      
-      windowEl.appendChild(header);
-      
-      // 窗口内容
-      const body = document.createElement('div');
-      body.className = 'window-body';
-      
-      // 加载指示器
-      const loadingIndicator = document.createElement('div');
-      loadingIndicator.className = 'loading-indicator';
-      body.appendChild(loadingIndicator);
-      
-      // 加载中状态
-      const loadingEl = document.createElement('div');
-      loadingEl.className = 'window-loading';
-      
-      const spinner = document.createElement('div');
-      spinner.className = 'spinner';
-      loadingEl.appendChild(spinner);
-      
-      const loadingText = document.createElement('div');
-      loadingText.textContent = '正在加载...';
-      loadingEl.appendChild(loadingText);
-      
-      body.appendChild(loadingEl);
-      
-      // iframe
-      const iframe = document.createElement('iframe');
-      iframe.src = url;
-      iframe.style.opacity = '0';
-      iframe.addEventListener('load', () => {
-        loadingEl.style.display = 'none';
-        loadingIndicator.style.display = 'none';
-        iframe.style.opacity = '1';
-        // 尝试获取iframe内页面标题
-        try {
-          if (iframe.contentDocument) {
-            const pageTitle = iframe.contentDocument.title;
-            if (pageTitle) {
-              titleText.textContent = pageTitle;
-              const taskbarItem = document.getElementById(`taskbar-${windowId}`);
-              if (taskbarItem) {
-                taskbarItem.querySelector('span').textContent = pageTitle;
-              }
-            }
-          }
-        } catch (e) {
-          // 跨域问题，忽略
-        }
-      });
-      body.appendChild(iframe);
-      
-      windowEl.appendChild(body);
-      
-      // 添加到DOM
-      this.container.appendChild(windowEl);
-      
-      // 添加到任务栏
-      this.addTaskbarItem(windowId, title, favicon);
-      
-      // 添加窗口对象到数组
-      this.windows.push({
-        id: windowId,
-        el: windowEl,
-        header: header,
-        iframe: iframe,
-        title: title,
-        url: url,
-        favicon: favicon
-      });
-      
-      // 更新任务栏可见性
-      this.updateTaskbarVisibility();
-      
-      // 设置窗口拖拽
-      this.setupWindowDrag(windowId, header);
-      
-      // 聚焦新窗口
-      this.focusWindow(windowId);
-      
-      // 延迟显示窗口以添加动画效果
-      setTimeout(() => {
-        windowEl.classList.add('visible');
-      }, 10);
-      
-      return windowId;
-    }
-    
-    // 在addTaskbarItem方法中使用Font Awesome图标
-    addTaskbarItem(windowId, title, faviconUrl) {
-      const taskbarItem = document.createElement('div');
-      taskbarItem.className = 'taskbar-item';
-      taskbarItem.id = `taskbar-${windowId}`;
-      taskbarItem.setAttribute('data-title', title); // 添加标题作为悬停提示
-      
-      // 从URL或分析中提取图标类
-      let iconClass = 'fas fa-globe'; // 默认图标
-      
-      if (title.toLowerCase().includes('wiki') || faviconUrl.includes('book')) {
-        iconClass = 'fas fa-book-open';
-      } else if (title.toLowerCase().includes('导航') || faviconUrl.includes('compass')) {
-        iconClass = 'fas fa-compass';
-      } else if (title.toLowerCase().includes('音乐') || faviconUrl.includes('music')) {
-        iconClass = 'fas fa-music';
-      } else if (title.toLowerCase().includes('图') || faviconUrl.includes('images')) {
-        iconClass = 'fas fa-images';
-      }
-      
-      // 创建图标元素
-      const icon = document.createElement('i');
-      icon.className = iconClass;
-      taskbarItem.appendChild(icon);
-      
-      taskbarItem.addEventListener('click', () => {
-        const windowObj = this.windows.find(w => w.id === windowId);
-        if (windowObj?.el.classList.contains('minimized')) {
-          this.restoreWindow(windowId);
-        } else if (windowObj?.el.classList.contains('active')) {
-          this.minimizeWindow(windowId);
-        } else {
-          this.focusWindow(windowId);
-        }
-      });
-      
-      this.taskbarItems.appendChild(taskbarItem);
-    }
-    
-    setupWindowDrag(windowId, headerEl) {
-      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-      
-      headerEl.onmousedown = dragMouseDown;
-      
-      const windowObj = this.windows.find(w => w.id === windowId);
-      const windowEl = windowObj.el;
-      
-      function dragMouseDown(e) {
-        e.preventDefault();
-        
-        if (windowEl.classList.contains('maximized')) return;
-        
-        // 获取鼠标位置
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        
-        // 当鼠标移动或释放时调用函数
-        document.onmousemove = elementDrag;
-        document.onmouseup = closeDragElement;
-      }
-      
-      function elementDrag(e) {
-        e.preventDefault();
-        
-        // 计算新位置
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        
-        // 设置元素的新位置
-        windowEl.style.top = `${windowEl.offsetTop - pos2}px`;
-        windowEl.style.left = `${windowEl.offsetLeft - pos1}px`;
-      }
-      
-      function closeDragElement() {
-        // 停止移动时停止跟踪
-        document.onmouseup = null;
-        document.onmousemove = null;
-      }
-    }
-    
-    handleGlobalMouseDown(e) {
-      const windowEl = e.target.closest('.window');
-      if (windowEl) {
-        this.focusWindow(windowEl.id);
-      }
-    }
-    
-    focusWindow(windowId) {
-      // 取消选中其他窗口
-      this.windows.forEach(w => {
-        w.el.classList.remove('active');
-        document.getElementById(`taskbar-${w.id}`)?.classList.remove('active');
-      });
-      
-      // 选中当前窗口
-      const windowObj = this.windows.find(w => w.id === windowId);
-      if (windowObj) {
-        windowObj.el.classList.add('active');
-        windowObj.el.style.zIndex = this.zIndex++;
-        document.getElementById(`taskbar-${windowId}`)?.classList.add('active');
-      }
-    }
-    
-    minimizeWindow(windowId) {
-      const windowObj = this.windows.find(w => w.id === windowId);
-      if (windowObj) {
-        windowObj.el.classList.add('minimized');
-        document.getElementById(`taskbar-${windowId}`)?.classList.remove('active');
-      }
-    }
-    
-    restoreWindow(windowId) {
-      const windowObj = this.windows.find(w => w.id === windowId);
-      if (windowObj) {
-        windowObj.el.classList.remove('minimized');
-        this.focusWindow(windowId);
-      }
-    }
-    
-    toggleMaximize(windowId) {
-      const windowObj = this.windows.find(w => w.id === windowId);
-      if (windowObj) {
-        windowObj.el.classList.toggle('maximized');
-      }
-    }
-    
-    closeWindow(windowId) {
-      const index = this.windows.findIndex(w => w.id === windowId);
-      if (index !== -1) {
-        const windowObj = this.windows[index];
-        
-        // 从DOM中移除
-        windowObj.el.classList.remove('visible');
-        
-        // 延迟移除以允许动画完成
-        setTimeout(() => {
-          windowObj.el.remove();
-          document.getElementById(`taskbar-${windowId}`)?.remove();
-        }, 200);
-        
-        // 从数组中移除
-        this.windows.splice(index, 1);
-        
-        // 更新任务栏可见性
-        this.updateTaskbarVisibility();
-      }
-    }
+  constructor() {
+    this.windows = [];     // 存放所有打开的窗口对象（包括元素和相关信息）
+    this.zIndex = 9000;    // 初始化最高层级，用于控制窗口的叠放顺序
 
-    // 更新任务栏显示状态
-    updateTaskbarVisibility() {
-      // 检查是否有任何可见窗口（非最小化）
-      const hasVisibleWindows = this.windows.some(window => 
-        !window.el.classList.contains('minimized')
-      );
-      
-      // 检查是否有任何窗口（包括最小化的）
-      const hasAnyWindows = this.windows.length > 0;
-      
-      // 只有当有窗口时才显示任务栏
-      if (hasAnyWindows) {
-        this.taskbar.classList.add('active');
-      } else {
-        this.taskbar.classList.remove('active');
-      }
+    // 创建窗口容器，用来承载所有窗口元素
+    this.container = this.createEl('div', 'window-container', document.body);
+    // 创建任务栏及其内部容器，用于显示打开窗口的图标
+    this.taskbar = this.createEl('div', 'taskbar', document.body);
+    this.taskbarItems = this.createEl('div', 'taskbar-items', this.taskbar);
+
+    // 全局点击监听，处理链接点击打开新窗口逻辑
+    document.addEventListener('click', this.handleLinkClick.bind(this));
+    // 监听鼠标按下事件，判断点击是否在窗口内部，进行窗口激活（聚焦）
+    document.addEventListener('mousedown', e => {
+      const win = e.target.closest('.window');
+      if (win) this.focusWindow(win.id);
+    });
+  }
+
+  // 通用创建DOM元素并添加class，附加到指定父元素
+  createEl(tag, className, parent) {
+    const el = document.createElement(tag);
+    el.className = className;
+    if (parent) parent.appendChild(el);
+    return el;
+  }
+
+  // 处理点击链接打开新窗口，排除一些特殊情况（如 target=_self 或带data-no-window）
+  handleLinkClick(e) {
+    const link = e.target.closest('a');
+    if (!link
+        || link.getAttribute('target') === '_self'
+        || link.hasAttribute('data-no-window')
+        || link.href.startsWith('javascript:')) return;
+
+    e.preventDefault(); // 阻止默认跳转
+
+    // 读取链接地址和标题，调用 createWindow 创建新窗口
+    const url = link.href;
+    const title = link.getAttribute('title') || link.textContent || url;
+    this.createWindow(url, title, this.getFavicon(url));
+  }
+
+  // 根据url匹配，返回对应窗口标题图标的class（fontawesome图标类）
+  getFavicon(url) {
+    if (/wiki|book/.test(url)) return 'fas fa-book-open';
+    if (/nav|guide|compass/.test(url)) return 'fas fa-compass';
+    if (/music|song|audio/.test(url)) return 'fas fa-music';
+    if (/photo|image|gallery|huaban/.test(url)) return 'fas fa-images';
+    return 'fas fa-globe'; // 默认地球图标
+  }
+
+  // 创建窗口，传入url、标题、图标class及其他选项
+  createWindow(url, title, iconClass = 'fas fa-globe', opts = {}) {
+    // 生成唯一窗口id
+    const id = `window-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
+
+    // 创建窗口外层容器，添加样式及定位、大小，层级控制
+    const win = this.createEl('div', 'window', this.container);
+    Object.assign(win.style, {
+      width: `${opts.width || 800}px`,
+      height: `${opts.height || 600}px`,
+      left: `${opts.x || Math.random() * 200 + 50}px`,
+      top: `${opts.y || Math.random() * 100 + 50}px`,
+      zIndex: this.zIndex++,
+    });
+    win.id = id;
+
+    // 创建窗口头部：包含图标、标题、控制按钮（最小化/最大化/关闭）
+    const header = this.createEl('div', 'window-header', win);
+    const titleEl = this.createEl('div', 'window-title', header);
+    titleEl.innerHTML = `<i class='${iconClass}' style='margin-right:8px'></i><span>${title}</span>`;
+
+    // 创建窗口控制按钮区域
+    const controls = this.createEl('div', 'window-controls', header);
+    ['minimize', 'maximize', 'close'].forEach(type => {
+      const btn = this.createEl('div', `window-button ${type}`, controls);
+      btn.addEventListener('click', () => this[`${type}Window`](id));
+    });
+
+    // 创建窗口内容区域，先显示加载动画，后加载iframe内容
+    const body = this.createEl('div', 'window-body', win);
+    const loader = this.createEl('div', 'window-loading', body);
+    loader.innerHTML = `<div class='spinner'></div><div>正在加载...</div>`;
+
+    // iframe承载网页内容，初始透明，加载完成后显示
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.style.opacity = '0';
+    iframe.onload = () => {
+      loader.remove();
+      iframe.style.opacity = '1';
+      try {
+        // 尝试同步iframe内网页title更新窗口标题和任务栏提示
+        const newTitle = iframe.contentDocument?.title;
+        if (newTitle) {
+          titleEl.querySelector('span').textContent = newTitle;
+          const taskItem = document.getElementById(`taskbar-${id}`);
+          if (taskItem) taskItem.title = newTitle;
+        }
+      } catch {}
+    };
+    body.appendChild(iframe);
+
+    // 添加对应的任务栏按钮
+    this.addTaskbarItem(id, title, iconClass);
+
+    // 记录窗口信息，便于管理
+    this.windows.push({ id, el: win, iframe, header });
+
+    // 根据当前窗口状态更新任务栏显示
+    this.updateTaskbar();
+
+    // 启用拖动功能
+    this.setupDrag(id);
+
+    // 激活新窗口（置顶高亮）
+    this.focusWindow(id);
+
+    // 异步添加显示动画类，触发CSS动画效果
+    setTimeout(() => win.classList.add('visible'), 10);
+  }
+
+  // 添加任务栏按钮，点击切换窗口最小化/恢复
+  addTaskbarItem(id, title, iconClass) {
+    const item = this.createEl('div', 'taskbar-item', this.taskbarItems);
+    item.id = `taskbar-${id}`;
+    item.title = title;
+    item.innerHTML = `<i class='${iconClass}'></i>`;
+    item.addEventListener('click', () => {
+      const win = this.windows.find(w => w.id === id)?.el;
+      if (!win) return;
+      win.classList.contains('minimized') ? this.restoreWindow(id) : this.minimizeWindow(id);
+    });
+  }
+
+  // 给窗口头部绑定拖拽事件，实现拖动
+  setupDrag(id) {
+    const win = this.windows.find(w => w.id === id)?.el;
+    const header = win.querySelector('.window-header');
+    let offsetX = 0, offsetY = 0;
+
+    header.onmousedown = e => {
+      if (win.classList.contains('maximized')) return; // 最大化时不允许拖动
+      offsetX = e.clientX - win.offsetLeft;
+      offsetY = e.clientY - win.offsetTop;
+
+      // 鼠标移动时更新窗口位置
+      document.onmousemove = e => {
+        win.style.left = `${e.clientX - offsetX}px`;
+        win.style.top = `${e.clientY - offsetY}px`;
+      };
+
+      // 鼠标松开时停止拖动事件
+      document.onmouseup = () => {
+        document.onmousemove = null;
+        document.onmouseup = null;
+      };
+    };
+  }
+
+  // 聚焦窗口，置顶并高亮任务栏对应按钮
+  focusWindow(id) {
+    this.windows.forEach(w => {
+      w.el.classList.remove('active');
+      document.getElementById(`taskbar-${w.id}`)?.classList.remove('active');
+    });
+    const win = this.windows.find(w => w.id === id);
+    if (win) {
+      win.el.classList.add('active');
+      win.el.style.zIndex = this.zIndex++;
+      document.getElementById(`taskbar-${id}`)?.classList.add('active');
     }
   }
-  
-  // 页面加载后初始化窗口管理器
-  document.addEventListener('DOMContentLoaded', () => {
-    window.windowManager = new WindowManager();
-    
-    // 如果存在#openWindow的URL参数，自动打开窗口
-    const urlParams = new URLSearchParams(window.location.search);
-    const openUrl = urlParams.get('openWindow');
-    if (openUrl) {
-      try {
-        const url = decodeURIComponent(openUrl);
-        const title = urlParams.get('title') || '新窗口';
-        window.windowManager.createWindow(url, title);
-      } catch (e) {
-        console.error('无法打开窗口:', e);
-      }
+
+  // 窗口最小化（隐藏窗口）
+  minimizeWindow(id) {
+    const win = this.windows.find(w => w.id === id)?.el;
+    if (win) win.classList.add('minimized');
+  }
+
+  // 恢复窗口显示（取消最小化），并激活
+  restoreWindow(id) {
+    const win = this.windows.find(w => w.id === id)?.el;
+    if (win) {
+      win.classList.remove('minimized');
+      this.focusWindow(id);
     }
-  });
+  }
+
+  // 最大化窗口（切换最大化状态）
+  maximizeWindow(id) {
+    const win = this.windows.find(w => w.id === id)?.el;
+    if (win) win.classList.toggle('maximized');
+  }
+
+  // 关闭窗口，移除对应DOM和任务栏按钮，更新管理状态
+  closeWindow(id) {
+    const index = this.windows.findIndex(w => w.id === id);
+    if (index >= 0) {
+      const win = this.windows[index].el;
+      win.classList.remove('visible'); // 触发关闭动画（CSS中控制）
+      setTimeout(() => win.remove(), 200); // 延迟移除DOM，动画完成后
+      document.getElementById(`taskbar-${id}`)?.remove();
+      this.windows.splice(index, 1);
+      this.updateTaskbar();
+    }
+  }
+
+  // 更新任务栏状态，打开窗口时显示任务栏，全部关闭时隐藏
+  updateTaskbar() {
+    this.taskbar.classList.toggle('active', this.windows.length > 0);
+  }
+}
+
+// 页面加载完成后实例化窗口管理器，支持URL参数打开窗口
+window.addEventListener('DOMContentLoaded', () => {
+  window.windowManager = new WindowManager();
+  const p = new URLSearchParams(location.search);
+  const openUrl = p.get('openWindow');
+  if (openUrl) {
+    window.windowManager.createWindow(decodeURIComponent(openUrl), p.get('title') || '新窗口');
+  }
+});

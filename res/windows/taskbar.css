@@ -1,43 +1,31 @@
-/* 
- * Windows风格窗口管理器 - 任务栏
- * 包含任务栏和任务栏项目样式
- */
-
-/* 任务栏基础样式 - 默认隐藏 */
+/* Windows 风格任务栏容器 */
 .taskbar {
-  position: fixed; 
-  display: flex; 
-  flex-wrap: wrap; 
+  position: fixed;                    /* 固定定位 */
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%); /* 初始隐藏在顶部上方 */
+  opacity: 0;                         /* 初始完全透明 */
+  pointer-events: none;              /* 初始不可交互 */
+  display: flex;
   align-items: center;
-  left: 50%; 
-  transform: translateX(-50%) translateY(-100%); /* 向上平移使其隐藏 */
-  top: 0px;
-  opacity: 0; /* 完全透明 */
-  
-  padding: 10px 15px;
-  border-radius: 0px 0px 15px 15px; /* 左上右上右下左下 */
-  background-color: rgba(146, 146, 146, 0.129); /* 半透明背景 */
-  backdrop-filter: blur(5px); /* 背景模糊效果 */
-
-  gap: 10px;
-  z-index: 9999; /* 确保在最顶层 */
-  border: 1px solid rgba(236, 236, 236, 0.332); /* 边框 */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 阴影效果 */
-  transition: transform 0.3s ease, opacity 0.3s ease; /* 过渡动画 */
-  max-width: 500px; /* 最大宽度限制 */
-  pointer-events: none; /* 初始状态不可交互 */
+  flex-wrap: wrap;
+  padding: 10px;
+  max-width: 500px;
+  background: rgba(146,146,146,0.13); /* 半透明背景 */
+  backdrop-filter: blur(5px);         /* 模糊背景 */
+  border: 1px solid rgba(236,236,236,0.33); /* 淡色边框 */
+  border-radius: 10px;       /* 圆角下边 */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* 阴影提升层级感 */
+  z-index: 9999;                      /* 高于所有窗口 */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* 平滑过渡动画 */
+  background-color: rgba(52, 52, 52, 0.118);
 }
 
-/* 当有窗口打开时显示任务栏 */
+/* 激活状态：任务栏可见 */
 .taskbar.active {
-  transform: translateX(-50%) translateY(0); /* 恢复正常位置 */
-  opacity: 1; /* 完全不透明 */
-  pointer-events: auto; /* 可以交互 */
-}
-
-/* 任务栏悬停效果 */
-.taskbar.active:hover {
-  background-color: rgba(146, 146, 146, 0.2); /* 悬停时略微增加不透明度 */
+  transform: translateX(-50%) translateY(0); /* 滑入视口 */
+  opacity: 1;                                /* 完全可见 */
+  pointer-events: auto;                      /* 可交互 */
 }
 
 /* 任务栏项目容器 */
@@ -49,65 +37,28 @@
   justify-content: center;
 }
 
-/* 任务栏项目按钮 */
+/* 单个任务栏图标按钮 */
 .taskbar-item {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%; /* 圆形按钮 */
-  background-color: rgba(255, 255, 255, 0.068); /* 半透明背景 */
+  width: 32px;
+  height: 32px;
+  border-radius: 20%;                         /* 圆形 */
+  background: rgba(255,255,255,0.07);         /* 微透明底 */
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease; /* 过渡动画 */
-  position: relative; /* 用于提示定位 */
+  transition: all 0.2s ease;                  /* 动画过渡 */
+  position: relative;
 }
 
-/* 任务栏项目中的图片 */
-.taskbar-item img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
+/* 悬停时的高亮与放大效果 */
+.taskbar-item:hover {
+  transform: scale(1.2);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* 任务栏项目中的Font Awesome图标 */
+/* Font Awesome 图标样式 */
 .taskbar-item i {
   font-size: 16px;
   color: white;
-}
-
-/* 任务栏项目悬停效果 */
-.taskbar-item:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* 增加不透明度 */
-  transform: scale(1.1); /* 放大效果 */
-}
-
-/* 活动任务栏项目样式 */
-.taskbar-item.active {
-  background-color: rgba(135, 115, 232, 0.48); /* 更加明显的背景 */
-}
-
-/* 任务栏项目悬停提示 */
-.taskbar-item::after {
-  content: attr(data-title); /* 使用data-title属性作为提示文本 */
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.8); /* 暗色背景 */
-  color: white;
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  white-space: nowrap; /* 防止文本换行 */
-  opacity: 0; /* 初始隐藏 */
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease; /* 平滑显示/隐藏 */
-  pointer-events: none; /* 防止鼠标与提示交互 */
-}
-
-/* 显示任务栏悬停提示 */
-.taskbar-item:hover::after {
-  opacity: 1;
-  visibility: visible;
 }
