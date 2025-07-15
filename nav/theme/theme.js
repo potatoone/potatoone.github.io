@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 更新图标
     const icon = themeBtn.querySelector('i');
     if (icon) {
-      icon.className = isDarkMode ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      icon.className = isDarkMode ? 'fa-solid fa-brush' : 'fa-solid fa-brush';
     }
   }
 
