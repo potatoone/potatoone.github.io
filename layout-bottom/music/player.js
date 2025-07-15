@@ -154,25 +154,36 @@ const MusicPlayer = (() => {
     window.PlaylistManager?.setPlayingState?.(isPlaying);
   }
   
-  // 显示通知
-  function showNotification(message) {
-    const existingNotification = document.querySelector('.music-notification');
-    existingNotification?.remove();
-    
-    const notification = document.createElement('div');
-    notification.className = 'music-notification';
-    notification.innerHTML = `<i class="fas fa-info-circle"></i><span>${message}</span>`;
-    
-    const control = document.querySelector('.control');
-    if (control) {
-      control.appendChild(notification);
-      setTimeout(() => notification.classList.add('show'), 10);
-      setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 500);
-      }, 4000);
-    }
+// 修改 showNotification 函数
+function showNotification(message) {
+  // 先移除已有的通知，避免叠加
+  const existingNotification = document.querySelector('.music-notification');
+  if (existingNotification) {
+    existingNotification.remove();
   }
+  
+  // 创建新通知
+  const notification = document.createElement('div');
+  notification.className = 'music-notification';
+  notification.innerHTML = `<i class="fas fa-info-circle"></i><span>${message}</span>`;
+  
+  // 关键：直接添加到 body 中，脱离播放器组件
+  document.body.appendChild(notification);
+  
+  // 触发显示动画（延迟10ms确保DOM已渲染）
+  setTimeout(() => {
+    notification.classList.add('show');
+  }, 10);
+  
+  // 4秒后自动隐藏
+  setTimeout(() => {
+    notification.classList.remove('show');
+    // 动画结束后移除DOM
+    setTimeout(() => {
+      notification.remove();
+    }, 300);
+  }, 4000);
+}
   
   // 公开API
   return {

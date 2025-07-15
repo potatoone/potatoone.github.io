@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="./layout-bottom/music/playlist/categories.css" />  <!-- 播放列表分类切换按钮 -->
     <link rel="stylesheet" href="./layout-bottom/music/progress/progress.css" />  <!-- 进度条 -->
 
+    <link rel="stylesheet" href="./body/menu/menu.css" /> <!-- 右键菜单 -->
+
     <!-- 引入Font Awesome图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
@@ -48,6 +50,12 @@
     <!-- loading组件 -->
     <div id="loading-screen">
       <div class="loading"></div>
+    </div>
+
+    <div class="custom-context-menu" id="contextMenu">
+      <div class="menu-item"><i class="fas fa-floppy-disk"></i><span>COPY</span></div>
+      <div class="menu-item"><i class="fas fa-circle-notch"></i><span>REFRESH</span></div>
+      <div class="menu-item"><i class="fas fa-circle-exclamation"></i><span>ABOUT</span></div>
     </div>
 
     <div class="background">
@@ -135,8 +143,8 @@
                   </a>
               </div>
               <div class="bottom-button other">
-                <a href="http://www.coolapk.com/u/709076" target="_blank">
-                  <i class="fas fa-ellipsis-h"></i>
+                <a href="https://space.bilibili.com/185951788" target="_blank">
+                  <i class="fab fa-bilibili"></i>
                 </a>
               </div>
             </div>
@@ -254,6 +262,8 @@
     <!-- 窗口管理器 -->
     <script src="./res/windows/window.js" defer></script>
 
+    <!-- 右键菜单 -->
+    <script src="./body/menu/menu.js" defer></script>
 
   </body>
 

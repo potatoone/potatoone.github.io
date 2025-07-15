@@ -139,19 +139,21 @@ const PlayModeManager = (() => {
     const toast = document.createElement('div');
     toast.className = 'music-toast';
     toast.textContent = message;
-    
-    // 设置样式
-    const style = toast.style;
-    style.position = 'fixed';
-    style.top = '120px';
-    style.right = '30px';
-    style.fontSize = '12px';
-    style.backgroundColor = 'rgba(0, 0, 0, 0.24)';
-    style.color = 'white';
-    style.padding = '10px 10px';
-    style.borderRadius = '6px';
-    style.zIndex = '1000';
-    style.transition = 'opacity 0.5s';
+
+    // 集中设置样式（使用模板字符串）
+    toast.style.cssText = `
+      position: fixed;
+      top: 135px; right: 20px;
+      font-size: 12px;
+      padding: 6px 12px;
+      background-color: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(5px);
+      color: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 99999;
+      transition: opacity 0.3s;
+    `;
     
     // 添加到页面
     document.body.appendChild(toast);
