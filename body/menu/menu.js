@@ -8,16 +8,32 @@ document.addEventListener('contextmenu', e => {
   const { offsetWidth: w, offsetHeight: h } = contextMenu;
   const { innerWidth: winW, innerHeight: winH } = window;
   
+  // 计算位置并显示菜单
   contextMenu.style.cssText = `
     display: block;
     left: ${Math.min(e.clientX, winW - w)}px;
     top: ${Math.min(e.clientY, winH - h)}px;
   `;
+  
+  // 动态禁用/启用"OPEN IN NEW TAB"按钮
+  const hasLink = !!targetElement.closest('a')?.href;
+  const newTabItem = document.querySelector('.menu-item span:contains("OPEN IN NEW TAB")')?.closest('.menu-item');
+  if (newTabItem) {
+    if (hasLink) {
+      newTabItem.removeAttribute('disabled');
+      newTabItem.style.opacity = '1';
+      newTabItem.style.pointerEvents = 'auto';
+    } else {
+      newTabItem.setAttribute('disabled', 'true');
+      newTabItem.style.opacity = '0.5';
+      newTabItem.style.pointerEvents = 'none';
+    }
+  }
 });
 
-// 点击空白处关闭菜单
+// 核心修改：点击任意位置（包括关于卡片打开时）都关闭菜单
 document.addEventListener('click', e => {
-  if (!contextMenu.contains(e.target) && !document.querySelector('.about-card?.active')) {
+  if (!contextMenu.contains(e.target)) {
     contextMenu.style.display = 'none';
   }
 });
@@ -36,10 +52,22 @@ document.querySelectorAll('.menu-item').forEach(item => {
       case 'ABOUT':
         createAboutCard();
         break;
+      case 'OPEN IN NEW TAB':
+        openInNewTab();
+        break;
     }
-    contextMenu.style.display = 'none';
+    contextMenu.style.display = 'none'; // 点击菜单项后也关闭
   });
 });
+
+// 在新标签页打开
+function openInNewTab() {
+  const linkEl = targetElement.closest('a');
+  if (linkEl?.href) {
+    window.open(linkEl.href, '_blank');
+    showCopyFeedback('已在新标签页打开');
+  }
+}
 
 // 复制功能
 function copyHoveredContent() {
