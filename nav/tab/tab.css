@@ -24,7 +24,6 @@
   padding: 8px 18px;
   background-color: var(--card);
   border-radius: 10px;
-  cursor: pointer;
   white-space: nowrap;
   font-size: 14px;
   color: var(--font-1);

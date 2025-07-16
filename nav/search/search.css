@@ -34,7 +34,6 @@
   background: var(--botton-2);
   color: var(--botton-1);
   border-radius: 50%; /* 圆形更协调 */
-  cursor: pointer;
   transition: all 0.3s ease;
 }
 .search-dropdown-trigger:hover {
@@ -76,7 +75,6 @@
   align-items: center;
   padding: 14px 20px;
   color: var(--active);
-  cursor: pointer;
   transition: background-color 0.2s;
 }
 .search-dropdown-item i {
@@ -139,7 +137,6 @@ input:-webkit-autofill {
   background: var(--botton-1);
   color: #fff;
   border-radius: 50px;
-  cursor: pointer;
   font-size: 14px; /* 缩小字体避免换行 */
   font-weight: 700;
   transition: all 0.3s ease;

@@ -2,6 +2,7 @@
   "1": {
     "tabs": {
       "新闻": [
+        {"title": "全网热点", "desc": "全网最新热点", "url": "https://newsnow.busiyi.world/", "icon": "fa-newspaper" },
         { "title": "新华网", "desc": "官方新闻媒体", "url": "https://www.xinhuanet.com/", "icon": "fa-newspaper" },
         { "title": "人民网", "desc": "人民日报官网", "url": "https://www.people.com.cn/", "icon": "fa-newspaper" },
         { "title": "澎湃新闻", "desc": "综合新闻平台", "url": "https://www.thepaper.cn/", "icon": "fa-newspaper" },

@@ -19,7 +19,6 @@
   flex-direction: column;
   position: relative; /* 作为内部绝对定位元素的基准 */
   transition: transform 0.2s, box-shadow 0.2s;
-  cursor: default;
 }
 
 /* ===== 卡片标题区域 ===== */
@@ -96,7 +95,6 @@
   padding: 8px 16px;
   border-radius: 20px;
   border: none;
-  cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s;
   position: absolute;

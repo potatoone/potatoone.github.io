@@ -18,7 +18,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   transition: all 0.3s ease;
 }
 .theme-btn:hover {
@@ -75,7 +74,6 @@
 }
 .switch-track {
   position: absolute;
-  cursor: pointer;
   inset: 0;
   background-color: var(--active);
   border-radius: 20px;
@@ -121,7 +119,6 @@ input:checked + .switch-track:before {
   height: 22px;
   border-radius: 50%;
   border: none;
-  cursor: pointer;
   transition: all 0.2s ease;
 }
 .color-item.active {
@@ -134,7 +131,6 @@ input:checked + .switch-track:before {
 .auto-toggle {
   display: inline-flex;
   align-items: center;
-  cursor: pointer;
 }
 /* 自动模式复选框样式 */
 .auto-toggle input {
@@ -146,7 +142,6 @@ input:checked + .switch-track:before {
   border-radius: 10px;
   margin-right: 4px;
   position: relative;
-  cursor: pointer;
 }
 /* 自动模式复选框选中状态样式 */
 .auto-toggle input:checked {
@@ -179,5 +174,4 @@ input:checked + .switch-track:before {
 /* 禁用状态下的开关轨道 */
 .android-switch input:disabled + .switch-track {
   opacity: 0.4;
-  cursor: not-allowed;
 }

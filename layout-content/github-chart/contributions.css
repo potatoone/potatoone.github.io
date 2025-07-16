@@ -28,7 +28,6 @@
   height: 10px; /* 固定高度 */
   border-radius: 1px;
   transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.3s ease;
-  cursor: pointer;
   position: relative;
   /* 确保格子在网格中居中 */
   justify-self: center;
