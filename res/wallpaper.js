@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       infoButton = document.createElement('label');
       infoButton.setAttribute('for', 'wallpaper-info-toggle');
-      infoButton.style.cssText = 'position:fixed;top:5px;right:5px;width:17px;height:17px;border-radius:50%;background:rgba(0,0,0,0.3);color:white;display:flex;align-items:center;justify-content:center;font-size:10px;z-index:10;opacity:0.4;transition:opacity 0.3s,background-color 0.3s';
+      infoButton.style.cssText = 'position:fixed;top:5px;right:5px;width:17px;height:17px;border-radius:50%;background:rgba(0, 0, 0, 0.14);backdrop-filter:blur(2px);color:white;display:flex;align-items:center;justify-content:center;font-size:10px;z-index:10;';
       infoButton.innerHTML = '<i>i</i>';
 
       infoElement = document.createElement('div');

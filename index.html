@@ -10,7 +10,6 @@
     <link rel="icon" href="./res/icon/logo.svg" type="image/png">    <!-- 网站图标 -->
     <link rel="stylesheet" href="./body/loading/loading.css" />    <!-- ...loading... -->
     <link rel="stylesheet" href="./body/click/loader.css" />    <!-- 点击效果 -->
-    <link rel="stylesheet" href="./body/pointer/pointer.css" />   <!-- 圆点指针 -->
     <link rel="stylesheet" href="./res/fireworks/fireworks.css" />  <!-- Bing壁纸 -->
 
 
@@ -61,159 +60,103 @@
       <div class="menu-item"><i class="fas fa-circle-exclamation"></i><span>ABOUT</span></div>
     </div>
 
-    <div class="background">
+    <div class="container">
 
-      <div class="container">
-
-        <div class="sentence"></div>
-        <div class="weather"></div>
+      <div class="sentence"></div>
+      <div class="weather"></div>
+      
+      <div class="content">
         
-        <div class="content">
-          
-          <div class="content1">
-            <div class="content-tab1">
-              <a href="https://potatoone.github.io/wiki/" class="tab-link" title="我的Wiki">
-                <i class="fas fa-book-open"></i>
-                <span>Wiki</span>
-              </a>
-            </div>
-            <div class="content-tab2">
-              <a href="https://potatoone.github.io/nav/" class="tab-link" class="tab-link" title="网址导航">
-                <i class="fas fa-compass"></i>
-                <span>导航</span>
-              </a>
-            </div>
-            <div class="content-tab3">
-              <a href="https://music.163.com/#/user/home?id=46311222" class="tab-link" title="网易云">
-                <i class="fas fa-music"></i>
-                <span>网易云</span>
-              </a>
-            </div>
-            <div class="content-tab4">
-              <a href="https://huaban.com/#" class="tab-link" title="花瓣">
-                <i class="fas fa-images"></i>
-                <span>花瓣</span>
-              </a>
-            </div>
+        <div class="content1">
+          <div class="content-tab1">
+            <a href="./wiki/" class="tab-link" title="My Wiki">
+              <i class="fas fa-book-open"></i>
+              <span>Wiki</span>
+            </a>
           </div>
-
-          <div class="content2">
-            <div class="tab1">
-              <div class="snake-game-container">
-                <button id="startSnakeGame" class="play-button">
-                  <i class="fas fa-play"></i>
-                </button>
-                <canvas id="snakeCanvas" style="display: none;"></canvas>
-              </div>
-            </div>
-            <div class="tab2">
-              <div class="github-contributions">
-                <!-- JavaScript将在这里生成贡献格子 -->
-              </div>
-            </div>
+          <div class="content-tab2">
+            <a href="./nav/" class="tab-link" class="tab-link" title="网址导航">
+              <i class="fas fa-compass"></i>
+              <span>导航</span>
+            </a>
           </div>
-
+          <div class="content-tab3">
+            <a href="https://music.163.com/#/user/home?id=46311222" class="tab-link" title="网易云">
+              <i class="fas fa-music"></i>
+              <span>网易云</span>
+            </a>
+          </div>
+          <div class="content-tab4">
+            <a href="https://huaban.com/#" class="tab-link" title="花瓣">
+              <i class="fas fa-images"></i>
+              <span>花瓣</span>
+            </a>
+          </div>
         </div>
 
-
-        <div class="info-container" id="infoContainer">
-
-          <!-- 头像区域 -->
-          <div class="avatar-container">
-            <div class="avatar" id="avatar">
-              <img src="./res/icon/avatar.jpg" alt="avatar" />
+        <div class="content2">
+          <div class="tab1">
+            <button id="startSnakeGame" class="play-button">
+              <i class="fas fa-play"></i>
+            </button>
+            <canvas id="snakeCanvas" width="144" height="144" style="display:none;"></canvas>
+          </div>
+          <div class="tab2">
+            <div class="github-contributions">
+              <!-- JavaScript将在这里生成贡献格子 -->
             </div>
           </div>
-          
-          <!-- 内容包装器 -->
-          <div class="content-wrapper">
+        </div>
 
-            <!-- 按钮区域 -->
-            <div class="bottom-btnc">
-              <div class="bottom-button github">
-                <a href="https://github.com/potatoone" target="_blank">
-                  <i class="fab fa-github"></i>
-                </a>
-              </div>
-              <div class="bottom-button email">
+      </div>
+
+
+      <div class="info-container" id="infoContainer">
+
+        <!-- 头像区域 -->
+        <div class="avatar-container">
+          <div class="avatar" id="avatar">
+            <img src="./res/icon/avatar.jpg" alt="avatar" />
+          </div>
+        </div>
+        
+        <!-- 内容包装器 -->
+        <div class="content-wrapper">
+
+          <!-- 按钮区域 -->
+          <div class="bottom-btnc">
+            <div class="bottom-button github">
+              <a href="https://github.com/potatoone" target="_blank">
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+            <div class="bottom-button email">
+              <a href="#">
+                  <i class="fas fa-envelope"></i>
+              </a>
+            </div>
+            <div class="bottom-button qq">
                 <a href="#">
-                    <i class="fas fa-envelope"></i>
+                    <i class="fab fa-qq"></i>
                 </a>
-              </div>
-              <div class="bottom-button qq">
-                  <a href="#">
-                      <i class="fab fa-qq"></i>
-                  </a>
-              </div>
-              <div class="bottom-button other">
-                <a href="https://space.bilibili.com/185951788" target="_blank">
-                  <i class="fab fa-bilibili"></i>
-                </a>
-              </div>
             </div>
-
-            <!-- 标签容器 -->
-            <div class="tags-container">
-              <div class="tag">Linux</div>
-              <div class="tag">Docker</div>
-              <div class="tag">Nginx</div>
-              <div class="tag">Network</div>
-              <div class="tag">Android</div>
-              <div class="tag">Go</div>
-
-              <div class="tag">UI/UX</div>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- 音乐播放器区域 -->
-        <div class="player">
-
-          <div id="playlist-toggle"><i class="fas fa-angle-down"></i></div>
-  
-          <!-- 播放列表分类切换按钮 -->
-          <div class="playlist-tabs">
-            <input type="radio" name="tab" id="tab-all" checked>
-            <input type="radio" name="tab" id="tab-1">
-            <input type="radio" name="tab" id="tab-2">
-            <input type="radio" name="tab" id="tab-3">
-
-            <div id="playlist-categories" class="playlist-categories">
-              <label for="tab-all" class="category-btn"></label>
-              <label for="tab-1" class="category-btn"></label>
-              <label for="tab-2" class="category-btn"></label>
-              <label for="tab-3" class="category-btn"></label>
-              <div class="slider"></div>
+            <div class="bottom-button other">
+              <a href="https://space.bilibili.com/185951788" target="_blank">
+                <i class="fab fa-bilibili"></i>
+              </a>
             </div>
           </div>
-          
-          <!-- 播放列表区域 -->
-          <div id="playlist" class="playlist">
-            <ul><!-- 歌曲列表由JavaScript动态生成 --></ul>
-          </div>
 
-          <div class="control">
-            <div class="control-title"></div>  <!-- 音乐标题 -->
-            <div class="control-btn"> <!-- 播放控制按钮 -->
-              <button id="prev"><i class="fas fa-backward"></i></button>
-              <button id="play"><i class="fas fa-play"></i></button>
-              <button id="next"><i class="fas fa-forward"></i></button>
-              <button id="mode"><i class="fas fa-bars"></i></button>
-            </div>
-            <div class="time-info">   <!-- 时间 -->
-              <span class="current-time">0:00</span>
-              <span class="total-time">0:00</span>
-            </div>
-            <div class="progress-container">  <!-- 进度条 -->
-              <div class="progress-bar"></div>
-              <div class="progress-handle"></div>
-            </div>
-            <audio id="audio-player"> <!-- 音频播放器 -->
-              <source src="" type="audio/mpeg">
-            </audio>
+          <!-- 标签容器 -->
+          <div class="tags-container">
+            <div class="tag">Linux</div>
+            <div class="tag">Docker</div>
+            <div class="tag">Nginx</div>
+            <div class="tag">Network</div>
+            <div class="tag">Android</div>
+            <div class="tag">Go</div>
+
+            <div class="tag">UI/UX</div>
           </div>
 
         </div>
@@ -221,25 +164,73 @@
       </div>
 
 
-      <!-- 个人信息弹窗 -->
-      <div class="modal-overlay" id="contact-modal">
-        <div class="box">
-          <div class="front"></div>
-          <div class="back">
-            <div class="card-title">联系方式</div>
-            <div class="card-value" id="contact-value">内容</div>
+      <!-- 音乐播放器区域 -->
+      <div class="player">
+
+        <div id="playlist-toggle"><i class="fas fa-angle-down"></i></div>
+
+        <!-- 播放列表分类切换按钮 -->
+        <div class="playlist-tabs">
+          <input type="radio" name="tab" id="tab-all" checked>
+          <input type="radio" name="tab" id="tab-1">
+          <input type="radio" name="tab" id="tab-2">
+          <input type="radio" name="tab" id="tab-3">
+
+          <div id="playlist-categories" class="playlist-categories">
+            <label for="tab-all" class="category-btn"></label>
+            <label for="tab-1" class="category-btn"></label>
+            <label for="tab-2" class="category-btn"></label>
+            <label for="tab-3" class="category-btn"></label>
+            <div class="slider"></div>
           </div>
         </div>
+        
+        <!-- 播放列表区域 -->
+        <div id="playlist" class="playlist">
+          <ul><!-- 歌曲列表由JavaScript动态生成 --></ul>
+        </div>
+
+        <div class="control">
+          <div class="control-title"></div>  <!-- 音乐标题 -->
+          <div class="control-btn"> <!-- 播放控制按钮 -->
+            <button id="prev"><i class="fas fa-backward"></i></button>
+            <button id="play"><i class="fas fa-play"></i></button>
+            <button id="next"><i class="fas fa-forward"></i></button>
+            <button id="mode"><i class="fas fa-bars"></i></button>
+          </div>
+          <div class="time-info">   <!-- 时间 -->
+            <span class="current-time">0:00</span>
+            <span class="total-time">0:00</span>
+          </div>
+          <div class="progress-container">  <!-- 进度条 -->
+            <div class="progress-bar"></div>
+            <div class="progress-handle"></div>
+          </div>
+          <audio id="audio-player"> <!-- 音频播放器 -->
+            <source src="" type="audio/mpeg">
+          </audio>
+        </div>
+
       </div>
 
+    </div>
 
+
+    <!-- 个人信息弹窗 -->
+    <div class="modal-overlay" id="contact-modal">
+      <div class="box">
+        <div class="front"></div>
+        <div class="back">
+          <div class="card-title">联系方式</div>
+          <div class="card-value" id="contact-value">内容</div>
+        </div>
+      </div>
     </div>
 
 
     <script src="./body/loading/loading.js"></script>  <!-- 页面加载控制脚本 -->
     <script src="./res/wallpaper.js"></script>  <!-- Bing壁纸 -->
     <script src="./body/click/loader.js"></script>  <!-- 点击效果 -->
-    <script src="./body/pointer/pointer.js"></script>   <!-- 圆点指针 -->
 
     <script src="./layout-content/snake/snake.js"></script>  <!-- 贪吃蛇游戏 -->
 

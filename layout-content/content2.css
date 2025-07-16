@@ -11,18 +11,18 @@
 }
 
 .tab1 {
-  width: 15%; /* 左侧tab宽度15% */
+  width: 150px; /* 左侧tab宽度15% */
   height: 150px;
   box-sizing: border-box;
-  border: 3px solid rgba(169, 169, 169, 0.468);
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.145);
+  border-radius: 15px;
+  border: 3px solid rgba(169, 169, 169, 0.26);
   backdrop-filter: blur(10px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden; /* 确保内容不溢出 */
   display: flex; /* 添加flex布局使图标居中 */
   justify-content: center;
   align-items: center;
+  opacity: calc(0.6); /* 默认透明度为0.5 */
 }
 
 .tab1 i {
@@ -31,18 +31,18 @@
 }
 
 .tab2 {
-  width: 85%; /* 右侧tab宽度85% */
+  width: 850px; /* 右侧tab宽度85% */
   height: 150px;
   box-sizing: border-box;
-  border: 3px solid rgba(169, 169, 169, 0.247);
-  border-radius: 10px;
+  border-radius: 15px;
+  border: 3px solid rgba(169, 169, 169, 0.26);
   backdrop-filter: blur(10px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: visible; /* 改为visible允许tooltip显示在外部 */
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: calc(0.5); /* 默认透明度为0.5 */
+  opacity: calc(0.6); /* 默认透明度为0.5 */
 }
 
 .tab1:hover,.tab2:hover {

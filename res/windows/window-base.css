@@ -65,7 +65,7 @@
   backdrop-filter: blur(15px); /* 模糊效果 */
   padding: 7px 0px 7px 10px;
   user-select: none; /* 防止文本选择 */
-  height: 15px; /* 固定高度 */
+  height: 30px; /* 固定高度 */
   flex-shrink: 0; /* 防止压缩 */
 }
 

@@ -1,7 +1,7 @@
 /* 播放器容器 */
 .player {
   position: fixed; z-index: 999;
-  width: 250px; right: 20px; bottom: 20px;  /* 定位到右下角 */
+  width: 230px; right: 20px; bottom: 20px;  /* 定位到右下角 */
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -25,7 +25,7 @@
 .control-btn {
   display: flex;
   justify-content: center; align-items: center; /* 水平垂直居中 */
-  gap: 10px;
+  gap: 7px;
   margin: 10px 0 -10px 0;
 }
 

@@ -1,37 +1,39 @@
 /* 修改body.css文件 */
 
-@import url("https://static.zeoseven.com/zsft/41/main/result.css");
+@import url("https://static.zeoseven.com/zsft/41/main/result.css");  /* 大宝桃桃体 */
+
+/* 全局盒模型统一 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: inherit; /* 确保所有元素都继承字体设置 */
+}
 
 body {
     font-family: "DaBaoTaoTaoTi"; /* 大宝桃桃体 */
     font-weight: normal;
-    /* 确保内容可选择和复制 */
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    user-select: none;     /* 内容不可选择和复制 */
+}
+
+/* html 基础视口设置 */
+html {
+	width:100%;
+	height:100%;
+  overflow-x: hidden; /* 禁止html层滚动 */
 }
 
 /* 全局性能优化 */
 body {
+  display: flex;
   transform: translateZ(0); /* 全局启用GPU加速 */
   backface-visibility: hidden; /* 防止3D翻转闪烁 */
   will-change: auto; /* 自动判断需要优化的属性 */
-  -webkit-font-smoothing: antialiased; /* 字体渲染优化 */
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* 全局样式设置 */
-html, body {
   margin: 0;
   padding: 0;
-
-	width:100%;
-	height:100%;
-  overflow: auto; /* 改为auto，允许在需要时出现滚动条 */
   scrollbar-width: none; /* 隐藏滚动条 */
-  overflow-y: auto; /* 只允许垂直滚动 */
-  overflow-x: hidden; /* 禁止水平滚动 */
+  overflow-x: hidden; /* 禁止滚动 */
+  overflow-y: auto;
 }
 
 /* 为Chrome等浏览器隐藏滚动条 */
@@ -39,42 +41,17 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   display: none;
 }
 
-.background {
-  display: flex;
-  margin: 0;
-  padding: 0;
-}
-
+/* 主体容器 */
 .container {
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3); /* 壁纸遮罩 */
 }
 
-/* 确保所有元素都继承字体设置 */
-* {
-  font-family: inherit;
-}
+/* 中间内容容器 */
+.content {
+  display: flex; flex-direction: column; /* 列布局 */
+  justify-content: center; align-items: center; /* 水平垂直居中 */
+  min-height: 100vh; /* 改为最小高度 */
+  height: auto; /* 允许高度自适应 */
 
-/* 确保淡入动画支持GPU加速 */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(10px) translateZ(0);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) translateZ(0);
-  }
-}
-
-/* 壁纸信息面板的状态切换 */
-#wallpaper-info-toggle:checked ~ .wallpaper-info-panel {
-  opacity: 1;
-  pointer-events: auto;
-}
-#wallpaper-info-toggle:not(:checked) ~ .wallpaper-info-panel {
-  opacity: 0;
-  pointer-events: none;
 }

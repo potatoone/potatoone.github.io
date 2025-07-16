@@ -1,116 +1,138 @@
+/* 个人信息卡片 - 贴底布局优化版 */
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-hover: rgba(255, 255, 255, 0.25);
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  --transition: all 0.3s ease;
+}
+
 /* 个人信息容器 */
 .info-container {
-  display: flex; position: fixed; z-index: 100;
-  bottom: 20px; left: 20px; gap: 20px;
-  transition: all 0.3s ease;
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 1.25rem;
+  position: absolute;
+  bottom: 20px; left: 20px; /* 左下角20xp */
   z-index: 100;
 }
 
 /* 头像区域 */
 .avatar-container {
-  flex-shrink: 0; 
-  width: 170px; height: 170px;
+  width: 170px;
+  height: 170px;
 }
 
-/* 圆形头像 */
 .avatar {
-  display: flex; justify-content: center; align-items: center;
-  overflow: hidden; 
-  width: 100%; height: 100%; 
-  box-sizing: border-box;
-  border-radius: 50%; border: 3px solid rgba(255, 255, 255, 0.192);
-  background-color: rgba(197, 197, 197, 0.2);
-  backdrop-filter: blur(5px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid var(--glass-border);
+  background: rgba(197, 197, 197, 0.2);
+  backdrop-filter: blur(0.625rem);
+  box-shadow: var(--shadow);
 }
 
-/* 头像图片 */
 .avatar img {
   object-fit: cover;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
+  transition: var(--transition);
+}
+
+.avatar:hover img {
+  transform: scale(1.05);
 }
 
 /* 内容包装器 */
 .content-wrapper {
-  position: relative; flex-shrink: 0;
-  width: 240px; height: 170px;
+  position: relative;
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* 内容底部对齐 */
+  gap: 0.75rem;
 }
 
 /* 按钮容器 */
 .bottom-btnc {
-  display: flex; justify-content: center; align-items: center; 
-  position: absolute; z-index: 101;
-  bottom: 95px; left: 0; gap: 8px;
+  display: flex;
+  gap: 10px;
+  z-index: 101;
 }
 
-/* 单个按钮 */
 .bottom-button {
-  display: flex; justify-content: center; align-items: center; 
-  width: 36px; height: 36px; 
-  border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.126);
-  backdrop-filter: blur(5px); 
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(0.3125rem);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
 }
 
-/* 按钮图标 */
 .bottom-button a {
-  display: block; 
-  text-align: center; text-decoration: none;
-  width: 100%; height: 100%;  
-  line-height: 36px; font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   color: rgba(255, 255, 255, 0.87);
+  font-size: 1.2rem;
+  text-decoration: none; /* 确保无下划线 */
 }
 
-/* 按钮悬停效果 */
+.bottom-button a:hover,
+.bottom-button a:focus,
+.bottom-button a:active {
+  text-decoration: none; /* 所有状态都无下划线 */
+}
+
 .bottom-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-0.1875rem);
+  box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.2);
 }
 
-/* Github按钮 */
-.bottom-button.github:hover {
-  background-color: #24292e;
-}
-
-/* 邮箱按钮 */
-.bottom-button.email:hover {
-  background-color: #D44638;
-}
-
-/* QQ按钮 */
-.bottom-button.qq:hover {
-  background-color: #12B7F5;
-}
-
-/* 其他按钮 */
-.bottom-button.other:hover {
-  background-color: #7289DA;
-}
+.bottom-button.github:hover { background: #24292e; }
+.bottom-button.email:hover { background: #D44638; }
+.bottom-button.qq:hover { background: #12B7F5; }
+.bottom-button.other:hover { background: #7289DA; }
 
 /* 标签容器 */
 .tags-container {
-  position: absolute; display: flex; flex-wrap: wrap;
-  width: 260px; bottom: 0px; left: 0; /* 定位于左下角 */
-  padding: 10px; 
-  border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.096); 
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(66, 66, 66, 0.2);
-  gap: 7px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4375rem;
+  padding: 0.625rem;
+  border-radius: 0.9375rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(0.625rem);
+  box-shadow: var(--shadow);
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* 个性化标签 */
 .tag {
-  padding: 5px 10px; 
-  background-color: rgba(255, 255, 255, 0.06); color: white; 
+  padding: 0.3125rem 0.625rem;
+  background: var(--glass-bg);
+  color: white;
   font-size: 0.65rem;
-  border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.066);
-  transition: all 0.3s ease; white-space: nowrap;
+  border-radius: 0.9375rem;
+  border: 1px solid var(--glass-border);
+  transition: var(--transition);
+  white-space: nowrap;
 }
 
-/* 标签悬停效果 */
 .tag:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
+  background: var(--glass-hover);
+  transform: translateY(-0.125rem);
 }

@@ -11,11 +11,12 @@
 
 /* 控制按钮基础样式 */
 .window-button {
-  width: 55px;
+  width: 50px;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   transition: background-color 0.1s ease; /* 悬停颜色变化动画 */
   color: white; /* 图标颜色 */
 }

@@ -8,7 +8,7 @@ with(backgroundOverlay.style) {
   position = 'absolute';      // 绝对定位，覆盖整个页面
   top = left = 0;             // 定位到页面左上角
   width = height = '100%';    // 宽度和高度均占满整个页面
-  backgroundColor = 'rgba(0, 0, 0, 0.75)';  // 半透明黑色（透明度75%）
+  backgroundColor = 'rgba(0, 0, 0, 0.5)';  // 半透明黑色（透明度50%）
   display = 'none';           // 默认隐藏，需要时再显示
 }
 // 将遮罩层添加到页面中

@@ -1,19 +1,14 @@
 /* 移动端样式 */
 @media (max-width: 768px) {
-    .info-container {
-      position: absolute;
-      left: 20px; /* 左侧间距20px */
-      bottom: 20px; /* 底部间距20px */
-    }
-    
+
     /* 内容包装器 */
     .content-wrapper {
       display: none;
       height: auto;
-      width: 180px; /* 减小宽度以便右侧显示 */
+      width: 170px; /* 减小宽度以便右侧显示 */
       position: absolute;
       left: 70px; /* 在头像右侧显示 */
-      bottom: -7px; /* 与放大后的头像底部对齐 */
+      bottom: -5px; /* 与放大后的头像底部对齐 */
     }
   
     /* 头像状态：折叠(默认) */
@@ -42,40 +37,19 @@
     
     /* 展开状态的按钮容器 */
     .info-container.expanded .bottom-btnc {
-      display: flex; position: relative; /* 改为相对定位，保持在右侧 */
-      opacity: 1;
-      visibility: visible;
-      bottom: auto; /* 清除桌面端底部定位 */
       margin-bottom: 10px; /* 与下方标签保持间距 */
-      flex-direction: row; /* 水平排列 */
-      justify-content: flex-start;
-    }
-    
-    /* 展开状态的标签容器 */
-    .info-container.expanded .tags-container {
-      position: relative; /* 改为相对定位 */
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      left: auto; /* 清除之前的左侧定位 */
-      bottom: auto; /* 清除之前的底部定位 */
-      transform: none; /* 清除之前的变换 */
-      width: 100%; /* 撑满包装器宽度 */
     }
     
     /* 移动端按钮样式调整 */
     .bottom-button {
       height: 30px;
       width: 30px;
-      margin-right: 5px; /* 按钮之间的间距 */
       border-radius: 20px;
-      font-size: 5px;
     }
     
     /* 按钮图标 */
     .bottom-button a {
-      line-height: 30px;    /* 按钮高度 */
-      font-size: 16px;
+      font-size: 14px;
     }
 
     /* 微调标签样式 */

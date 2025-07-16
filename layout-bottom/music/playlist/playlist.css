@@ -12,7 +12,7 @@
 #playlist-toggle {
   /* 位置和尺寸 */
   position: absolute;
-  right: 260px;
+  right: 240px;
   width: 40px; 
   height: 30px;
   bottom: 0px;  /* 与player底部对齐 */
@@ -70,57 +70,90 @@
   }
 }
 
-
-
-
-
-/* ===== 3. 播放列表项 ===== */
-#playlist ul { /* 列表容器 */
-  padding: 0;
-  margin: 0;
-  width: 100%; /* 调整为占据整个宽度 */
+/* ===== 播放列表容器样式 ===== */
+.playlist {
+  display: flex;
+  position: relative;
+  max-height: 0vh;
+  bottom: 10px;
+  overflow-y: auto;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 0 solid rgba(255, 255, 255, 0.2);
+  scrollbar-width: none;
+  transition: max-height 0.5s ease, border 0.3s ease;
 }
 
-#playlist li { /* 播放列表项 */
-  /* 布局 */
+.playlist.expanded {
+  max-height: 36vh;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .playlist.expanded {
+    max-height: 30vh;
+  }
+}
+
+
+/* ===== 播放列表项容器 ===== */
+#playlist ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+
+/* ===== 通用列表项样式 ===== */
+#playlist li {
   display: flex;
   align-items: center;
   padding: 8px;
   font-size: 10px;
-  
-  /* 外观 */
+  color: inherit;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  background-color: transparent;
+  transition:
+    background-color 0.3s ease,
+    font-size 0.25s ease,
+    padding 0.25s ease;
 }
 
+/* 悬浮效果 */
 #playlist li:hover {
-  background-color: rgba(209, 74, 139, 0.321);
-  transition: 0.1s;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
+
+/* ===== 播放中状态 ===== */
 #playlist li.playing {
-  background-color: rgba(187, 22, 63, 0.436);
-  font-weight: bold;
-  font-size: 12px;
-  padding: 10px;
-  color: rgb(255, 255, 255);
   background-image: linear-gradient(
     90deg,
-    rgba(189, 114, 255, 0.5) 0%,
-    rgba(179, 106, 235, 0.5) 10%,
-    rgba(200, 84, 228, 0.5) 20%,
-    rgba(205, 67, 190, 0.5) 30%,
-    rgba(210, 50, 152, 0.5) 40%,
-    rgba(216, 37, 103, 0.5) 50%,
-    rgba(210, 50, 152, 0.5) 60%,
-    rgba(205, 67, 190, 0.5) 70%,
-    rgba(200, 84, 228, 0.5) 80%,
-    rgba(179, 106, 235, 0.5) 90%,
-    rgba(189, 114, 255, 0.5) 100%
+    rgba(189, 114, 255, 0.6),
+    rgba(179, 106, 235, 0.6),
+    rgba(200, 84, 228, 0.6),
+    rgba(205, 67, 190, 0.6),
+    rgba(210, 50, 152, 0.6),
+    rgba(216, 37, 103, 0.6),
+    rgba(210, 50, 152, 0.6),
+    rgba(205, 67, 190, 0.6),
+    rgba(200, 84, 228, 0.6),
+    rgba(179, 106, 235, 0.6),
+    rgba(189, 114, 255, 0.6)
   );
   background-size: 200% 100%;
   animation: bg-slide-loop 5s linear infinite;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 10px;
+  color: #ffdcffea;
 }
+
 
 /* 背景滑动动画 */
 @keyframes bg-slide-loop {
@@ -159,10 +192,7 @@
   display: block;
   width: 3px;
   margin-right: 3px;
-  background: rgba(255, 255, 255, 0.9);
-  
-  /* 只有在 active 时才有动画效果 */
-  animation: none;
+  background: #ffdcffea;
   transform-origin: bottom;
 }
 
@@ -171,8 +201,8 @@
 }
 
 .audio-wave span:nth-child(1) {
-  height: 8px;
-  animation-delay: 0.2s;
+  height: 9px;
+  animation-delay: 0.3s;
 }
 
 .audio-wave span:nth-child(2) {
@@ -188,7 +218,7 @@
 /* 波形动画 */
 @keyframes wave {
   0%, 100% {
-    transform: scaleY(0.6);
+    transform: scaleY(0.4);
   }
   50% {
     transform: scaleY(1);

@@ -32,11 +32,11 @@ input[type="radio"] {
 /* 选中状态下的按钮 */
 .slider {
   position: absolute;
-  top: 5px; /* 与上内边距对齐 */
-  left: 5px; /* 与左内边距对齐 */
-  width: 55.75px;  /* 每个按钮宽60px，减去左边距 */
-  height: calc(100% - 10px); /* 减去上下内边距 */
-  background-color: rgba(255, 255, 255, 0.1);
+  top: 4px; /* 与上内边距对齐 */
+  left: 4px; /* 与左内边距对齐 */
+  width: 49px;  /* 每个按钮宽60px，减去左边距 */
+  height: calc(100% - 8px); /* 减去上下内边距 */
+  background-color: rgba(255, 255, 255, 0.115);
   border-radius: 6px;
   z-index: 0;
   transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -47,13 +47,13 @@ input[type="radio"] {
   transform: translateX(0%);
 }
 #tab-1:checked ~ .playlist-categories .slider {
-  transform: translateX(calc(100% + 4.5px));
+  transform: translateX(calc(100% + 8px));
 }
 #tab-2:checked ~ .playlist-categories .slider {
-  transform: translateX(calc(200% + 10.5px));
+  transform: translateX(calc(200% + 16px));
 }
 #tab-3:checked ~ .playlist-categories .slider {
-  transform: translateX(calc(300% + 15.2px));
+  transform: translateX(calc(300% + 24px));
 }
 
 /* 选中状态下的文字高亮 */
