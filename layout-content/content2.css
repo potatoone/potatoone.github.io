@@ -27,7 +27,7 @@
 
 .tab1 i {
   font-size: 40px;
-  color: #f0f0f0;
+  color: #ffffff;
 }
 
 .tab2 {
@@ -45,7 +45,7 @@
   opacity: calc(0.6); /* 默认透明度为0.5 */
 }
 
-.tab1:hover,.tab2:hover {
+.tab1:hover,.tab1 i,.tab2:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   opacity: calc(1); /* 鼠标悬停时透明度变为1 */

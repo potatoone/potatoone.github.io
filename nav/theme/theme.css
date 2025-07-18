@@ -152,13 +152,13 @@ input:checked + .switch-track:before {
 .auto-toggle input:checked::after {
   content: '';
   position: absolute;
-  left: 3px;
-  top: 1px;
-  width: 3px;
-  height: 6px;
+  left: 6px; top: 0.5px;
+  width: 3px; height: 5px;
   border: solid white;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+  transform-origin: left top;
+  box-sizing: content-box;
 }
 /* 自动模式复选框文本样式 */
 .auto-toggle span {
