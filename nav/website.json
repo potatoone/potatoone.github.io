@@ -14,7 +14,8 @@
         { "title": "微博", "desc": "社交媒体平台", "url": "https://www.weibo.com/", "icon": "fa-brands fa-weibo" },
         { "title": "QQ空间", "desc": "腾讯社交平台", "url": "https://qzone.qq.com/", "icon": "fa-star" },
         { "title": "知乎", "desc": "知识分享社区", "url": "https://www.zhihu.com/", "icon": "fa-brands fa-zhihu" },
-        { "title": "豆瓣", "desc": "文化社交平台", "url": "https://www.douban.com/", "icon": "fa-book" }
+        { "title": "豆瓣", "desc": "文化社交平台", "url": "https://www.douban.com/", "icon": "fa-book" },
+        {"title": "百度贴吧", "desc": "贴吧社区", "url": "https://tieba.baidu.com/", "icon": "fa-comments"}
       ],
       "娱乐": [
         { "title": "优酷", "desc": "在线视频平台", "url": "https://www.youku.com/", "icon": "fa-film" },
@@ -52,7 +53,10 @@
         { "title": "Unsplash", "desc": "免费高质量图片", "url": "https://unsplash.com/", "icon": "fa-image" },
         { "title": "Pexels", "desc": "免费摄影素材", "url": "https://www.pexels.com/", "icon": "fa-image" },
         { "title": "稿定设计", "desc": "在线设计平台", "url": "https://www.gaoding.com/", "icon": "fa-pencil-ruler" },
-        { "title": "Pixabay", "desc": "免费图片素材", "url": "https://pixabay.com/", "icon": "fa-image" }
+        { "title": "Office Plus", "desc": "Office 模板", "url": "https://office-plus.com/", "icon": "fa-image" },
+        { "title": "Yes Icon", "desc": "图标字体库", "url": "https://yesicon.com/", "icon": "fa-icons" },
+        { "title": "在线PS", "desc": "在线PS工具", "url": "https://www.photopea.com/", "icon": "fa-image" }
+
       ],
       "图床": [
         { "title": "SM.MS", "desc": "免费图床服务", "url": "https://sm.ms/", "icon": "fa-image" },
@@ -67,15 +71,16 @@
     "tabs": {
       "资源与工具": [
         { "title": "Free For Dev", "desc": "免费开发者资源", "url": "https://free-for.dev/#/", "icon": "fa-gift" },
-        { "title": "LeetCode", "desc": "编程题库", "url": "https://leetcode.cn/", "icon": "fa-code" }
-      ],
-      "前端": [
         { "title": "MDN Web Docs", "desc": "Web开发文档", "url": "https://developer.mozilla.org/zh-CN/", "icon": "fa-code" },
         { "title": "W3Schools", "desc": "Web技术教程", "url": "https://www.w3schools.com/", "icon": "fa-code" },
+        { "title": "菜鸟教程", "desc": "编程学习网站", "url": "https://www.runoob.com/", "icon": "fa-code" },
+        { "title": "LeetCode", "desc": "编程题库", "url": "https://leetcode.cn/", "icon": "fa-code" },
+        { "title": "CodePen", "desc": "前端代码分享平台", "url": "https://codepen.io/", "icon": "fa-code" }
+      ],
+      "前端": [
         { "title": "Vue.js", "desc": "渐进式JavaScript框架", "url": "https://cn.vuejs.org/", "icon": "fa-code" },
         { "title": "React", "desc": "用于构建用户界面的JavaScript库", "url": "https://reactjs.org/", "icon": "fa-code" },
-        { "title": "TypeScript", "desc": "JavaScript的类型超集", "url": "https://www.typescriptlang.org/", "icon": "fa-code" },
-        { "title": "CodePen", "desc": "前端代码分享平台", "url": "https://codepen.io/", "icon": "fa-code" }
+        { "title": "TypeScript", "desc": "JavaScript的类型超集", "url": "https://www.typescriptlang.org/", "icon": "fa-code" }
       ],
       "后端": [
         { "title": "Node.js", "desc": "JavaScript运行环境", "url": "https://nodejs.org/en/", "icon": "fa-code" },
