@@ -23,7 +23,6 @@
 }
 
 .sentence:hover {
-  transform: translateY(3px) translateZ(0);
-  background-color: rgba(146, 146, 146, 0.2);
+  transform: translateY(-2px);
 }
   

@@ -1,130 +1,126 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>One Potato Navigation</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>One Potato Navigation</title>
 
-  <link rel="icon" href="./logo.svg" type="image/png">
+    <link rel="icon" href="./logo.svg" type="image/png">
 
-  <!-- 引入Font Awesome图标库 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-  <link rel="stylesheet" href="body.css" />
-  <link rel="stylesheet" href="./search/search.css" />  
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="body.css" />
+    <link rel="stylesheet" href="./search/search.css" />  <!-- 搜索框 -->
+    <link rel="stylesheet" href="./nav/nav.css" />  <!-- 底部导航 -->
+    <link rel="stylesheet" href="./card/card.css" />  <!-- 网址卡片 -->
+    <link rel="stylesheet" href="./tab/tab.css" />  <!-- Tab样式 -->
+    <link rel="stylesheet" href="./theme/theme.css" />  <!-- 主题切换 -->
+    <link rel="stylesheet" href="./theme/color.css" />  <!-- 主题颜色 -->
+    <link rel="stylesheet" href="./loading/loading.css" />  <!-- 加载动画 -->
 
-  <link rel="stylesheet" href="./nav/nav.css" />  
-  <link rel="stylesheet" href="./card/card.css" />  
-  <link rel="stylesheet" href="./tab/tab.css" />
+  </head>
 
-  <link rel="stylesheet" href="./theme/theme.css" />
-  <link rel="stylesheet" href="./theme/color.css" />
-
-  <link rel="stylesheet" href="./loading/loading.css" />
-
-
-</head>
-
-<!-- 全屏加载容器 -->
-<div class="loader-container">
-  <div class="loader"></div> <!-- 原有进度条 -->
-</div>
-
-<body>
-  <!-- 标题区域 -->
-  <div class="title">
-    <h1>One Potato Navi</h1>
+  <!-- 全屏加载容器 -->
+  <div class="loader-container">
+    <div class="loader"></div> <!-- 原有进度条 -->
   </div>
 
-
-
-  <!-- 搜索框 -->
-  <div class="search-container">
-    <!-- 搜索引擎下拉选择器 -->
-    <div class="search-dropdown">
-      <div class="search-dropdown-trigger">
-        <i class="trigger-icon"></i> <!-- JS动态设置图标 -->
-      </div>
-      <div class="search-dropdown-menu">
-        <!-- JS动态生成选项 -->
-      </div>
+  <body>
+    <!-- 标题区域 -->
+    <div class="title">
+      <h1>One Potato Navi</h1>
     </div>
-    
-    <!-- 搜索输入框 -->
-    <input type="text" class="search-input" placeholder="Enter content to search..." id="searchInput">
-    
-    <!-- 搜索按钮 -->
-    <button class="search-button" id="searchBtn">
-      <i class="fa-solid fa-search"></i>
-      <span>Search</span>
-    </button>
-  </div>
 
-  <!-- Tab选择器容器 -->
-  <div class="tabs-container">
-    <div class="tabs-wrapper" id="tabsWrapper">
+    <!-- 搜索框 -->
+    <div class="search-container">
+      <!-- 搜索引擎下拉选择器 -->
+      <div class="search-dropdown">
+        <div class="search-dropdown-trigger">
+          <i class="trigger-icon"></i> <!-- JS动态设置图标 -->
+        </div>
+        <div class="search-dropdown-menu">
+          <!-- JS动态生成选项 -->
+        </div>
+      </div>
+
+      <!-- 搜索输入框 -->
+      <input type="text" class="search-input"
+        placeholder="Enter content to search..." id="searchInput">
+
+      <!-- 搜索按钮 -->
+      <button class="search-button" id="searchBtn">
+        <i class="fa-solid fa-search"></i>
+        <span>Search</span>
+      </button>
+    </div>
+
+    <!-- Tab选择器容器 -->
+    <div class="tabs-container">
+      <div class="tabs-wrapper" id="tabsWrapper">
+        <!-- Tab项由JS动态生成 -->
+      </div>
+      <!-- 指示器（用于平滑左右移动） -->
+      <div class="tab-indicator"></div>
+    </div>
+
+    <!-- 卡片容器 -->
+    <div class="cards-container" id="cardsContainer">
       <!-- Tab项由JS动态生成 -->
     </div>
-    <!-- 指示器（用于平滑左右移动） -->
-    <div class="tab-indicator"></div>
-  </div>
 
-  <!-- 卡片容器 -->
-  <div class="cards-container" id="cardsContainer">
-        <!-- Tab项由JS动态生成 -->
-  </div>
-
-  <!-- 悬浮底部导航栏 -->
-  <div class="nav">
-    <div class="nav-item" data-nav="1">
-      <i class="fa fa-coffee icon"></i>
-      <span>Daily</span>
-    </div>
-    
-    <div class="nav-item" data-nav="2">
-      <i class="fa fa-screwdriver-wrench icon"></i>
-      <span>Tools</span>
-    </div>
-    
-    <div class="nav-item" data-nav="3">
-      <i class="fa fa-code icon"></i>
-      <span>Dev</span>
-    </div>
-  </div>
-
-  <!-- 主题切换组件 -->
-  <div class="theme-toggle">
-    <button class="theme-btn" id="themeBtn">
-      <i class="fa-solid fa-moon"></i>
-    </button>
-    <div class="theme-panel">
-      <!-- 夜间模式切换 -->
-      <div class="theme-option">
-        <span>夜间模式</span>
-        <label class="auto-toggle">
-          <input type="checkbox" id="autoModeSwitch" checked>
-          <span>AUTO</span>
-        </label>
-        <label class="android-switch">
-          <input type="checkbox" id="nightModeSwitch">
-          <span class="switch-track"></span>
-        </label>
+    <!-- 悬浮底部导航栏 -->
+    <div class="nav">
+      <div class="nav-item" data-nav="1">
+        <i class="fa fa-coffee icon"></i>
+        <span>Daily</span>
       </div>
-      
-      <!-- 主题颜色选择 -->
-      <div class="theme-colors">
-        <span class="colors-title">主题颜色</span>
-        <div class="color-palette" id="colorOptions"></div>
+
+      <div class="nav-item" data-nav="2">
+        <i class="fa fa-screwdriver-wrench icon"></i>
+        <span>Tools</span>
+      </div>
+
+      <div class="nav-item" data-nav="3">
+        <i class="fa fa-code icon"></i>
+        <span>Dev</span>
       </div>
     </div>
-  </div>
 
-  <script src="./nav/nav.js"></script>
-  <script src="./tab/tab.js"></script>
-  <script src="./card/card.js"></script>
-  <script src="./search/search.js"></script>
-  <script src="./theme/theme.js"></script>
-  <script src="./loading/loading.js"></script>
+    <!-- 主题切换组件 -->
+    <div class="theme-toggle">
+      <button class="theme-btn" id="themeBtn">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <div class="theme-panel">
+        <!-- 夜间模式切换 -->
+        <div class="theme-option">
+          <span>夜间模式</span>
+          <label class="auto-toggle">
+            <input type="checkbox" id="autoModeSwitch" checked>
+            <span>AUTO</span>
+          </label>
+          <label class="android-switch">
+            <input type="checkbox" id="nightModeSwitch">
+            <span class="switch-track"></span>
+          </label>
+        </div>
 
-</body>
+        <!-- 主题颜色选择 -->
+        <div class="theme-colors">
+          <span class="colors-title">主题颜色</span>
+          <div class="color-palette" id="colorOptions"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./nav/nav.js"></script>
+    <script src="./tab/tab.js"></script>
+    <script src="./card/card.js"></script>
+    <script src="./search/search.js"></script>
+    <script src="./theme/theme.js"></script>
+    <script src="./loading/loading.js"></script>
+
+  </body>
 
 </html>

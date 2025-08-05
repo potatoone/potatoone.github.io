@@ -1,38 +1,27 @@
-/* 个人信息卡片 - 贴底布局优化版 */
-
-:root {
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-hover: rgba(255, 255, 255, 0.25);
-  --shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  --transition: all 0.3s ease;
-}
-
 /* 个人信息容器 */
 .info-container {
   display: grid;
-  grid-template-columns: 170px 1fr;
+  grid-template-columns: 160px 1fr;
   gap: 1.25rem;
-  position: absolute;
+  position: fixed;
   bottom: 20px; left: 20px; /* 左下角20xp */
   z-index: 100;
+  align-items: end;
 }
 
 /* 头像区域 */
 .avatar-container {
-  width: 170px;
-  height: 170px;
+
+  width: 160px;
+  height: 160px;
 }
 
 .avatar {
   display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   border-radius: 50%;
-  border: 3px solid var(--glass-border);
+  border: 3px solid rgba(255, 255, 255, 0.2);
   background: rgba(197, 197, 197, 0.2);
   backdrop-filter: blur(0.625rem);
   box-shadow: var(--shadow);
@@ -42,7 +31,7 @@
   object-fit: cover;
   width: 100%;
   height: 100%;
-  transition: var(--transition);
+  transition: all 0.3s ease;
 }
 
 .avatar:hover img {
@@ -51,11 +40,10 @@
 
 /* 内容包装器 */
 .content-wrapper {
-  position: relative;
-  width: 260px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* 内容底部对齐 */
+  position: relative;
+  width: 220px;
   gap: 0.75rem;
 }
 
@@ -73,11 +61,11 @@
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 0.5rem;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(0.3125rem);
   box-shadow: var(--shadow);
-  transition: var(--transition);
+  transition: all 0.3s ease;
 }
 
 .bottom-button a {
@@ -102,19 +90,20 @@
   box-shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.2);
 }
 
-.bottom-button.github:hover { background: #24292e; }
-.bottom-button.email:hover { background: #D44638; }
+.bottom-button.github:hover { background: #373939; }
+.bottom-button.email:hover { background: #e39e44; }
 .bottom-button.qq:hover { background: #12B7F5; }
-.bottom-button.other:hover { background: #7289DA; }
+.bottom-button.other:hover { background: #da72bb; }
 
 /* 标签容器 */
 .tags-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4375rem;
-  padding: 0.625rem;
-  border-radius: 0.9375rem;
-  background: var(--glass-bg);
+  gap: 0.4rem;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 10px;
   backdrop-filter: blur(0.625rem);
   box-shadow: var(--shadow);
   width: 100%;
@@ -123,16 +112,16 @@
 
 .tag {
   padding: 0.3125rem 0.625rem;
-  background: var(--glass-bg);
+  background: rgba(255, 255, 255, 0.1);
   color: white;
   font-size: 0.65rem;
   border-radius: 0.9375rem;
-  border: 1px solid var(--glass-border);
-  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   white-space: nowrap;
+  transition: all 0.3s ease;
 }
 
 .tag:hover {
-  background: var(--glass-hover);
+  background: rgba(255, 255, 255, 0.25);
   transform: translateY(-0.125rem);
 }

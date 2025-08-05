@@ -5,43 +5,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>One Potato Homepage</title>   <!-- 网站标题 -->
+    <title>One Potato Homepage</title> <!-- 网站标题 -->
 
-    <link rel="icon" href="./res/icon/logo.svg" type="image/png">    <!-- 网站图标 -->
-    <link rel="stylesheet" href="./body/loading/loading.css" />    <!-- ...loading... -->
-    <link rel="stylesheet" href="./body/click/loader.css" />    <!-- 点击效果 -->
+    <link rel="icon" href="./res/icon/logo.svg" type="image/png">  <!-- 网站图标 -->
+    <link rel="stylesheet" href="./body/loading/loading.css" />  <!-- 加载动画 -->
+    <link rel="stylesheet" href="./body/click/loader.css" />  <!-- 点击效果 -->
     <link rel="stylesheet" href="./res/fireworks/fireworks.css" />  <!-- Bing壁纸 -->
-
-
-<link rel="stylesheet" href="./res/windows/window.css" />
-
-    <link rel="stylesheet" href="./layout-content/snake/snake.css"/>  <!-- 贪吃蛇游戏样式 -->
-
+    <link rel="stylesheet" href="./res/windows/window.css" />  <!-- 窗口管理器 -->
+    <link rel="stylesheet" href="./layout-content/snake/snake.css" />  <!-- 贪吃蛇游戏样式 -->
     <link rel="stylesheet" href="./body/body.css" />  <!-- 主体 -->
-
     <link rel="stylesheet" href="./layout-top/sentence.css" />  <!-- 一言 -->
-    <link rel="stylesheet" href="./layout-top/weather.css" /> <!-- 天气 -->
+    <link rel="stylesheet" href="./layout-top/weather.css" />  <!-- 天气 -->
     <link rel="stylesheet" href="./layout-top/mobile.css" />  <!-- 移动端适配 -->
-
-    <link rel="stylesheet" href="./layout-content/content1.css" /> <!-- 内容区域2 上 -->
+    <link rel="stylesheet" href="./layout-content/content1.css" />  <!-- 内容区域2 上 -->
     <link rel="stylesheet" href="./layout-content/mobile.css" />  <!-- 移动端适配 -->
-
     <link rel="stylesheet" href="./layout-content/content2.css" />  <!-- 内容区域2 下 -->
     <link rel="stylesheet" href="./layout-content/github-chart/contributions.css" />  <!-- Github贡献图 -->
-
     <link rel="stylesheet" href="./layout-bottom/personal/info.css" />  <!-- 个人信息区域 -->
     <link rel="stylesheet" href="./layout-bottom/personal/mobile.css" />  <!-- 移动端适配 -->
-    <link rel="stylesheet" href="./layout-bottom/personal/card/card.css" /> <!-- 模态窗口 -->
-
+    <link rel="stylesheet" href="./layout-bottom/personal/card/card.css" />  <!-- 模态窗口 -->
     <link rel="stylesheet" href="./layout-bottom/music/player.css" />  <!-- 音乐播放器 -->
     <link rel="stylesheet" href="./layout-bottom/music/playlist/playlist.css" />  <!-- 播放列表 -->
     <link rel="stylesheet" href="./layout-bottom/music/playlist/categories.css" />  <!-- 播放列表分类切换按钮 -->
     <link rel="stylesheet" href="./layout-bottom/music/progress/progress.css" />  <!-- 进度条 -->
-
     <link rel="stylesheet" href="./body/menu/menu.css" /> <!-- 右键菜单 -->
-
-    <!-- 引入Font Awesome图标库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />  <!-- Font Awesome图标库 -->
 
   </head>
 
@@ -64,9 +52,9 @@
 
       <div class="sentence"></div>
       <div class="weather"></div>
-      
+
       <div class="content">
-        
+
         <div class="content1">
           <div class="content-tab1">
             <a href="./wiki/" class="tab-link" title="My Wiki">
@@ -81,7 +69,8 @@
             </a>
           </div>
           <div class="content-tab3">
-            <a href="https://music.163.com/#/user/home?id=46311222" class="tab-link" title="网易云">
+            <a href="https://music.163.com/#/user/home?id=46311222"
+              class="tab-link" title="网易云">
               <i class="fas fa-music"></i>
               <span>网易云</span>
             </a>
@@ -96,20 +85,15 @@
 
         <div class="content2">
           <div class="tab1">
-            <button id="startSnakeGame" class="play-button">
-              <i class="fas fa-play"></i>
-            </button>
+            <button id="startSnakeGame" class="play-button"><i class="fas fa-play"></i></button>
             <canvas id="snakeCanvas" width="144" height="144" style="display:none;"></canvas>
           </div>
           <div class="tab2">
-            <div class="github-contributions">
-              <!-- JavaScript将在这里生成贡献格子 -->
-            </div>
+            <div class="github-contributions"><!-- js 生成贡献格子 --></div>
           </div>
         </div>
 
       </div>
-
 
       <div class="info-container" id="infoContainer">
 
@@ -119,50 +103,42 @@
             <img src="./res/icon/avatar.jpg" alt="avatar" />
           </div>
         </div>
-        
+
         <!-- 内容包装器 -->
         <div class="content-wrapper">
 
           <!-- 按钮区域 -->
           <div class="bottom-btnc">
             <div class="bottom-button github">
-              <a href="https://github.com/potatoone" target="_blank">
-                <i class="fab fa-github"></i>
-              </a>
+              <a href="https://github.com/potatoone" target="_blank"><i class="fab fa-github"></i></a>
             </div>
             <div class="bottom-button email">
-              <a href="#">
-                  <i class="fas fa-envelope"></i>
-              </a>
+              <a href="#"><i class="fas fa-envelope"></i></a>
             </div>
             <div class="bottom-button qq">
-                <a href="#">
-                    <i class="fab fa-qq"></i>
-                </a>
+              <a href="#"><i class="fab fa-qq"></i></a>
             </div>
             <div class="bottom-button other">
-              <a href="https://space.bilibili.com/185951788" target="_blank">
-                <i class="fab fa-bilibili"></i>
-              </a>
+              <a href="https://space.bilibili.com/185951788" target="_blank"><i class="fab fa-bilibili"></i></a>
             </div>
           </div>
 
           <!-- 标签容器 -->
           <div class="tags-container">
+            <div class="tag">Go</div>
+            <div class="tag">Python</div>
+            <div class="tag">TypeScript</div>
             <div class="tag">Linux</div>
             <div class="tag">Docker</div>
             <div class="tag">Nginx</div>
             <div class="tag">Network</div>
             <div class="tag">Android</div>
-            <div class="tag">Go</div>
-
             <div class="tag">UI/UX</div>
           </div>
 
         </div>
 
       </div>
-
 
       <!-- 音乐播放器区域 -->
       <div class="player">
@@ -184,37 +160,36 @@
             <div class="slider"></div>
           </div>
         </div>
-        
+
         <!-- 播放列表区域 -->
         <div id="playlist" class="playlist">
           <ul><!-- 歌曲列表由JavaScript动态生成 --></ul>
         </div>
 
         <div class="control">
-          <div class="control-title"></div>  <!-- 音乐标题 -->
+          <div class="control-title"></div> <!-- 音乐标题 -->
           <div class="control-btn"> <!-- 播放控制按钮 -->
             <button id="prev"><i class="fas fa-backward"></i></button>
             <button id="play"><i class="fas fa-play"></i></button>
             <button id="next"><i class="fas fa-forward"></i></button>
             <button id="mode"><i class="fas fa-bars"></i></button>
           </div>
-          <div class="time-info">   <!-- 时间 -->
-            <span class="current-time">0:00</span>
-            <span class="total-time">0:00</span>
+          <div class="time-info"> <!-- 时间 -->
+            <span class="current-time"></span>
+            <span class="total-time"></span>
           </div>
-          <div class="progress-container">  <!-- 进度条 -->
+          <div class="progress-container"> <!-- 进度条 -->
             <div class="progress-bar"></div>
             <div class="progress-handle"></div>
           </div>
           <audio id="audio-player"> <!-- 音频播放器 -->
-            <source src="" type="audio/mpeg">
+            <source src type="audio/mpeg">
           </audio>
         </div>
 
       </div>
 
     </div>
-
 
     <!-- 个人信息弹窗 -->
     <div class="modal-overlay" id="contact-modal">
@@ -227,38 +202,26 @@
       </div>
     </div>
 
-
-    <script src="./body/loading/loading.js"></script>  <!-- 页面加载控制脚本 -->
-    <script src="./res/wallpaper.js"></script>  <!-- Bing壁纸 -->
-    <script src="./body/click/loader.js"></script>  <!-- 点击效果 -->
-
-    <script src="./layout-content/snake/snake.js"></script>  <!-- 贪吃蛇游戏 -->
-
+    <script src="./body/loading/loading.js"></script> <!-- 页面加载控制脚本 -->
+    <script src="./res/wallpaper.js"></script> <!-- Bing壁纸 -->
+    <script src="./body/click/loader.js"></script> <!-- 点击效果 -->
+    <script src="./layout-content/snake/snake.js"></script> <!-- 贪吃蛇游戏 -->
     <script src="./layout-top/sentence.js"></script> <!-- 一言 -->
-    <script src="./layout-top/weather.js"></script>  <!-- 天气 -->
-
-    <script src="./layout-content/github-chart/contributions.js"></script> <!-- Github图表 -->
-    <script src="./layout-content/github-chart/colorpick.js"></script> <!-- Github图表颜色 -->
-
-    <script src="./layout-bottom/personal/info.js"></script>  <!-- 个人信息区域 -->
-    <script src="./layout-bottom/personal/card/card.js"></script>  <!-- 模态窗口 -->
-
-    <script src="./layout-bottom/music/player.js"></script>  <!-- 音乐播放器区域 -->
-    <script src="./layout-bottom/music/playlist/playlist.js"></script>  <!-- 播放列表 -->
-    <script src="./layout-bottom/music/playlist/categories.js"></script>  <!-- 播放列表分类切换按钮 -->
-    <script src="./layout-bottom/music/progress/progress.js"></script>  <!-- 进度条 -->
-    <script src="./layout-bottom/music/mode.js"></script>  <!-- 播放模式 -->
-    <script src="./layout-bottom/music/mobile.js"></script>  <!-- 移动端适配 -->
-
-    <!-- 烟花效果 -->
-    <script src="./res/fireworks/fireworks.js"></script>
-    <script src="./res/fireworks/check.js"></script>
-
-    <!-- 窗口管理器 -->
-    <script src="./res/windows/window.js" defer></script>
-
-    <!-- 右键菜单 -->
-    <script src="./body/menu/menu.js" defer></script>
+    <script src="./layout-top/weather.js"></script> <!-- 天气 -->
+    <script src="./layout-content/github-chart/contributions.js"></script><!-- Github图表 -->
+    <script src="./layout-content/github-chart/colorpick.js"></script><!-- Github图表取色器 -->
+    <script src="./layout-bottom/personal/info.js"></script> <!-- 个人信息区域 -->
+    <script src="./layout-bottom/personal/card/card.js"></script> <!-- 模态窗口 -->
+    <script src="./layout-bottom/music/player.js"></script> <!-- 音乐播放器区域 -->
+    <script src="./layout-bottom/music/playlist/playlist.js"></script><!-- 播放列表 -->
+    <script src="./layout-bottom/music/playlist/categories.js"></script><!-- 播放列表分类切换按钮 -->
+    <script src="./layout-bottom/music/progress/progress.js"></script><!-- 进度条 -->
+    <script src="./layout-bottom/music/mode.js"></script> <!-- 播放模式 -->
+    <script src="./layout-bottom/music/mobile.js"></script> <!-- 移动端适配 -->
+    <script src="./res/fireworks/fireworks.js"></script>  <!-- 烟花效果 -->
+    <script src="./res/fireworks/check.js"></script>  <!-- 烟花触发 -->
+    <script src="./res/windows/window.js" defer></script>  <!-- 窗口管理器 -->
+    <script src="./body/menu/menu.js" defer></script>  <!-- 右键菜单 -->
 
   </body>
 

@@ -2,7 +2,7 @@
 .custom-context-menu {
   position: fixed;
   display: none;
-  background-color: #ffffff36;
+  background-color: #b6b6b636;
   border-radius: 6px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   min-width: 140px;
@@ -86,14 +86,14 @@
 }
 
 .about-content {
-  background-color: #ffffff16;
+  position: relative;
+  max-width: 360px;
   padding: 24px;
   border-radius: 12px;
-  max-width: 320px;
-  width: 90%;
-  position: relative;
+  font-size: 14px;
   transform: scale(0.9);
   transition: transform 0.3s;
+  background-color: #ffffff16;
 }
 
 .about-card.active .about-content {
@@ -106,7 +106,7 @@
   right: 20px;
   background: none;
   border: none;
-  font-size: 30px;
+  font-size: 25px;
   color: #ffffff;
   cursor: pointer;
 }

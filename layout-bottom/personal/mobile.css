@@ -5,7 +5,7 @@
     .content-wrapper {
       display: none;
       height: auto;
-      width: 170px; /* 减小宽度以便右侧显示 */
+      width: 175px; /* 减小宽度以便右侧显示 */
       position: absolute;
       left: 70px; /* 在头像右侧显示 */
       bottom: -5px; /* 与放大后的头像底部对齐 */

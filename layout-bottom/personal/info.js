@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // 头像点击事件
   avatar.addEventListener('click', function(e) {
     if (isMobile()) {
-      e.stopPropagation();
       infoContainer.classList.toggle('expanded');
     }
   });
