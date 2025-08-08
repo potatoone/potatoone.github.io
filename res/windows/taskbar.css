@@ -1,31 +1,31 @@
 /* Windows 风格任务栏容器 */
 .taskbar {
-  position: fixed;                    /* 固定定位 */
+  position: fixed;
   top: 5px;
   left: 50%;
-  transform: translateX(-50%) translateY(-100%); /* 初始隐藏在顶部上方 */
-  opacity: 0;                         /* 初始完全透明 */
-  pointer-events: none;              /* 初始不可交互 */
+  transform: translateX(-50%) translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   padding: 10px;
   max-width: 500px;
-  background: rgba(146,146,146,0.13); /* 半透明背景 */
-  backdrop-filter: blur(5px);         /* 模糊背景 */
-  border: 1px solid rgba(236,236,236,0.33); /* 淡色边框 */
-  border-radius: 10px;       /* 圆角下边 */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* 阴影提升层级感 */
-  z-index: 9999;                      /* 高于所有窗口 */
-  transition: transform 0.3s ease, opacity 0.3s ease; /* 平滑过渡动画 */
+  background: rgba(146,146,146,0.13);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(236,236,236,0.33);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 9999;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   background-color: rgba(52, 52, 52, 0.118);
 }
 
 /* 激活状态：任务栏可见 */
 .taskbar.active {
-  transform: translateX(-50%) translateY(0); /* 滑入视口 */
-  opacity: 1;                                /* 完全可见 */
-  pointer-events: auto;                      /* 可交互 */
+  transform: translateX(-50%) translateY(0); 
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* 任务栏项目容器 */
@@ -41,12 +41,12 @@
 .taskbar-item {
   width: 32px;
   height: 32px;
-  border-radius: 20%;                         /* 圆形 */
-  background: rgba(255,255,255,0.07);         /* 微透明底 */
+  border-radius: 20%;
+  background: rgba(255,255,255,0.07);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;                  /* 动画过渡 */
+  transition: all 0.2s ease;
   position: relative;
 }
 
@@ -56,7 +56,6 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Font Awesome 图标样式 */
 .taskbar-item i {
   font-size: 16px;
   color: white;

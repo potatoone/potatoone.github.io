@@ -1,69 +1,76 @@
 .content2 {
-  display: flex; /* 改为flex布局 */
-  flex-direction: row; /* 水平排列 */
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  max-width: 1000px; /* 限制最大宽度 */
-  gap: 20px; /* 元素之间的间距 */
-  padding: 20px;
+  max-width: 1000px;
+  gap: 20px; padding: 20px;
   z-index: 10;
 }
 
-.tab1 {
-  width: 150px; /* 左侧tab宽度15% */
+.content2-tab1 {
+  width: 150px;
   height: 150px;
-  box-sizing: border-box;
   border-radius: 15px;
-  border: 3px solid rgba(169, 169, 169, 0.26);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.155);
   backdrop-filter: blur(10px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden; /* 确保内容不溢出 */
-  display: flex; /* 添加flex布局使图标居中 */
+  overflow: hidden;
+  display: flex;
   justify-content: center;
   align-items: center;
-  opacity: calc(0.6); /* 默认透明度为0.5 */
 }
 
-.tab1 i {
+.content2-tab1 i {
   font-size: 40px;
   color: #ffffff;
 }
 
-.tab2 {
-  width: 850px; /* 右侧tab宽度85% */
+.content2-tab2 {
+  width: 850px;
   height: 150px;
-  box-sizing: border-box;
   border-radius: 15px;
-  border: 3px solid rgba(169, 169, 169, 0.26);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.155);
   backdrop-filter: blur(10px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: visible; /* 改为visible允许tooltip显示在外部 */
+  overflow: visible;
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: calc(0.6); /* 默认透明度为0.5 */
+
 }
 
-.tab1:hover,.tab1 i,.tab2:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  opacity: calc(1); /* 鼠标悬停时透明度变为1 */
+.content2-tab1:hover,.content2-tab1 i,.content2-tab2:hover {
+  transform: translateY(-3px);
 }
 
-/* 移动端适配 */
+
+/* 贪吃蛇按钮 */
+.play-button {
+  position: absolute;
+  background-color: #ffffff00;
+  border: none;
+  font-size: 40px;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+.play-button:hover {
+  transform: scale(1.1);
+}
+
 @media screen and (max-width: 768px) {
   .chart {
-    flex-direction: column; /* 移动端改为垂直排列 */
-    gap: 15px; /* 移动端减小间距 */
+    flex-direction: column;
+    gap: 15px;
   }
-  .tab1 {
-    display: none; /* 移动端隐藏左侧tab */
+  .content2-tab1 {
+    display: none;
   }
-  .tab2 {
-    display: none;  /* 移动端隐藏右侧tab */
+  .content2-tab2 {
+    display: none;
     border-radius: 15px;
-    width: 100%; /* 移动端两个tab都占满宽度 */
-    height: 80px; /* 移动端稍微减小高度 */
+    width: 100%;
+    height: 80px;
   }
 }

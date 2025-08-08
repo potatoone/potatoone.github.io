@@ -2,14 +2,13 @@
 /* 搜索容器 - 整体布局 */
 .search-container {
   display: flex;
-  box-sizing: border-box;
   align-items: center;
   width: 100%;
-  max-width: 600px; /* 最大宽度限制，小屏幕自动收缩 */
-  height: 50px; /* 增加高度避免内部元素溢出 */
-  padding: 7px; /* 调整内边距，避免挤压子元素 */
-  margin: 10px; /* 居中显示 */
-  gap: 10px; /* 缩小间距，避免挤压 */
+  max-width: 600px;
+  height: 50px;
+  padding: 7px;
+  margin: 10px;
+  gap: 10px;
   background: var(--card);
   border-radius: 50px;
   transition: box-shadow 0.3s ease;
@@ -22,18 +21,18 @@
 /* 下拉选择器组件 */
 .search-dropdown {
   position: relative;
-  flex-shrink: 0; /* 防止被挤压变形 */
+  flex-shrink: 0;
 }
 .search-dropdown-trigger {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 36px; /* 宽高统一，包含padding */
+  width: 36px;
   height: 36px;
-  padding: 0; /* 用宽高直接控制尺寸，避免padding导致的错位 */
+  padding: 0;
   background: var(--botton-2);
   color: var(--botton-1);
-  border-radius: 50%; /* 圆形更协调 */
+  border-radius: 50%;
   transition: all 0.3s ease;
 }
 .search-dropdown-trigger:hover {
@@ -50,7 +49,7 @@
 /* 下拉菜单 */
 .search-dropdown-menu {
   position: absolute;
-  top: calc(100% + 8px); /* 缩小与触发器的间距 */
+  top: calc(100% + 8px);
   left: 0;
   width: 170px;
   background: var(--white);
@@ -96,8 +95,8 @@
 /* 搜索输入框 */
 .search-input {
   font-family: "DaBaoTaoTaoTi", sans-serif;
-  flex: 1; /* 占据剩余空间 */
-  height: 36px; /* 与触发器高度匹配 */
+  flex: 1;
+  height: 36px;
   width: 100%;
   padding: 0 10px;
   background: transparent;
@@ -132,15 +131,15 @@ input:-webkit-autofill {
   align-items: center;
   justify-content: center;
   border: none;
-  padding: 0 20px; /* 水平padding控制宽度 */
-  height: 36px; /* 与其他元素高度统一 */
+  padding: 0 20px;
+  height: 36px;
   background: var(--botton-1);
   color: #fff;
   border-radius: 50px;
-  font-size: 14px; /* 缩小字体避免换行 */
+  font-size: 14px; 
   font-weight: 700;
   transition: all 0.3s ease;
-  flex-shrink: 0; /* 防止被挤压 */
+  flex-shrink: 0;
 }
 .search-button i {
   margin-right: 6px;
@@ -161,19 +160,16 @@ input:-webkit-autofill {
 /* 移动端适配（<768px） */
 @media screen and (max-width: 768px) {
   .search-container {
-    height: 44px; /* 适当缩减高度 */
+    height: 44px;
     padding: 0 8px;
   }
-
   .search-dropdown-trigger {
     width: 32px;
     height: 32px;
   }
-
   .search-dropdown-menu {
     width: 150px;
   }
-
   .search-dropdown-item {
     padding: 10px 16px;
     font-size: 12px;
@@ -184,16 +180,14 @@ input:-webkit-autofill {
   .search-dropdown-item span {
     font-size: 12px;
   }
-
   .search-input {
     height: 32px;
     font-size: 12px;
   }
-
   .search-button {
     width: 32px;
     height: 32px;
-    padding: 0; /* 仅保留图标 */
+    padding: 0;
   }
   .search-button i {
     margin-right: 0;

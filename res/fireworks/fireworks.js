@@ -1,40 +1,33 @@
-// ==============================================
 // 背景遮罩层 - 用于增强烟花显示效果的半透明黑色背景
-// ==============================================
-// 创建遮罩层DOM元素
 const backgroundOverlay = document.createElement('div');
 // 使用with语句简化样式设置（针对遮罩层的样式对象）
 with(backgroundOverlay.style) {
-  position = 'absolute';      // 绝对定位，覆盖整个页面
-  top = left = 0;             // 定位到页面左上角
-  width = height = '100%';    // 宽度和高度均占满整个页面
-  backgroundColor = 'rgba(0, 0, 0, 0.5)';  // 半透明黑色（透明度50%）
-  display = 'none';           // 默认隐藏，需要时再显示
+  position = 'absolute';
+  top = left = 0;
+  width = height = '100%';
+  backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  display = 'none';
 }
 // 将遮罩层添加到页面中
 document.body.appendChild(backgroundOverlay);
 
-// ==============================================
 // 烟花颜色配置 - 定义烟花粒子和轨迹的颜色组合
-// ==============================================
 const fireworkColors = [
-  { main: '#FF5E5E', trail: '#ff3d00' },    // 红色系（粒子色，轨迹色）
-  { main: '#FFB95E', trail: '#ff9800' },    // 橙色系
-  { main: '#FFF65E', trail: '#ffeb3b' },    // 黄色系
-  { main: '#B9FF5E', trail: '#cddc39' },    // 黄绿色系
-  { main: '#5EFF5E', trail: '#8bc34a' },    // 绿色系
-  { main: '#5EFFB9', trail: '#4caf50' },    // 青绿色系
-  { main: '#5EFFFF', trail: '#00bcd4' },    // 青色系
-  { main: '#5EB9FF', trail: '#2196f3' },    // 蓝色系
-  { main: '#5E5EFF', trail: '#3f51b5' },    // 靛色系
-  { main: '#B95EFF', trail: '#673ab7' },    // 紫色系
-  { main: '#FF5EFF', trail: '#9c27b0' },    // 粉紫色系
-  { main: '#FF5EB9', trail: '#e91e63' }     // 粉红色系
+  { main: '#FF5E5E', trail: '#ff3d00' },
+  { main: '#FFB95E', trail: '#ff9800' }, 
+  { main: '#FFF65E', trail: '#ffeb3b' },
+  { main: '#B9FF5E', trail: '#cddc39' },
+  { main: '#5EFF5E', trail: '#8bc34a' },
+  { main: '#5EFFB9', trail: '#4caf50' },
+  { main: '#5EFFFF', trail: '#00bcd4' },
+  { main: '#5EB9FF', trail: '#2196f3' },
+  { main: '#5E5EFF', trail: '#3f51b5' },
+  { main: '#B95EFF', trail: '#673ab7' },
+  { main: '#FF5EFF', trail: '#9c27b0' },
+  { main: '#FF5EB9', trail: '#e91e63' }
 ];
 
-// ==============================================
 // 创建单个烟花 - 包含上升轨迹和爆炸效果
-// ==============================================
 function createFirework() {
   // 1. 计算烟花位置参数
   const startX = 50 + Math.random() * (window.innerWidth - 100); // 底部随机X坐标（左右留边距）
@@ -103,9 +96,7 @@ function createFirework() {
   }, riseDuration * 1000);
 }
 
-// ==============================================
 // 烟花控制逻辑 - 管理烟花的启动和停止
-// ==============================================
 let fireworksTimer = null; // 用于存储定时器ID，便于后续清除
 let fireworksActive = false; // 烟花活动状态标记
 

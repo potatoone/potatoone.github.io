@@ -1,12 +1,9 @@
 /* 
  * Windows风格窗口管理器 - 控制按钮
- * 使用FontAwesome图标实现窗口控制按钮
  */
-
-/* Windows 10风格的窗口控制按钮容器 */
 .window-controls {
   display: flex;
-  margin-left: auto; /* 靠右对齐 */
+  margin-left: auto;
 }
 
 /* 控制按钮基础样式 */
@@ -17,53 +14,38 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.1s ease; /* 悬停颜色变化动画 */
-  color: white; /* 图标颜色 */
+  transition: background-color 0.1s ease;
+  color: white;
 }
 
-/* 移除旧的span样式，不再需要 */
-.window-button span {
-  display: none;
-}
-
-/* 添加FontAwesome图标 */
 .window-button::before {
   font-family: "Font Awesome 6 Free";
-  font-weight: 900; /* 确保使用实心图标 */
-  font-size: 14px; /* 调整图标大小 */
+  font-weight: 900;
+  font-size: 14px;
 }
-
-/* 最小化按钮 - 使用minus图标 */
 .window-button.minimize::before {
   content: "\f068"; /* FontAwesome的minus Unicode */
 }
-
-/* 最大化按钮 - 使用expand图标 */
 .window-button.maximize::before {
   content: "\f065"; /* FontAwesome的expand Unicode */
 }
-
-/* 关闭按钮 - 使用xmark图标 */
 .window-button.close::before {
   content: "\f00d"; /* FontAwesome的xmark Unicode */
+}
+.window.maximized .window-button.maximize::before {
+  content: "\f066"; /* FontAwesome的compress Unicode */
 }
 
 /* 最小化按钮悬停效果 */
 .window-button.minimize:hover {
-  background-color: rgba(0, 0, 0, 0.307); /* 灰色背景 */
+  background-color: rgba(0, 0, 0, 0.307);
 }
-
 /* 最大化按钮悬停效果 */
 .window-button.maximize:hover {
-  background-color: rgba(0, 0, 0, 0.307);  /* 浅灰色背景 */
+  background-color: rgba(0, 0, 0, 0.307);
 }
-
 /* 关闭按钮悬停效果 - Windows标准红色 */
 .window-button.close:hover {
-  background-color: #9162ff9e; /* Windows红色关闭按钮 */
+  background-color: #9162ff9e;
 }
 
-/* 最大化状态下切换为compress图标 */
-.window.maximized .window-button.maximize::before {
-  content: "\f066"; /* FontAwesome的compress Unicode */
-}

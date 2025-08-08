@@ -5,27 +5,22 @@
     .content-wrapper {
       display: none;
       height: auto;
-      width: 175px; /* 减小宽度以便右侧显示 */
       position: absolute;
-      left: 70px; /* 在头像右侧显示 */
-      bottom: -5px; /* 与放大后的头像底部对齐 */
+      width: 152px;
+      left: 70px;
+      bottom: -5px;
     }
   
-    /* 头像状态：折叠(默认) */
     .avatar-container {
-      opacity: 0.5; /* 降低透明度 */
+      opacity: 0.7; /* 降低透明度 */
       transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease, height 0.3s ease; /* 添加尺寸过渡 */
-      width: 50px; /* 更小的头像容器 */
+      width: 50px;
       height: 50px;
-
-    }
-    .avatar {
-      border: 2px solid rgba(255, 255, 255, 0.192);
     }
 
     /* 头像状态：展开 */
     .info-container.expanded .avatar-container {
-      transform: scale(1.2); /* 微微放大，但不是原始大小 */
+      transform: scale(1.1);
       opacity: 1;
     }
     
@@ -52,12 +47,16 @@
       font-size: 14px;
     }
 
+    /* 标签容器 */
+    .tags-container {
+      gap: 5px; padding: 6px;
+    }
     /* 微调标签样式 */
     .tag {
-      padding: 3px 7px;
-      font-size: 0.5rem;
+      padding: 3px 7.5px;
+      font-size: 7px;
     }
-    
+
     /* 淡入动画 */
     @keyframes fadeIn {
       from {

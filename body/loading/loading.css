@@ -1,6 +1,6 @@
 /* 打字机效果加载动画 */
 .loading {
-  font-size: clamp(32px, 6vw, 60px); /* 响应式字体大小 */
+  font-size: clamp(32px, 6vw, 60px);
   font-family: system-ui, sans-serif;
   font-weight: 700;
   color: transparent;
@@ -9,7 +9,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   animation: l1 1.5s linear infinite;
-  text-align: center; /* 确保在小屏幕上居中 */
+  text-align: center;
   margin: 0.5em;
 }
 
@@ -33,12 +33,10 @@
   z-index: 9999;
   transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
   animation: bg-pulse 5s ease infinite;
-  padding: 1rem; /* 添加内边距，特别对小屏幕有用 */
 }
 
 /* 动画关键帧 */
 @keyframes l1 { to { background-size: 100% 100% } }
-
 @keyframes bg-pulse {
   0%, 100% { background-position: 0% 0%; }
   50% { background-position: 100% 100%; }

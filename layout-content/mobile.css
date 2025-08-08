@@ -1,7 +1,6 @@
-/* 移动端：2行2列布局 */
 @media (max-width: 768px) {
     .content {
-      height: auto; /* 允许高度自适应内容 */
+      height: auto;
       padding: 15px;
     }
     
@@ -9,37 +8,22 @@
       width: 95%;
       grid-template-columns: repeat(2, 1fr); /* 2列 */
       grid-template-rows: repeat(2, 1fr); /* 2行 */
-      gap: 15px; /* 移动端减小间距 */
+      gap: 15px;
       padding: 0px;
     }
   
     .content-tab1 {
-      border: 2px solid rgba(169, 169, 169, 0.26);
-      border-radius: 0px 20px 20px 20px;  /* 左上右上右下左下 */
+      border-radius: 0px 20px 20px 20px;
     }
     .content-tab2 {
-      border: 2px solid rgba(169, 169, 169, 0.26);
       border-radius: 20px 0px 20px 20px;  
     }
     .content-tab3 {
-      border: 2px solid rgba(169, 169, 169, 0.26);
       border-radius: 20px 20px 20px 0px;  
     }
     .content-tab4 {
-      border: 2px solid rgba(169, 169, 169, 0.26);
       border-radius: 20px 20px 0px 20px;
     }
   
   }
   
-  /* 超小屏幕 */
-  @media (max-width: 480px) {
-    .content1 {
-      grid-template-columns: repeat(2, 1fr); /* 2列 */
-      grid-template-rows: repeat(2, 1fr); /* 2行 */
-    }
-    
-    .content-tab {
-      padding-bottom: 70%; /* 矮一点的矩形 */
-    }
-  }

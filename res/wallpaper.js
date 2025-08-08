@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       infoButton = document.createElement('label');
       infoButton.setAttribute('for', 'wallpaper-info-toggle');
-      infoButton.style.cssText = 'position:fixed;top:5px;right:5px;width:17px;height:17px;border-radius:50%;background:rgba(0, 0, 0, 0.14);backdrop-filter:blur(2px);color:white;display:flex;align-items:center;justify-content:center;font-size:10px;z-index:10;';
+      infoButton.style.cssText = 'position:fixed;top:5px;right:5px;width:17px;height:17px;border-radius:50%;background:rgba(0, 0, 0, 0.14);backdrop-filter:blur(2px);color:white;display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;z-index:10;';
       infoButton.innerHTML = '<i>i</i>';
 
       infoElement = document.createElement('div');
@@ -202,8 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <div style="display:flex;flex-direction:column;margin-right:8px">
             <div style="font-weight:bold;margin-bottom:3px;text-align:center">${formatShortDate(data.date)}</div>
             <div style="display:flex">
-              <button style="background:rgba(255,255,255,0.06);color:white;border:none;border-radius:3px;padding:1px 6px;margin-right:3px;font-size:12px;opacity:${data.index < 7 ? '1' : '0.25'}" ${data.index < 7 ? '' : 'disabled'}>-</button>
-              <button style="background:rgba(255,255,255,0.06);color:white;border:none;border-radius:3px;padding:1px 6px;font-size:12px;opacity:${data.index > 0 ? '1' : '0.25'}" ${data.index > 0 ? '' : 'disabled'}>+</button>
+              <button style="background:rgba(255,255,255,0.06);color:white;border:none;border-radius:3px;padding:1px 6px;margin-right:3px;font-size:12px;cursor:pointer;opacity:${data.index < 7 ? '1' : '0.25'}" ${data.index < 7 ? '' : 'disabled'}>-</button>
+              <button style="background:rgba(255,255,255,0.06);color:white;border:none;border-radius:3px;padding:1px 6px;font-size:12px;cursor:pointer;opacity:${data.index > 0 ? '1' : '0.25'}" ${data.index > 0 ? '' : 'disabled'}>+</button>
             </div>
           </div>
           <div style="flex:1;white-space:normal;line-height:1.2">${data.copyright}</div>

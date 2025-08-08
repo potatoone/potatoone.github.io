@@ -1,4 +1,3 @@
-
 // 检查并切换烟花显示
 function checkAndToggleFireworks() {
   if (!window.MusicPlayer || !window.PlaylistManager || !window.toggleFireworks) return;

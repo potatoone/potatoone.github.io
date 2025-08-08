@@ -10,19 +10,20 @@ input[type="radio"] {
   backdrop-filter: blur(10px);
   overflow: hidden;
   bottom: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.155);
 }
 
 /* 分类按钮 */
 .category-btn {
   flex: 1;
   text-align: center;
-  padding: 12px;
+  padding: 10px;
   color: rgba(255, 255, 255, 0.353);
   z-index: 1;
   transition: color 0.3s ease;
   position: relative;
   font-size: 12px;
+  cursor: pointer;
 }
 
 .category-btn:hover {
@@ -32,10 +33,10 @@ input[type="radio"] {
 /* 选中状态下的按钮 */
 .slider {
   position: absolute;
-  top: 4px; /* 与上内边距对齐 */
-  left: 4px; /* 与左内边距对齐 */
-  width: 49px;  /* 每个按钮宽60px，减去左边距 */
-  height: calc(100% - 8px); /* 减去上下内边距 */
+  top: 4.5px; /* 与上内边距对齐 */
+  left: 4.5px; /* 与左内边距对齐 */
+  width: 51.875px;  /* 每个按钮宽60px，减去左边距 */
+  height: calc(100% - 9px); /* 减去上下内边距 */
   background-color: rgba(255, 255, 255, 0.115);
   border-radius: 6px;
   z-index: 0;
@@ -47,13 +48,14 @@ input[type="radio"] {
   transform: translateX(0%);
 }
 #tab-1:checked ~ .playlist-categories .slider {
-  transform: translateX(calc(100% + 8px));
+  transform: translateX(calc(100% + 4.5px));
 }
 #tab-2:checked ~ .playlist-categories .slider {
-  transform: translateX(calc(200% + 16px));
+  transform: translateX(calc(200% + 9px));
 }
 #tab-3:checked ~ .playlist-categories .slider {
-  transform: translateX(calc(300% + 24px));
+  transform: translateX(calc(300% + 13.5px));
+
 }
 
 /* 选中状态下的文字高亮 */

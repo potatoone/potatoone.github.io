@@ -71,8 +71,8 @@ class SnakeGame {
       this.draw();
     }, 450);
 
-    // 游戏开始时设 .tab1 透明度为1
-    document.querySelector('.tab1').style.opacity = '1';
+    // 游戏开始时设 .content2-tab1 透明度为1
+    document.querySelector('.content2-tab1').style.opacity = '1';
   }
 
   onKey(e) {
@@ -155,8 +155,8 @@ class SnakeGame {
     this.over = true;
     this.draw();
 
-    // 游戏结束时移除 .tab1 透明度样式
-    document.querySelector('.tab1').style.removeProperty('opacity');
+    // 游戏结束时移除 .content2-tab1 透明度样式
+    document.querySelector('.content2-tab1').style.removeProperty('opacity');
 
     // 隐藏画布，显示开始按钮
     setTimeout(() => {

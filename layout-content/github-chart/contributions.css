@@ -12,10 +12,9 @@
 /* GitHub贡献图样式 */
 .github-contributions {
   display: grid;
-  /* 修改网格模板，确保一致性 */
   grid-template-rows: 15px repeat(7, minmax(10px, 1fr)); /* 第一行给月份标签 */
   grid-template-columns: 25px repeat(53, minmax(10px, 1fr)); /* 第一列给星期标签 */
-  grid-gap: 3px; /* 统一的间隙 */
+  grid-gap: 3px;
   padding: 10px;
   width: 100%;
   aspect-ratio: 12/2;
@@ -24,17 +23,14 @@
 
 /* 贡献格子基础样式 - 固定大小 */
 .contribution-cell {
-  width: 10px; /* 固定宽度 */
-  height: 10px; /* 固定高度 */
+  width: 10px; height: 10px;
   border-radius: 1px;
   transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.3s ease;
   position: relative;
-  /* 确保格子在网格中居中 */
-  justify-self: center;
-  align-self: center;
+  justify-self: center; align-self: center;
 }
 
-/* 贡献等级颜色 - 使用CSS变量 */
+/* 贡献等级颜色 */
 .level-0 { background-color: var(--contrib-level0); }
 .level-1 { background-color: var(--contrib-level1); }
 .level-2 { background-color: var(--contrib-level2); }
@@ -67,18 +63,18 @@
   opacity: 0;
   transition: visibility 0s, opacity 0.2s ease;
   pointer-events: none;
-  z-index: 9999; /* 将z-index提高到一个非常高的值 */
+  z-index: 100;
 }
 
 .contribution-cell:hover .contribution-tooltip {
   visibility: visible;
   opacity: 1;
-  z-index: 9999; /* 确保悬停时也保持高z-index */
+  z-index: 100;
 }
 
-/* 周标签 - 修改为固定在第一列 */
+/* 周标签 - 固定在第一列 */
 .day-label {
-  grid-column: 1; /* 固定在第一列 */
+  grid-column: 1;
   font-size: 7px;
   color: var(--contrib-text);
   align-self: center;
@@ -86,34 +82,31 @@
   padding-right: 8px;
 }
 
-/* 月份标签 - 修改为固定在第一行 */
+/* 月份标签 - 固定在第一行 */
 .month-label {
-  grid-row: 1; /* 固定在第一行 */
+  grid-row: 1;
   width: auto;
   font-size: 9px;
   color: var(--contrib-text);
   align-self: center;
   justify-self: center;
-  /* 确保月份标签不会扩展列宽 */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  /* 添加pointerEvents: none，防止影响鼠标事件 */
   pointer-events: none;
 }
 
-/* 响应式布局 */
 @media screen and (max-width: 768px) {
   .github-contributions {
-    padding: 8px; grid-gap: 1px; /* 统一的间隙 */
+    padding: 8px; grid-gap: 1px;
     grid-template-rows: 12px repeat(7, minmax(6px, 1fr));
     grid-template-columns: 17px repeat(53, minmax(6px, 1fr));
   }
   
   .contribution-cell {
-    width: 5px; /* 移动端更小格子 */
+    width: 5px;
     height: 5px;
-    grid-gap: 1px; /* 移动端更小间隙 */
+    grid-gap: 1px;
     border-radius: 1px;
   }
   

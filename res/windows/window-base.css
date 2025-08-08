@@ -10,50 +10,50 @@
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* 允许点击穿透到下层元素 */
-  z-index: 9000; /* 确保窗口显示在大多数元素之上 */
+  pointer-events: none;
+  z-index: 9000;
   overflow: hidden;
 }
 
 /* 基本窗口样式 */
 .window {
   position: absolute;
-  min-width: 300px; /* 窗口最小宽度 */
-  min-height: 200px; /* 窗口最小高度 */
-  border-radius: 8px; /* 窗口圆角 */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.436); /* 窗口阴影效果 */
-  overflow: hidden; /* 隐藏溢出内容 */
+  min-width: 300px;
+  min-height: 200px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.436);
+  overflow: hidden;
   display: flex;
-  flex-direction: column; /* 垂直排列标题栏和内容区 */
-  pointer-events: auto; /* 启用鼠标事件 */
-  transform: scale(0.6); /* 初始打开缩放 */
-  opacity: 0; /* 初始透明，用于动画 */
-  transition: transform 0.2s ease, opacity 0.2s ease; /* 平滑过渡动画 */
-  backdrop-filter: blur(10px); /* 背景模糊效果 */
+  flex-direction: column;
+  pointer-events: auto;
+  transform: scale(0.6);
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  backdrop-filter: blur(10px);
   background-color: rgba(52, 52, 52, 0.118);
 }
 
 /* 可见状态的窗口样式 */
 .window.visible {
-  transform: scale(1); /* 显示时恢复正常大小 */
-  opacity: 1; /* 显示时完全不透明 */
+  transform: scale(1);
+  opacity: 1;
 }
 
 /* 最大化状态的窗口样式 */
 .window.maximized {
-  top: 0 !important; /* 强制置顶 */
-  left: 0 !important; /* 强制靠左 */
-  width: 100% !important; /* 强制全宽 */
-  height: 100% !important; /* 强制全高 */
-  border-radius: 0; /* 移除圆角 */
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0;
   border: none;
 }
 
 /* 最小化状态的窗口样式 */
 .window.minimized {
-  transform: scale(0.6); /* 缩小效果 */
-  opacity: 0; /* 隐藏 */
-  pointer-events: none; /* 禁用鼠标事件 */
+  transform: scale(0.6);
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* 窗口标题栏 */
@@ -61,28 +61,27 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(245, 245, 245, 0); /* 透明背景 */
-  backdrop-filter: blur(15px); /* 模糊效果 */
+  background-color: rgba(245, 245, 245, 0);
+  backdrop-filter: blur(15px);
   padding: 7px 0px 7px 10px;
-  user-select: none; /* 防止文本选择 */
-  height: 30px; /* 固定高度 */
-  flex-shrink: 0; /* 防止压缩 */
+  user-select: none;
+  height: 30px;
+  flex-shrink: 0;
 }
 
 /* 窗口标题文本 */
 .window-title {
-  color: #ffffff; /* 白色文本 */
+  color: #ffffff;
   font-size: 12px;
-  margin-right: auto; /* 推动控制按钮到右侧 */
-  white-space: nowrap; /* 防止标题换行 */
+  margin-right: auto;
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* 文本溢出时显示省略号 */
-  max-width: 50%; /* 最大宽度限制 */
+  text-overflow: ellipsis;
+  max-width: 50%;
   display: flex;
   align-items: center;
 }
 
-/* 窗口标题中的Font Awesome图标 */
 .window-title i {
   font-size: 12px;
   color: #ffffff;

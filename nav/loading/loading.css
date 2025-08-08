@@ -5,12 +5,12 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: var(--background); /* 全屏白色背景 */
+  background: var(--background);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* 确保在最上层 */
-  transition: opacity 0.3s ease; /* 隐藏时的淡出效果 */
+  z-index: 100;
+  transition: opacity 0.3s ease;
 }
 
 /* 进度条动画（保留原有样式） */
@@ -32,5 +32,5 @@
 /* 隐藏加载动画的类 */
 .loader-container.hidden {
   opacity: 0;
-  pointer-events: none; /* 隐藏后不响应点击 */
+  pointer-events: none;
 }

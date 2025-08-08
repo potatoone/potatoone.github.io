@@ -48,7 +48,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 99999;
-  opacity: 0; /* 默认隐藏 */
+  opacity: 0;
   transition: opacity 0.3s;
 }
 
@@ -57,7 +57,7 @@
   background-color: rgba(255, 255, 255, 0.12);
 }
 
-/* 失败状态的反馈提示（预留） */
+/* 失败状态的反馈提示 */
 .copy-feedback.error {
   background-color: #ff564a98;
 }

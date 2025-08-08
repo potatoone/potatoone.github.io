@@ -1,4 +1,3 @@
-/* 添加媒体查询，针对不同屏幕大小调整组件尺寸 */
 @media screen and (max-width: 768px) {
 .sentence {
   left: 20px; top: 20px; padding: 5px;
@@ -8,13 +7,9 @@
   box-shadow: none;
   background: none;
 }
-
-/* 覆盖 hover 效果 */
 .sentence:hover {
   transform: none;
-  background-color: transparent;
 }
-
 
 
 .weather {
@@ -24,19 +19,19 @@
   box-shadow: none;
   background: none;
 }
+.weather:hover {
+  transform: none;
+}
 
 .weather-icon {
   font-size: 20px;
 }
-  
 .weather-temp {
   font-size: 10px;
 }
-
 .weather-humidity {
   font-size: 10px;
 }
-
 .weather-city {
   font-size: 10px;
 }

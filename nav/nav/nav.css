@@ -19,16 +19,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* 垂直居中，解决靠下问题 */
+  justify-content: center;
   opacity: 0.8;
   transition: all 0.3s ease;
   position: relative;
   padding: 5px 0;
 }
 
-/* 未选中状态：调整图标位置（不再过度下沉） */
+/* 未选中状态图标位置 */
 .nav-item:not(.active) .icon {
-  transform: translateY(10px); /* 减少下沉距离 */
+  transform: translateY(10px);
 }
 
 /* 文字样式 */
@@ -56,9 +56,9 @@
 .nav-item.active .icon {
   background-color: var(--botton-2);
   color: var(--active);
-  border-radius: 20px; /* 圆角适中，保持长方形 */
-  padding: 7px 25px; /* 横向留白，强化长方形视觉 */
-  transform: translateY(0); /* 回到居中位置 */
+  border-radius: 20px;
+  padding: 7px 25px;
+  transform: translateY(0);
 }
 
 /* 选中文字显示样式 */
@@ -72,32 +72,26 @@
   .nav {
     width: 100%;
     bottom: 0;
-    border-radius: 15px 15px 0 0; /* 保留顶部圆角 */
-    height: 60px; /* 略微增加高度，保持与桌面端比例 */
-    padding: 8px 15px; /* 减少横向padding，增加内部空间 */
-    max-width: 100%; /* 确保填满屏幕 */
+    border-radius: 15px 15px 0 0;
+    height: 60px;
+    padding: 8px 15px;
+    max-width: 100%;
   }
-
   .nav-item:not(.active) .icon {
-    transform: translateY(8px); /* 未选中图标位置微调 */
+    transform: translateY(8px);
   }
-
   .nav-item .icon {
-    font-size: 18px; /* 减小图标尺寸 */
+    font-size: 18px;
   }
-
   .nav-item span {
-    font-size: 10px; /* 减小文字尺寸 */
-    transform: translateY(15px); /* 调整文字初始位置 */
+    font-size: 10px;
+    transform: translateY(15px);
   }
-
-  /* 选中状态保持长方形圆角，但缩小尺寸 */
   .nav-item.active .icon {
-    border-radius: 15px; /* 圆角稍小 */
-    padding: 5px 15px; /* 缩小背景尺寸 */
+    border-radius: 15px;
+    padding: 5px 15px;
   }
-
   .nav-item.active span {
-    margin-top: 2px; /* 微调文字与图标的间距 */
+    margin-top: 2px;
   }
 }

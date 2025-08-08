@@ -21,13 +21,12 @@
   width: 100%;
   height: 100px;
   position: relative;
-  box-sizing: border-box;
   border-radius: 15px;
-  border: 3px solid rgba(169, 169, 169, 0.26);
   background-color: rgba(175, 175, 175, 0.145);
   backdrop-filter: blur(20px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden; /* 确保内容不溢出 */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.155);
 }
 
 .content-tab1:hover,.content-tab2:hover,.content-tab3:hover,.content-tab4:hover {
@@ -48,14 +47,12 @@
   gap: 10px;
   max-width: 250px;
   margin: 0 auto;
-  height: 100%; /* 使链接填充整个tab高度 */
-  width: 100%;  /* 使链接填充整个tab宽度 */
-  box-sizing: border-box;
+  height: 100%; width: 100%;
 }
 
 .tab-link i {
   font-size: 2.5rem;
-  color: #ffffff; /* 图标颜色 */
+  color: #ffffff;
 }
 
 .tab-link span {
@@ -63,7 +60,6 @@
   font-weight: 500;
 }
 
-/* 响应式设计 */
 @media screen and (max-width: 768px) {
   .tab-link {
     padding: 10px 15px;
