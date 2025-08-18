@@ -4,7 +4,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const BingWallpaper = (() => {
     const API_URL = 'https://bing.biturl.top';
-    const MAX_CACHE_COUNT = 7;
 
     let container = document.body;
     let infoButton, infoElement, infoToggle;
