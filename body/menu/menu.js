@@ -14,21 +14,7 @@ document.addEventListener('contextmenu', e => {
     left: ${Math.min(e.clientX, winW - w)}px;
     top: ${Math.min(e.clientY, winH - h)}px;
   `;
-  
-  // 动态禁用/启用"OPEN IN NEW TAB"按钮
-  const hasLink = !!targetElement.closest('a')?.href;
-  const newTabItem = document.querySelector('.menu-item span:contains("OPEN IN NEW TAB")')?.closest('.menu-item');
-  if (newTabItem) {
-    if (hasLink) {
-      newTabItem.removeAttribute('disabled');
-      newTabItem.style.opacity = '1';
-      newTabItem.style.pointerEvents = 'auto';
-    } else {
-      newTabItem.setAttribute('disabled', 'true');
-      newTabItem.style.opacity = '0.5';
-      newTabItem.style.pointerEvents = 'none';
-    }
-  }
+
 });
 
 // 核心修改：点击任意位置（包括关于卡片打开时）都关闭菜单
