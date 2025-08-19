@@ -15,12 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const getCacheKey = index => `bing_wallpaper_cache_${index}`;
     const getCacheIndexListKey = () => 'bing_wallpaper_cache_indices';
 
-    // 日期处理
-    const getCurrentSystemDate = () => {
-      const date = new Date();
-      return `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`;
-    };
-
     const getDateByIndex = index => {
       const date = new Date();
       date.setDate(date.getDate() - index);
@@ -40,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
       cachedIndices.forEach(idx => {
         if (!validIndices.includes(idx)) {
           localStorage.removeItem(getCacheKey(idx));
-          console.log(`[壁纸] 清除无效缓存 index=${idx}`);
         }
       });
       
@@ -103,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       
-      console.log(`[壁纸 API] 请求 index=${index} 日期=${getDateByIndex(index)}`);
       const params = new URLSearchParams({
         resolution: 'UHD',
         format: 'json',
@@ -125,8 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
           // 保存缓存并更新缓存池
           localStorage.setItem(getCacheKey(index), JSON.stringify(currentWallpaperData));
           manageCachePool(index);
-          console.log(`[壁纸 API] 加载成功 index=${index} 日期=${currentWallpaperData.date}`);
-          
           applyWallpaper(currentWallpaperData);
         })
         .catch(error => {
@@ -137,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
               currentWallpaperData = JSON.parse(oldData);
               applyWallpaper(currentWallpaperData);
-              console.log(`[壁纸] 使用过期缓存 index=${index}`);
             } catch (e) {
               console.error(`[壁纸] 缓存降级失败 index=${index}`, e);
             }
@@ -151,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
       img.onload = () => {
         container.style.background = `url('${data.url}') no-repeat center/cover fixed`;
         createInfoButton();
-        console.log(`[壁纸] 设置完成 index=${data.index}`);
         
         // 触发壁纸更新事件
         setTimeout(() => {
@@ -226,7 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // 初始化监听
         document.addEventListener('wallpaperUpdated', () => {
           setTimeout(() => {
-              console.log('[壁纸] 触发颜色拾取器更新');
           }, 500);
         });
         

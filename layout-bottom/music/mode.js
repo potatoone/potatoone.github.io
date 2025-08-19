@@ -54,8 +54,7 @@ const PlayModeManager = (() => {
     
     // 显示提示
     showToast(`已切换为${modeNames[currentMode]}模式`);
-    
-    console.log(`播放模式切换为: ${currentMode}`);
+
   }
   
   // 更新模式按钮图标
@@ -196,13 +195,10 @@ const PlayModeManager = (() => {
   };
 })();
 
-// 在DOM加载完成后初始化
-document.addEventListener('DOMContentLoaded', function() {
+// 在 DOM 加载完成后初始化
+document.addEventListener ('DOMContentLoaded', function () {
   // 初始化播放模式管理器
-  const initialized = PlayModeManager.init();
-  if (initialized) {
-    console.log('播放模式管理器初始化成功');
-  }
+  PlayModeManager.init ();
 });
 
 // 添加到window对象，供其他脚本使用

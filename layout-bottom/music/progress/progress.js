@@ -6,8 +6,6 @@ function initializeProgress() {
   if (progressInitialized) return;
   progressInitialized = true;
   
-  console.log('初始化进度条...');
-  
   // 获取所有必要元素
   const progressContainer = document.querySelector('.progress-container');
   const progressBar = document.querySelector('.progress-bar');
@@ -31,8 +29,6 @@ function initializeProgress() {
     console.error('音频播放器元素未找到!');
     return;
   }
-  
-  console.log('所有进度条元素已找到');
   
   // 拖拽状态变量
   let isDragging = false;
@@ -103,10 +99,8 @@ function initializeProgress() {
     progressHandle.style.left = '0%';
     currentTimeEl.textContent = '0:00';
     totalTimeEl.textContent = '0:00';
-    console.log('进度条已重置');
   };
   
-  console.log('进度条初始化完成');
 }
 
 // 在DOMContentLoaded之后初始化

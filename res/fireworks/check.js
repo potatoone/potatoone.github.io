@@ -19,7 +19,6 @@ function checkAndToggleFireworks() {
 
   const trackId = trackElement.getAttribute('data-id');
   if (trackId === '2676045527') {
-    console.log('正在播放"花焰照亮的旅途"，显示烟花效果');
     window.toggleFireworks(true);
   } else {
     window.toggleFireworks(false);
