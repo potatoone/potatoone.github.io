@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="./layout-bottom/personal/info.css" />  <!-- 个人信息区域 -->
     <link rel="stylesheet" href="./layout-bottom/personal/mobile.css" />  <!-- 移动端适配 -->
     <link rel="stylesheet" href="./layout-bottom/personal/card/card.css" />  <!-- 模态窗口 -->
+    <link rel="stylesheet" href="./layout-bottom/personal/card/gisgus.css" />  <!-- Giscus 评论区卡片 -->
     <link rel="stylesheet" href="./layout-bottom/music/player.css" />  <!-- 音乐播放器 -->
     <link rel="stylesheet" href="./layout-bottom/music/playlist/playlist.css" />  <!-- 播放列表 -->
     <link rel="stylesheet" href="./layout-bottom/music/playlist/categories.css" />  <!-- 播放列表分类切换按钮 -->
@@ -117,8 +118,11 @@
             <div class="bottom-button qq">
               <a href="#"><i class="fab fa-qq"></i></a>
             </div>
-            <div class="bottom-button other">
+            <div class="bottom-button bilibili">
               <a href="https://space.bilibili.com/185951788" target="_blank"><i class="fab fa-bilibili"></i></a>
+            </div>
+            <div class="bottom-button gisgus">
+              <a href="#"><i class="fas fa-comment"></i></a>
             </div>
           </div>
 
@@ -191,15 +195,25 @@
     </div>
 
     <!-- 个人信息弹窗 -->
-    <div class="modal-overlay" id="contact-modal">
-      <div class="box">
-        <div class="front"></div>
-        <div class="back">
-          <div class="card-title">联系方式</div>
-          <div class="card-value" id="contact-value">内容</div>
-        </div>
-      </div>
+<div class="modal-overlay" id="modal">
+  <!-- 联系方式 CRT 卡片 -->
+  <div class="crt-card" id="contact-card">
+    <div class="crt-content">
+      <div class="card-title">联系方式</div>
+      <div class="card-value" id="contact-value">内容</div>
     </div>
+  </div>
+
+  <!-- Giscus CRT 卡片 -->
+  <div class="crt-card" id="giscus-card">
+    <div class="crt-scanline"></div>
+    <div id="giscus-container" class="crt-content"></div>
+  </div>
+</div>
+
+
+
+
 
     <script src="./body/loading/loading.js"></script> <!-- 页面加载控制脚本 -->
     <script src="./res/wallpaper.js"></script> <!-- Bing壁纸 -->

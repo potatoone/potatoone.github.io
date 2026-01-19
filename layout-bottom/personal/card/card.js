@@ -1,79 +1,110 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // DOM元素和状态变量
-  const modal = document.getElementById('contact-modal');
-  const box = document.querySelector(".box");
-  const front = document.querySelector(".front");
-  const back = document.querySelector(".back");
+  const modal = document.getElementById('modal');
+  const contactCard = document.getElementById('contact-card');
   const contactValue = document.getElementById('contact-value');
-  const cardTitle = document.querySelector('.card-title');
-  
-  let isReverse = false, currentContact = '', activeButton = null;
+  const giscusCard = document.getElementById('giscus-card');
 
-  // 联系方式和卡片状态配置
-  const contactButtons = {
-    email: { 
-      el: document.querySelector('.bottom-button.email a'), 
-      value: 'apotato@foxmail.com', 
-      title: '邮箱联系方式' 
-    },
-    qq: { 
-      el: document.querySelector('.bottom-button.qq a'), 
-      value: '2933351447', 
-      title: 'QQ联系方式' 
-    }
-  };
-  
-  const cardStates = {
-    hidden: { front: 'translateY(100%) scale(0.1) rotateX(0deg)', back: 'rotateX(-180deg)' },
-    visible: { front: 'translateY(0) scale(1) rotateX(180deg)', back: 'translateY(0) scale(1) rotateX(0deg)' }
-  };
-  
-  // 初始化和事件绑定
-  front.style.transform = cardStates.hidden.front;
-  back.style.transform = cardStates.hidden.back;
+  let activeMode = null;
+  let activeContactType = null; // 新增：记录当前激活的联系方式类型(email/qq)
 
-  Object.values(contactButtons).forEach(btn => {
+  const buttons = {
+    email: { el: document.querySelector('.bottom-button.email a'), value: 'apotato@foxmail.com', title: '邮箱联系方式', card: contactCard, type: 'email' },
+    qq:    { el: document.querySelector('.bottom-button.qq a'), value: '2933351447', title: 'QQ联系方式', card: contactCard, type: 'qq' },
+    giscus:{ el: document.querySelector('.bottom-button.gisgus a'), card: giscusCard, isGiscus: true, type: 'giscus' }
+  };
+
+  Object.values(buttons).forEach(btn => {
     btn.el.addEventListener('click', e => {
       e.preventDefault();
-      if (modal.classList.contains('active') && activeButton === btn.el) {
-        closeModal();
-        return;
+      
+      // 按钮判断逻辑
+      if (btn.isGiscus) {
+        // Giscus按钮逻辑
+        if (activeMode === 'giscus') {
+          closeAll();
+        } else {
+          openCard(btn);
+        }
+      } else {
+        // 联系方式按钮切换逻辑（Email/QQ）
+        if (activeMode === 'contact') {
+          if (activeContactType === btn.type) {
+            closeAll();
+          } else {
+            switchContact(btn);
+          }
+        } else {
+          openCard(btn);
+        }
       }
-      activeButton = btn.el;
-      currentContact = btn.value;
-      cardTitle.textContent = btn.title;
-      contactValue.textContent = btn.value;
-      if (isReverse) setCardState(false);
-      modal.classList.add('active');
-      setTimeout(() => setCardState(true), 200);
     });
   });
 
-  // 交互处理函数
-  function setCardState(visible) {
-    const state = visible ? cardStates.visible : cardStates.hidden;
-    front.style.transition = back.style.transition = 'transform 1s, opacity 1s';
-    front.style.transform = state.front;
-    back.style.transform = state.back;
-    box.classList[visible ? 'add' : 'remove']("flipped");
-    isReverse = visible;
+  // 切换联系方式的函数
+  function switchContact(btn) {
+    activeContactType = btn.type;
+    contactValue.textContent = btn.value;
+    // 可以在这里添加切换动画效果（可选）
+    contactCard.classList.add('switching');
+    setTimeout(() => contactCard.classList.remove('switching'), 300);
   }
 
-  function closeModal() {
-    if (isReverse) {
-      setCardState(false);
-      setTimeout(() => {
-        modal.classList.remove('active');
-        activeButton = null;
-      }, 600);
-    } else {
-      modal.classList.remove('active');
-      activeButton = null;
+  function openCard(btn) {
+    activeMode = btn.isGiscus ? 'giscus' : 'contact';
+    if (!btn.isGiscus) {
+      activeContactType = btn.type; // 记录当前激活的联系方式类型
     }
+
+    // 关闭另一张卡
+    [contactCard, giscusCard].forEach(c => {
+      if (c !== btn.card) c.classList.remove('active','closing','giscus-mode');
+    });
+
+    modal.classList.add('active');
+
+    if (!btn.isGiscus) {
+      contactValue.textContent = btn.value;
+      btn.card.classList.remove('giscus-mode'); // 联系方式保持小尺寸
+    } else {
+      loadGiscus();
+      btn.card.classList.add('giscus-mode'); // Giscus 大尺寸
+    }
+
+    btn.card.classList.remove('closing');
+    btn.card.classList.add('active');
   }
 
-  // 其他事件监听
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
-  box.addEventListener('click', () => navigator.clipboard.writeText(currentContact).catch(err => console.error('复制失败', err)));
+  function closeAll() {
+    activeMode = null;
+    activeContactType = null; // 重置激活的联系方式类型
+    [contactCard, giscusCard].forEach(c => {
+      if (c.classList.contains('active')) {
+        c.classList.add('closing');
+        setTimeout(() => c.classList.remove('active','closing','giscus-mode','switching'), 350);
+      }
+    });
+    setTimeout(() => modal.classList.remove('active'), 400);
+  }
+
+  function loadGiscus() {
+    const container = document.getElementById('giscus-container');
+    if (!container || container.dataset.loaded) return;
+    container.dataset.loaded = '1';
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.setAttribute('data-repo', 'potatoone/potatoone.github.io');
+    script.setAttribute('data-repo-id', 'R_kgDONVdxPA');
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'DIC_kwDONVdxPM4C1Iyg');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-theme', 'catppuccin_macchiato');
+    script.setAttribute('data-lang', 'zh-CN');
+    script.setAttribute('crossorigin', 'anonymous');
+    container.appendChild(script);
+  }
+
+  modal.addEventListener('click', e => { if (e.target === modal) closeAll(); });
+  document.addEventListener('keydown', e => { if (e.key==='Escape') closeAll(); });
 });

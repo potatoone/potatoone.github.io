@@ -41,7 +41,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 210px;
+  width: 220px;
   gap: 10px;
 }
 
@@ -90,7 +90,8 @@
 .bottom-button.github:hover { background: #373939; }
 .bottom-button.email:hover { background: #e39e44; }
 .bottom-button.qq:hover { background: #12B7F5; }
-.bottom-button.other:hover { background: #da72bb; }
+.bottom-button.bilibili:hover { background: #da72bb; }
+.bottom-button.gisgus:hover { background: #4285F4; }
 
 /* 标签容器 */
 .tags-container {

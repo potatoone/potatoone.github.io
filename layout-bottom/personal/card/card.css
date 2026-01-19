@@ -1,78 +1,123 @@
-/* info 点击卡片 */
 .modal-overlay {
   display: none;
   position: fixed;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   justify-content: center;
   align-items: center;
-  z-index: 10;
   backdrop-filter: blur(30px);
-  background-color: #00000055;
+  z-index: 10;
 }
 
-.modal-overlay.active {
-  display: flex;
-}
+.modal-overlay.active { display: flex; }
 
-.box {
-  position: relative;
-  margin: 0 auto;
-  left: 0;right: 0;
-  width: 30%; height: 25%;
-  transform-style: preserve-3d;
-  transform-origin: bottom;
-}
-
-.box div {
-  display: flex; position: absolute;
-  width: 100%; height: 100%;
-  top: 0; left: 0;
-  backface-visibility: hidden;
-  flex-direction: column; 
-  align-items: center; justify-content: center;
-}
-
-.front, .back {
-  padding: 20px;
-  text-align: center;
-  background-color: #ffffff16;
+/* ===== 弹窗通用样式 ===== */
+.crt-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scaleY(0);
+  width: 70%; height: 200px;
+  max-width: 400px;
+  background: rgba(11, 14, 20, 0.2); /* 半透明默认 */
   border-radius: 12px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  padding: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* 过渡动画 */
+  transition: transform 0.4s ease, opacity 0.4s ease, width 0.4s ease, height 0.4s ease, background 0.4s ease;
 }
 
-.flipped .front {
+/* 弹窗显示 */
+.crt-card.active {
+  pointer-events: auto;
   opacity: 1;
-  background-color: #ffffff16;
+  transform: translate(-50%, -50%) scaleY(1);
 }
 
-.card-title {
+/* 弹窗关闭 */
+.crt-card.closing {
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleY(0);
+}
+
+/* Giscus 大尺寸模式 */
+.crt-card.giscus-mode {
+  left:53%; top: 50%;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  overflow-y: auto;
+  width: 90%;height: auto;
+  max-width: 700px;
+  max-height: 90vh;
+  background: rgba(24, 17, 37, 0.95); /* 深色不透明 */
+}
+
+#giscus-container {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%; /* 占满弹窗高度 */
+  min-height: 300px; /* 配合弹窗最小高度，预留少量padding */
+}
+
+/* 内部内容 */
+.crt-content {
+  width: 100%;
+  color: aliceblue;
+}
+
+.crt-content .card-title {
   font-size: 24px;
-  margin-top: -20px;
-  width: 100%;
-  text-align: center;
-  color: aliceblue;
   font-weight: bold;
+  margin-bottom: 12px;
 }
 
-.card-value {
+.crt-content .card-value {
   font-size: 18px;
-  margin-top: 20px;
-  width: 100%;
-  text-align: center;
-  color: aliceblue;
+  word-break: break-word;
 }
 
-@media (max-width: 768px) {
-  .box {
-    font-size: 14px;
-    width: 65%;
-    height: 20%;
-    position: relative;
-    transform-style: preserve-3d;
-    transform-origin: bottom;
+/* 打开动画 */
+@keyframes crt-open {
+  0%   { transform: translate(-50%, -50%) scaleY(0.05); opacity: 0; filter: brightness(3); }
+  40%  { transform: translate(-50%, -50%) scaleY(0.15); opacity: 0.5; filter: brightness(1.5); }
+  100% { transform: translate(-50%, -50%) scaleY(1); opacity: 1; filter: brightness(1); }
+}
+
+/* 关闭动画 */
+@keyframes crt-close {
+  0%   { transform: translate(-50%, -50%) scaleY(1); opacity: 1; filter: brightness(1); }
+  60%  { transform: translate(-50%, -50%) scaleY(0.05); opacity: 0.5; filter: brightness(1.5); }
+  100% { transform: translate(-50%, -50%) scaleY(0); opacity: 0; filter: brightness(3); }
+}
+
+/* 弹窗显示时使用动画 */
+.crt-card.active {
+  pointer-events: auto;
+  animation: crt-open 0.45s ease-out forwards;
+}
+
+/* 弹窗关闭时使用动画 */
+.crt-card.closing {
+  animation: crt-close 0.35s ease-in forwards;
+}
+
+
+/* 移动端适配 */
+@media (max-width: 600px) {
+  .crt-card {
+    width: 65%; height: 150px;
   }
-  .card-title,  .card-value  {
-    font-size: 16px;
+  .crt-card.giscus-mode {
+    left:50%; top: 42%;
+    max-height: 76vh;
   }
-  
+  .crt-content .card-title { font-size: 20px; }
+  .crt-content .card-value { font-size: 16px; }
 }

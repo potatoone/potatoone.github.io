@@ -6,7 +6,7 @@
       display: none;
       height: auto;
       position: absolute;
-      width: 152px;
+      width: 190px;
       left: 70px;
       bottom: -5px;
     }
@@ -54,7 +54,7 @@
     /* 微调标签样式 */
     .tag {
       padding: 3px 7.5px;
-      font-size: 7px;
+      font-size: 7.5px;
     }
 
     /* 淡入动画 */
