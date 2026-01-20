@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     script.setAttribute('data-category', 'Announcements');
     script.setAttribute('data-category-id', 'DIC_kwDONVdxPM4C1Iyg');
     script.setAttribute('data-mapping', 'pathname');
-    script.setAttribute('data-theme', 'catppuccin_macchiato');
+    script.setAttribute('data-theme', 'catppuccin_frappe');
     script.setAttribute('data-lang', 'zh-CN');
     script.setAttribute('crossorigin', 'anonymous');
     container.appendChild(script);
