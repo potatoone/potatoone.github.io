@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 本地存储键
   const STORAGE_KEYS = {
-    theme: 'user-theme-color',
-    darkMode: 'user-dark-mode',
-    autoMode: 'user-auto-mode' // 新增自动模式存储键
+    theme: 'user-theme-color-nav',
+    darkMode: 'user-dark-mode-nav',
+    autoMode: 'user-auto-mode-nav'
   };
 
   // 初始化主题状态
