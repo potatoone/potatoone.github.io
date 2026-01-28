@@ -1,11 +1,11 @@
 /* 分类Tab容器 */
 .tabs-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 0px 10px 10px 10px;
+  padding: 0px 10px 10px 0px;
   width: 100%;
 }
 
@@ -16,6 +16,7 @@
   gap: 10px;
   padding: 5px 0;
   min-width: max-content;
+  margin: 0 auto; /* 当内容未溢出时居中；溢出时靠左 */
 }
 
 /* Tab项样式 */
@@ -25,6 +26,8 @@
   background-color: var(--card);
   border-radius: 10px;
   white-space: nowrap;
+  flex: 0 0 auto; /* 不允许在容器中被压缩，保持可读且允许水平滚动 */
+  min-width: 64px; /* 标签太多时保证最小宽度 */
   font-size: 14px;
   color: var(--font-1);
   transition: background-color 0.2s ease, color 0.2s ease;

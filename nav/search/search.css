@@ -84,7 +84,7 @@
   font-size: 14px;
 }
 .search-dropdown-item:hover {
-  background: rgba(164, 84, 255, 0.1);
+  background: var(--box-shadow-1);
 }
 .search-dropdown-item.selected {
   background: var(--active);
@@ -164,8 +164,8 @@ input:-webkit-autofill {
     padding: 0 8px;
   }
   .search-dropdown-trigger {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
   }
   .search-dropdown-menu {
     width: 150px;
@@ -181,12 +181,12 @@ input:-webkit-autofill {
     font-size: 12px;
   }
   .search-input {
-    height: 32px;
+    height: 30px;
     font-size: 12px;
   }
   .search-button {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     padding: 0;
   }
   .search-button i {
