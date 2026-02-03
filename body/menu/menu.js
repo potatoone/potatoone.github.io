@@ -102,7 +102,7 @@ function createAboutCard() {
         <h3>关于本站</h3>
         <p>· 纯静态网站，托管于 Github Pages</p>
         <p>· 使用纯 HTML/CSS/JS 开发</p>
-        <p>· 博客使用 VitePress</p>
+        <p>· 文档使用 MKONE</p>
         <p>基于 MIT 开源协议，使用请保留版权信息</p>
       </div>
     `
