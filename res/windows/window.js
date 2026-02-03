@@ -31,9 +31,9 @@ class WindowManager {
   handleLinkClick(e) {
     const link = e.target.closest('a');
     if (!link
-        || link.getAttribute('target') === '_self'
-        || link.hasAttribute('data-no-window')
-        || link.href.startsWith('javascript:')) return;
+      || link.getAttribute('target') === '_self'
+      || link.hasAttribute('data-no-window')
+      || link.href.startsWith('javascript:')) return;
 
     e.preventDefault(); // 阻止默认跳转
 
@@ -59,13 +59,51 @@ class WindowManager {
 
     // 创建窗口外层容器，添加样式及定位、大小，层级控制
     const win = this.createEl('div', 'window', this.container);
+
+    // ========== 核心修改：窗口位置计算（横向堆叠） ==========
+    // 检测是否为移动端（屏幕宽度小于768px）
+    const isMobile = window.innerWidth < 768;
+    let windowX = 0;
+    let windowY = 0;
+
+    if (isMobile) {
+      // 移动端：始终居中显示
+      const winWidth = opts.width || 700;
+      const winHeight = opts.height || 500;
+      windowX = (window.innerWidth - winWidth) / 2 + 'px';
+      windowY = (window.innerHeight - winHeight) / 2 + 'px';
+    } else {
+      // 桌面端：从左到右纯横向堆叠
+      // 基础位置（所有窗口的垂直位置固定）
+      const baseY = 50; // 垂直方向固定在50px位置
+      const baseX = 50; // 第一个窗口的水平起始位置
+      // 每个新窗口的水平偏移增量（仅横向偏移）
+      const horizontalStep = 30;
+      // 当前已打开的窗口数量（决定横向偏移量）
+      const windowCount = this.windows.length;
+
+      // 计算横向堆叠位置（仅X轴偏移，Y轴固定）
+      windowX = baseX + (windowCount * horizontalStep) + 'px';
+      windowY = baseY + 'px'; // 垂直方向无偏移，保持固定
+
+      // 边界检测：防止窗口超出屏幕范围（重点检测水平方向）
+      const winWidth = opts.width || 800;
+      const maxX = window.innerWidth - winWidth - 50; // 保留右侧50px边距
+      if (parseInt(windowX) > maxX) {
+        windowX = maxX + 'px'; // 超出则固定在最右侧
+      }
+    }
+
+    // 合并样式（优先使用opts传入的位置，没有则使用计算出的横向堆叠/居中位置）
     Object.assign(win.style, {
-      width: `${opts.width || 800}px`,
-      height: `${opts.height || 600}px`,
-      left: `${opts.x || Math.random() * 200 + 50}px`,
-      top: `${opts.y || Math.random() * 100 + 50}px`,
+      width: `${opts.width || 750}px`,
+      height: `${opts.height || 500}px`,
+      left: opts.x || windowX,  // 横向堆叠的X坐标
+      top: opts.y || windowY,   // 固定的Y坐标
       zIndex: this.zIndex++,
     });
+    // ========== 核心修改结束 ==========
+
     win.id = id;
 
     // 创建窗口头部：包含图标、标题、控制按钮（最小化/最大化/关闭）
@@ -100,7 +138,7 @@ class WindowManager {
           const taskItem = document.getElementById(`taskbar-${id}`);
           if (taskItem) taskItem.title = newTitle;
         }
-      } catch {}
+      } catch { }
     };
     body.appendChild(iframe);
 

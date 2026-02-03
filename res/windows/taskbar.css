@@ -9,12 +9,12 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: 5px;
   max-width: 500px;
   background: rgba(146,146,146,0.13);
   backdrop-filter: blur(5px);
   border: 1px solid rgba(236,236,236,0.33);
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   z-index: 9999;
   transition: transform 0.3s ease, opacity 0.3s ease;
@@ -32,16 +32,16 @@
 .taskbar-items {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
   align-items: center;
   justify-content: center;
 }
 
 /* 单个任务栏图标按钮 */
 .taskbar-item {
-  width: 32px;
-  height: 32px;
-  border-radius: 20%;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
   background: rgba(255,255,255,0.07);
   display: flex;
   align-items: center;
@@ -57,6 +57,6 @@
 }
 
 .taskbar-item i {
-  font-size: 16px;
+  font-size: 12px;
   color: white;
 }
