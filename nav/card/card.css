@@ -1,10 +1,10 @@
 /* 网址卡片容器 */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
   margin-bottom: 110px;
   transition: all 0.5s ease;
 }
@@ -106,7 +106,7 @@
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 700px) {
   .cards-container {
     margin-bottom: 90px;
     grid-template-columns: repeat(2, minmax(80px, 1fr));
