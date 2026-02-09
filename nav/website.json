@@ -59,6 +59,7 @@
 
       ],
       "图床": [
+        { "title": "Pixabay", "desc": "免费图片库", "url": "https://pixabay.com/zh/", "icon": "fa-image" },
         { "title": "SM.MS", "desc": "免费图床服务", "url": "https://sm.ms/", "icon": "fa-image" },
         { "title": "路过图床", "desc": "简单图床工具", "url": "https://imgchr.com/", "icon": "fa-image" },
         { "title": "Imgur", "desc": "国际图床平台", "url": "https://imgur.com/", "icon": "fa-image" },

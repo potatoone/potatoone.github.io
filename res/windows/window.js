@@ -68,8 +68,8 @@ class WindowManager {
 
     if (isMobile) {
       // 移动端：始终居中显示
-      const winWidth = opts.width || 700;
-      const winHeight = opts.height || 500;
+      const winWidth = opts.width || 850;
+      const winHeight = opts.height || 550;
       windowX = (window.innerWidth - winWidth) / 2 + 'px';
       windowY = (window.innerHeight - winHeight) / 2 + 'px';
     } else {
@@ -96,8 +96,8 @@ class WindowManager {
 
     // 合并样式（优先使用opts传入的位置，没有则使用计算出的横向堆叠/居中位置）
     Object.assign(win.style, {
-      width: `${opts.width || 750}px`,
-      height: `${opts.height || 500}px`,
+      width: `${opts.width || 850}px`,
+      height: `${opts.height || 550}px`,
       left: opts.x || windowX,  // 横向堆叠的X坐标
       top: opts.y || windowY,   // 固定的Y坐标
       zIndex: this.zIndex++,
