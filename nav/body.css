@@ -10,6 +10,7 @@
 
 body {
   font-family: "DaBaoTaoTaoTi"; /* 大宝桃桃体 */
+  font-weight: normal;
   background-color: var(--background);
   display: flex;
   flex-direction: column;
