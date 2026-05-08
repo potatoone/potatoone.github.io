@@ -1,4 +1,4 @@
-@import url("https://static.zeoseven.com/zsft/41/main/result.css");
+@import url("https://fontsapi.zeoseven.com/41/main/result.css");
 
 * {
   box-sizing: border-box;
@@ -8,9 +8,9 @@
 }
 
 body {
-    font-family: "DaBaoTaoTaoTi";
-    font-weight: normal;
-    user-select: none;
+  font-family: "DaBaoTaoTaoTi"; /* 大宝桃桃体 */
+  font-weight: normal;
+  user-select: none;
 }
 
 html {
