@@ -1,7 +1,7 @@
 /* 打字机效果加载动画 */
 .loading {
   font-size: clamp(32px, 6vw, 60px);
-  font-family: system-ui, sans-serif;
+  font-family: "DaBaoTaoTi"; /* 大宝桃桃体 */
   font-weight: 700;
   color: transparent;
   -webkit-text-stroke: 1px #ffffff;
@@ -14,7 +14,6 @@
 }
 
 .loading:before {
-  font-family: "DaBaoTaoTi"; /* 大宝桃桃体 */
   content: "Loading";
 }
 
